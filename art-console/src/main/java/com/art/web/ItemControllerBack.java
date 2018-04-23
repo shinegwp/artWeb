@@ -65,31 +65,31 @@ public class ItemControllerBack {
 			return 0;
 	}
 //******************************************************************************************************88888	
-//    @RequestMapping(value="itemsaveback",method=RequestMethod.POST)
-//	@ResponseBody
-//	private int createItem(String title,String price,String desc,String ownerId,String image) throws Exception {
-//		
-//		Item item = new Item();
-//		item.setTitle(title);
-//		item.setPrice(Long.decode(price));
-//		item.setOwnerId(Integer.parseInt(ownerId));
-//		item.setDescription(desc);
-//		item.setImgAddress(image);
-//		item.setCreated(new Date());
-//		System.out.println(item);
-//		int i = itemServiceBack.insertItem(item);
-//		return i;
-//	}
-//
-//	
-//    @RequestMapping(value="itemlistback",produces = "text/html;charset = utf-8")
-//	@ResponseBody
-//	public String getItemList(Integer page, Integer rows) {
-//		
-//		EUDataGridResult result = itemServiceBack.getItemList(page, rows);
-//		
-//		return JSONObject.fromObject(result).toString();
-//	}
+    @RequestMapping(value="itemsaveback",method=RequestMethod.POST)
+	@ResponseBody
+	private int createItem(String title,String price,String desc,String ownerId,String image) throws Exception {
+		
+		Item item = new Item();
+		item.setTitle(title);
+		item.setPrice(Long.decode(price));
+		item.setOwnerId(Integer.parseInt(ownerId));
+		item.setDescription(desc);
+		item.setImgAddress(image);
+		item.setCreated(new Date());
+		System.out.println(item);
+		int i = itemServiceBack.insertItem(item);
+		return i;
+	}
+
+	
+    @RequestMapping(value="itemlistback",produces = "text/html;charset = utf-8")
+	@ResponseBody
+	public String getItemList(Integer page, Integer rows) {
+		
+		EUDataGridResult result = itemServiceBack.getItemList(page, rows);
+		
+		return JSONObject.fromObject(result).toString();
+	}
 
 	
 	
