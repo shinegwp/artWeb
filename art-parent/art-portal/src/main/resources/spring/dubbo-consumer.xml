@@ -1,0 +1,49 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/task
+   		http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		http://code.alibabatech.com/schema/dubbo        
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		
+	<!-- Dubbo消费方 -->
+	<!-- 1：名称  计算机 区别 唯一 -->
+	<dubbo:application name="art-portal"/>
+	<!-- 2：设置注册中心  地址  zookeeper在哪里  redis ... -->
+    	<!-- <dubbo:registry address="192.168.200.128:2181,192.168.200.129:2181,192.168.200.130:2181" protocol="zookeeper"/> -->
+	<dubbo:registry address="192.168.200.128:2181" protocol="zookeeper"/>
+    <!-- 直连+不检查 -->
+    <!-- <dubbo:registry address="N/A" check="false"/> -->
+	<!-- 4： 调用此接口对应的实现类-->
+	<dubbo:reference interface="com.art.service.CollectionService" id="collectionService" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.ItemCatService" id="itemCatService" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.ItemImg1Service" id="itemImg1Service" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.ItemImg2Service" id="itemImg2Service" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.ItemService" id="itemService" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.LetterService" id="letterService" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.OrderFormService" id="orderFormService" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.ParentService" id="parentService" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.ProfessorService" id="professorService" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.ReferService" id="referService" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.SaleAfterService" id="saleAfterService" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.ShippingAddressService" id="shippingAddressService" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.TbItemParamItemService" id="tbItemParamItemService" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.TradeLogService" id="tradeLogService" url="dubbo://127.0.0.1:20880"/>
+	<dubbo:reference interface="com.art.service.UserService" id="userService" url="dubbo://127.0.0.1:20880"/>
+	<!-- 设置全局超时时间 -->
+ 	<dubbo:consumer timeout="60000"></dubbo:consumer>
+</beans>

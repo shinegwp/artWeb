@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.art.mapper.OrderFormMapper" >
+  <resultMap id="BaseResultMap" type="com.art.pojo.OrderForm" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="money" property="money" jdbcType="VARCHAR" />
+    <result column="unit_price" property="unitPrice" jdbcType="INTEGER" />
+    <result column="people_name" property="peopleName" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="item_img" property="itemImg" jdbcType="VARCHAR" />
+    <result column="item_title" property="itemTitle" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.art.pojo.OrderFormWithBLOBs" extends="BaseResultMap" >
+    <result column="form_num" property="formNum" jdbcType="LONGVARCHAR" />
+    <result column="address" property="address" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, uid, time, money, unit_price, people_name, state, item_img, item_title, tel, 
+    code
+  </sql>
+  <sql id="Blob_Column_List" >
+    form_num, address
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.art.pojo.OrderFormExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from order_form
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.art.pojo.OrderFormExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_form
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from order_form
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_form
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.art.pojo.OrderFormExample" >
+    delete from order_form
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.art.pojo.OrderFormWithBLOBs" >
+    insert into order_form (id, uid, time, 
+      money, unit_price, people_name, 
+      state, item_img, item_title, 
+      tel, code, form_num, 
+      address)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
+      #{money,jdbcType=VARCHAR}, #{unitPrice,jdbcType=INTEGER}, #{peopleName,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{itemImg,jdbcType=VARCHAR}, #{itemTitle,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{formNum,jdbcType=LONGVARCHAR}, 
+      #{address,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.art.pojo.OrderFormWithBLOBs" >
+    insert into order_form
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="unitPrice != null" >
+        unit_price,
+      </if>
+      <if test="peopleName != null" >
+        people_name,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="itemImg != null" >
+        item_img,
+      </if>
+      <if test="itemTitle != null" >
+        item_title,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="formNum != null" >
+        form_num,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        #{unitPrice,jdbcType=INTEGER},
+      </if>
+      <if test="peopleName != null" >
+        #{peopleName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="itemImg != null" >
+        #{itemImg,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTitle != null" >
+        #{itemTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="formNum != null" >
+        #{formNum,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.art.pojo.OrderFormExample" resultType="java.lang.Integer" >
+    select count(*) from order_form
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order_form
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitPrice != null" >
+        unit_price = #{record.unitPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.peopleName != null" >
+        people_name = #{record.peopleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemImg != null" >
+        item_img = #{record.itemImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemTitle != null" >
+        item_title = #{record.itemTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.formNum != null" >
+        form_num = #{record.formNum,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update order_form
+    set id = #{record.id,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      money = #{record.money,jdbcType=VARCHAR},
+      unit_price = #{record.unitPrice,jdbcType=INTEGER},
+      people_name = #{record.peopleName,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      item_img = #{record.itemImg,jdbcType=VARCHAR},
+      item_title = #{record.itemTitle,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR},
+      form_num = #{record.formNum,jdbcType=LONGVARCHAR},
+      address = #{record.address,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order_form
+    set id = #{record.id,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      money = #{record.money,jdbcType=VARCHAR},
+      unit_price = #{record.unitPrice,jdbcType=INTEGER},
+      people_name = #{record.peopleName,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR},
+      item_img = #{record.itemImg,jdbcType=VARCHAR},
+      item_title = #{record.itemTitle,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.art.pojo.OrderFormWithBLOBs" >
+    update order_form
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null" >
+        unit_price = #{unitPrice,jdbcType=INTEGER},
+      </if>
+      <if test="peopleName != null" >
+        people_name = #{peopleName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="itemImg != null" >
+        item_img = #{itemImg,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTitle != null" >
+        item_title = #{itemTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="formNum != null" >
+        form_num = #{formNum,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.art.pojo.OrderFormWithBLOBs" >
+    update order_form
+    set uid = #{uid,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      money = #{money,jdbcType=VARCHAR},
+      unit_price = #{unitPrice,jdbcType=INTEGER},
+      people_name = #{peopleName,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      item_img = #{itemImg,jdbcType=VARCHAR},
+      item_title = #{itemTitle,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      form_num = #{formNum,jdbcType=LONGVARCHAR},
+      address = #{address,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.art.pojo.OrderForm" >
+    update order_form
+    set uid = #{uid,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      money = #{money,jdbcType=VARCHAR},
+      unit_price = #{unitPrice,jdbcType=INTEGER},
+      people_name = #{peopleName,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      item_img = #{itemImg,jdbcType=VARCHAR},
+      item_title = #{itemTitle,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
