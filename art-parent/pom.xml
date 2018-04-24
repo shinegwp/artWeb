@@ -17,6 +17,7 @@
 		<module>art-console</module>
 		<module>art-login</module>
 		<module>art-portal</module>
+		<module>jedis</module>
 	</modules>
 
 	<dependencies>
