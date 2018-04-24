@@ -12,10 +12,23 @@ import com.art.service.UserServiceBack;
 import com.art.util.EUDataGridResult;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 @Service
 public class UserServiceImplBack implements UserServiceBack {
 	@Autowired 
     private UserMapper userMapper;
+	@Autowired
+	private JedisPool jedisPool;
+	
+	public boolean itemAddTest(){
+		Jedis jedis = jedisPool.getResource();
+		jedis.set("num", "5");
+		System.out.println("jedis测试成功+" + jedis.incr("num"));
+		return false;
+		
+	}
 	
 	public EUDataGridResult getUserList(int page, int rows) {
 		UserExample example = new UserExample();

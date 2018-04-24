@@ -28,6 +28,7 @@ public class UserControllerBack {
 	}
 	@RequestMapping("/{page}")
 	public String showpage(@PathVariable String page) {
+		userServiceBack.itemAddTest();
 		return page;
 	}
 	@RequestMapping(value ="restUserDelete",produces = "text/html;charset=UTF-8")//��̨

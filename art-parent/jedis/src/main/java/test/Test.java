@@ -64,6 +64,7 @@ public class Test {
 		System.out.println(jedis.hkeys("team"));
 		//获取字段值
 		System.out.println(jedis.hvals("team"));
+		//
 		
 	}
 }

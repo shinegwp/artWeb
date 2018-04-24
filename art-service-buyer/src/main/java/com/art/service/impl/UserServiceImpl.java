@@ -11,10 +11,21 @@ import com.art.pojo.UserExample;
 import com.art.pojo.UserExample.Criteria;
 import com.art.service.UserService;
 
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired 
     private UserMapper userMapper;
+    @Autowired
+    private JedisPool jedisPool;
+    
+    public void userJedisTest(){
+    	Jedis jedis = jedisPool.getResource();
+        jedis.set("userNum", "11");
+        System.out.println("长度是:" + jedis.strlen("userNum"));
+    }
     
 	public User getUserByTel(String tel) {//前台
 		

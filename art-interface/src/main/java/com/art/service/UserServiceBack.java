@@ -8,4 +8,5 @@ public interface UserServiceBack {
 	public int deleteItemById(Integer id);
 	public int update(User user);
 	public int insert(User user);
+	public boolean itemAddTest();
 }
