@@ -10,9 +10,7 @@ public class IDUtils implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * ͼƬ������
-	 */
+	
 	public static String genImageName() {
 		//取当前时间的长整形包含秒数
 		long millis = System.currentTimeMillis();
