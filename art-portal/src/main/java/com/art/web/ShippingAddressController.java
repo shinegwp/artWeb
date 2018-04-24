@@ -72,7 +72,7 @@ public String deleteShippingAddressById(Integer id)
   System.out.println(json.toString());
 	return json.toString();
 }
-//���ݴ�������UID��ȡ�ջ��ַ������jiesuan.jsp	
+//根据传过来的UID获取收获地址并传给jiesuan.jsp
 	@RequestMapping("getSAS")
 	@ResponseBody
 	public String getShippingAddressByUid(String uid) 

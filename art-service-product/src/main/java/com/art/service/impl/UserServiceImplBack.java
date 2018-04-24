@@ -32,13 +32,13 @@ public class UserServiceImplBack implements UserServiceBack {
 	
 	public EUDataGridResult getUserList(int page, int rows) {
 		UserExample example = new UserExample();
-		//鍒嗛〉澶勭悊
+		
 		PageHelper.startPage(page, rows);
 		List<User> list = userMapper.selectByExample(example);
-		//鍒涘缓涓�涓繑鍥炲�煎璞�
+		
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
-		//鍙栬褰曟�绘潯鏁�
+		
 		PageInfo<User> pageInfo = new PageInfo<User>(list);
 		result.setTotal(pageInfo.getTotal());
 		return result;

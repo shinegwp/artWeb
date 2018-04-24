@@ -30,15 +30,15 @@ public class PictureController {
 	@RequestMapping("picupload")
 	@ResponseBody
 	public Map<Object, Object> uploadPic(MultipartFile uploadFile,HttpServletRequest request) throws IOException, FileUploadException
-	{  //System.out.println("���·��"+request.getSession().getServletContext().getRealPath("")+"\\upload\\shadouyou\\"+uploadFile.getOriginalFilename());
-	//System.out.println("����·��"+request.getSession().getServletContext().getRealPath(""));
+	{  //System.out.println("相对路径"+request.getSession().getServletContext().getRealPath("")+"\\upload\\shadouyou\\"+uploadFile.getOriginalFilename());
+	//System.out.println("绝对路径"+request.getSession().getServletContext().getRealPath(""));
 	
 		System.out.println("----picupload----");
 		
 		String filePath = request.getSession().getServletContext().getRealPath("")+"\\WEB-INF\\upload\\shadouyou\\"+uploadFile.getOriginalFilename();
 	System.out.println("path:"+request.getSession().getServletContext().getRealPath("")+"\\WEB-INF\\upload\\shadouyou\\"+uploadFile.getOriginalFilename());	
 	File saveDir = new File(filePath);
-		//System.out.println("���·��"+this.getClass().getClassLoader().getResource("/").getPath());
+		//System.out.println("相对路径"+this.getClass().getClassLoader().getResource("/").getPath());
 		Map<Object, Object> resultMap = new HashMap<Object, Object>();	
 		System.out.println(saveDir.getParentFile().exists());
 		if(!saveDir.getParentFile().exists())
@@ -48,7 +48,7 @@ public class PictureController {
 		if(uploadFile.isEmpty())
 		{
 			resultMap.put("error", 1);
-			resultMap.put("message", "ͼƬΪ��");
+			resultMap.put("message", "图片为空");
 			return resultMap;
 		}
 		else
@@ -68,22 +68,22 @@ public class PictureController {
     public String uploadPicture(@RequestParam(value="file",required=false)MultipartFile[] files,
     HttpServletRequest request){
 		
-        List<String> msg = new ArrayList<String>();//���ش洢·��
+        List<String> msg = new ArrayList<String>();//返回存储路径
         int code=1;
 		for(int i=0;i<files.length;i++)
 		{File targetFile=null;
 			 String fileName=files[i].getOriginalFilename();
-			//��ȡ�ļ����Ӻ�׺
+			//获取文件名加后缀
 		        if(fileName!=null&&fileName!=""){   
-		            String returnUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() +"/upload/imgs/";//�洢·��
-		            String path = request.getSession().getServletContext().getRealPath("WEB-INF/upload/imgs"); //�ļ��洢λ��
-		            String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//�ļ���׺
-		            fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//�µ��ļ���
+		            String returnUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() +"/upload/imgs/";//存储路径
+		            String path = request.getSession().getServletContext().getRealPath("WEB-INF/upload/imgs"); //文件存储位置
+		            String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//文件后缀
+		            fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//新的文件名
 		             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		            //���ж��ļ��Ƿ����
+		            //先判断文件是否存在
 		            String fileAdd = sdf.format(new Date());
 		            File file1 =new File(path+"/"+fileAdd); 
-		            //����ļ��в������򴴽�    
+		            //如果文件夹不存在则创建  
 		            if(!file1 .exists()  && !file1 .isDirectory()){       
 		                file1 .mkdir();  
 		            }

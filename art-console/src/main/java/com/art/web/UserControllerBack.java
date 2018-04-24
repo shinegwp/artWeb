@@ -18,7 +18,7 @@ public class UserControllerBack {
 	@Autowired(required=true)
 	UserServiceBack userServiceBack;
 	
-	@RequestMapping("userlist")//��̨
+	@RequestMapping("userlist")
 	@ResponseBody
 	public EUDataGridResult getUserList(Integer page, Integer rows)
 	{	
@@ -34,7 +34,7 @@ public class UserControllerBack {
 	@RequestMapping(value ="restUserDelete",produces = "text/html;charset=UTF-8")//��̨
 	@ResponseBody
 	public int deleteUsers(Integer[] ids)
-	{	System.out.println("ɾ��");
+	{	System.out.println("删除");
 		int i = 0;	
 		for(Integer id:ids)
 			{
@@ -46,7 +46,7 @@ public class UserControllerBack {
 		}
 			return 0;
 	}
-	@RequestMapping(value ="restuserupdate")//��̨
+	@RequestMapping(value ="restuserupdate")
 	@ResponseBody
 	public User updata(String money,String upassword,Integer uid,String uname,String birthday,String sex,String tel,String qq,String email) throws ParseException
 	{  System.out.println(money);
@@ -68,7 +68,7 @@ public class UserControllerBack {
 		userServiceBack.update(u);
 		return u;
 	}
-	@RequestMapping("usersaveback")//ǰ��̨����
+	@RequestMapping("usersaveback")//
 	@ResponseBody
 	public int insertUser(User user)
 	{

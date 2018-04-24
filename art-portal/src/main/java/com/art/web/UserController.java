@@ -34,7 +34,7 @@ import com.art.util.TaotaoResult;
 import net.sf.json.JSONObject;
 
 @Controller
-@SessionAttributes("user") //��session��桾//ȡuserid @SessionAttributes("userid")  ,@ModelAttribute("userid")int uid��
+@SessionAttributes("user") //往session里存【//取userid @SessionAttributes("userid")  ,@ModelAttribute("userid")int uid】
 
 public class UserController {
 
@@ -62,7 +62,7 @@ public class UserController {
 		
 		return json.toString() ;
 	}
-	@RequestMapping("payOne")//֧��һ����Ʒ
+	@RequestMapping("payOne")
 	@ResponseBody
 	public String reduceOneMoney(HttpServletResponse response,HttpServletRequest request,String money,String uid) throws JsonParseException, JsonMappingException, UnsupportedEncodingException, IOException
 	{   User u = userService.getUserById(Integer.parseInt(uid));
@@ -77,8 +77,7 @@ public class UserController {
 		            for (Cookie cookie : cookies) {
 		                //
 		                if ("car".equals(cookie.getName())) {
-		                    //���ﳵ ���� ��json�ַ�����ת
-		                	
+		                    		                	
 		                    buyerCart = om.readValue(URLDecoder.decode(cookie.getValue(), "utf-8"), Car.class);
 		                    list = buyerCart.getItems();
 		                   
@@ -88,9 +87,9 @@ public class UserController {
 		        }
 		       for(Item item:list)
 		       {
-		    	   int j = itemservice.InstockItem(item.getId());//����Ʒ�¼ܣ�
+		    	   int j = itemservice.InstockItem(item.getId());
 		    	 
-		    	   buyerCart.setItems(new ArrayList<Item>());//�����ﳵ���
+		    	   buyerCart.setItems(new ArrayList<Item>());
 		    	    Writer w = new StringWriter();
 					 om.writeValue(w, buyerCart);
 					 Cookie cookie = new Cookie("car", URLEncoder.encode(w.toString(), "utf-8"));
@@ -103,7 +102,7 @@ public class UserController {
 		
 		return json.toString() ;
 	}
-	@RequestMapping("pay")//֧�����ﳵ�����Ʒ
+	@RequestMapping("pay")
 	@ResponseBody
 	public String reduceMoney(HttpServletResponse response,HttpServletRequest request,String money,String uid) throws JsonParseException, JsonMappingException, UnsupportedEncodingException, IOException
 	{   User u = userService.getUserById(Integer.parseInt(uid));
@@ -118,8 +117,7 @@ public class UserController {
 		            for (Cookie cookie : cookies) {
 		                //
 		                if ("car".equals(cookie.getName())) {
-		                    //���ﳵ ���� ��json�ַ�����ת
-		                	
+		                    		                	
 		                    buyerCart = om.readValue(URLDecoder.decode(cookie.getValue(), "utf-8"), Car.class);
 		                    list = buyerCart.getItems();
 		                   
@@ -129,9 +127,9 @@ public class UserController {
 		        }
 		       for(Item item:list)
 		       {
-		    	   int j = itemservice.InstockItem(item.getId());//����Ʒ�¼ܣ�
+		    	   int j = itemservice.InstockItem(item.getId());
 		    	 
-		    	   buyerCart.setItems(new ArrayList<Item>());//�����ﳵ���
+		    	   buyerCart.setItems(new ArrayList<Item>());
 		    	    Writer w = new StringWriter();
 					 om.writeValue(w, buyerCart);
 					 Cookie cookie = new Cookie("car", URLEncoder.encode(w.toString(), "utf-8"));
@@ -146,7 +144,7 @@ public class UserController {
 	}
 //********************************************************************************************************************************
 	
-	@RequestMapping("usersave")//ǰ��̨����
+	@RequestMapping("usersave")
 	@ResponseBody
 	public int insertUser(User user)
 	{

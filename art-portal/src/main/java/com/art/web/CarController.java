@@ -36,7 +36,7 @@ public class CarController {
 	@Autowired(required=true)
 	ItemService itemService;
 	
-	//���ﳵ�������Ʒ	
+	//往购物车里添加商品	
 			@RequestMapping(value ="/addItemtoCar")
 			@ResponseBody
 			public String addItemToCar(HttpServletResponse response,HttpServletRequest request,Integer id) throws JsonGenerationException, JsonMappingException, IOException 
@@ -50,7 +50,7 @@ public class CarController {
 			            for (Cookie cookie : cookies) {
 			                //
 			                if ("car".equals(cookie.getName())) {
-			                    //���ﳵ ���� ��json�ַ�ת
+			                	//购物车 对象 与json字符串互转
 			                	
 			                    buyerCart = om.readValue(URLDecoder.decode(cookie.getValue(), "utf-8"), Car.class);
 			                  
@@ -65,7 +65,7 @@ public class CarController {
 				 {
 					 buyerCart = new Car();
 				 }
-				 //�жϹ��ﳵ�Ƿ��԰���Ʒ
+				//判断购物车是否以包含商品
 				 boolean b = false;
 				 List<Item> list = buyerCart.getItems();
 				 for(Item i:list)
@@ -76,7 +76,7 @@ public class CarController {
 					 }
 				 }
 				 
-				 if(b==false)//����ﳵ����Ʒ�򷵻�0
+				 if(b==false)//如果购物车包含商品则返回0
 				 {  if(list.size()>10)
 				 {
 					 result.setStatus(2);
@@ -96,14 +96,12 @@ public class CarController {
 				 }
 					
 				 }
-				 else//���������ﳵ�����Ʒ
+				 else//如果不包含，则往购物车添加商品
 				 {
 					 result.setStatus(0);
 				 }
 				
-                 //��Cookie������ӹ��ﳵ
-				
-				 
+				//往Cookie了里添加购物车
 				
 				 JSONObject json = JSONObject.fromObject(result);
 				 return json.toString();
@@ -159,7 +157,7 @@ public class CarController {
 				 return json.toString();
 			}
 			
-//	//���ﳵ�������Ʒ	
+//	//往购物车里添加商品
 //		@RequestMapping(value ="/addItemtoCar",produces = "text/html;charset=UTF-8" )
 //		@ResponseBody
 //		public String addItemToCar(String id,String img,String title,String price,String uid) throws JsonGenerationException, JsonMappingException, IOException 

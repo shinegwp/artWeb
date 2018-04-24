@@ -58,7 +58,7 @@ public class OrderFormController {
 	public String updateOrderFormListById(Integer id,String state)	  
 	{ int i =0;
 		try {
-		System.out.println("�����ۺ�"+new String(state.getBytes("iso-8859-1"),"utf-8"));
+		System.out.println("申请售后"+new String(state.getBytes("iso-8859-1"),"utf-8"));
 		String sta =new String(state.getBytes("iso-8859-1"),"utf-8"); 
 		OrderForm orderform = new OrderForm();
 		orderform.setId(id);
@@ -117,7 +117,7 @@ public class OrderFormController {
 					orderform.setUnitPrice(Integer.parseInt(String.valueOf(item.getPrice())));
 					orderform.setTime(date);
 					orderform.setFormNum(sdf.format(date));
-					orderform.setState("��֧��");
+					orderform.setState("待支付");
 					orderform.setUid(Integer.parseInt(uid));
 					System.out.println(orderform);
 					int i = orderFormService.insert(orderform);

@@ -39,14 +39,14 @@ public class ItemServiceImplBack implements ItemServiceBack{
 	}
 	public EUDataGridResult getItemList(int page, int rows) {//前后台都有
 		ItemExample example = new ItemExample();
-		//鍒嗛〉澶勭悊
+		
 		PageHelper.startPage(page, rows);
 		List<Item> list = itemMapper.selectByExample(example);
 		System.out.println(list);
-		//鍒涘缓涓�涓繑鍥炲�煎璞�
+		
 		EUDataGridResult result = new EUDataGridResult();
 		result.setRows(list);
-		//鍙栬褰曟�绘潯鏁�
+		
 		PageInfo<Item> pageInfo = new PageInfo<Item>(list);
 
 		result.setTotal(pageInfo.getTotal());;

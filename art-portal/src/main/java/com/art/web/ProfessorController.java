@@ -68,13 +68,13 @@ public String saveProfessor(String pname,String birthday,String university,Strin
 	SimpleDateFormat smf = new SimpleDateFormat("yyyy-MM-dd");
 	Date d = smf.parse(birthday);
 	pro.setBirthday(d);
-	pro.setBroLocation("������"+broLocation);
+	pro.setBroLocation("出生于"+broLocation);
 	pro.setImg(img);
-	pro.setNowLocation("�����������"+nowLocation);
+	pro.setNowLocation("现生活、工作于"+nowLocation);
 	pro.setExperience(experience);
 	pro.setImg(img);
     pro.setSkill(skill);
-    pro.setUniversity("��ҵ��"+university);
+    pro.setUniversity("毕业于"+university);
     pro.setTel(tel);
     pro.setCreated(new Date());
     pro.setPassword(password);
@@ -110,7 +110,7 @@ public String updataProfessor(String pid,String pname,String birthday,String tel
 	}
 	if(broLocation!=null)
 	{
-		pro.setBroLocation("������"+broLocation);
+		pro.setBroLocation("出生于"+broLocation);
 	}
 	if(email!=null)
 	{
@@ -126,7 +126,7 @@ public String updataProfessor(String pid,String pname,String birthday,String tel
 	}
 	if(university!=null)
 	{
-		pro.setUniversity("��ҵ��"+university);
+		pro.setUniversity("毕业于"+university);
 	}
 	if(skill!=null)
 	{
@@ -138,7 +138,7 @@ public String updataProfessor(String pid,String pname,String birthday,String tel
 	}
 	if(nowLocation!=null)
 	{
-		pro.setNowLocation("�����������"+nowLocation);
+		pro.setNowLocation("现生活、工作于"+nowLocation);
 	}
 	System.out.println(pro);
 	 int i =professorService.update(pro);
@@ -156,7 +156,7 @@ public String updataProfessor(String pid,String pname,String birthday,String tel
 @RequestMapping(value ="getprofessorByPid",produces = "text/html;charset=UTF-8")
 @ResponseBody()
 public String getProfessor(String pid) 
-{//university=��ҵ���Ϻ�����, broLocation=�����ڰ���ʡ������, nowLocation=������������Ϻ�������
+{//university=毕业于上海交大, broLocation=出生于安徽省淮南市, nowLocation=现生活、工作于上海及北京
 	Professor pro = professorService.getProfessorById(Integer.parseInt(pid));
 	System.out.println(pro);
 	pro.setBroLocation(pro.getBroLocation().substring(3));
@@ -176,7 +176,7 @@ public String getProfessor(String pid)
 @ResponseBody()
 public String prologin(String username,String password,HttpServletResponse response,HttpServletRequest request)
 {Cookie[] cook = request.getCookies();
-String msg="�û������������";
+String msg="用户名或密码错误！";
 boolean haveuid =false;
 boolean havepid =false;
 for(Cookie c:cook )
@@ -194,7 +194,7 @@ System.out.println(c.getName().equals("uid"));
 }
 if(havepid==true)
 {
-	msg="��ǰ�����û���½�������˳���";
+	msg="当前已有用户登陆，请先退出！";
 }
 if(haveuid==false)
 {
@@ -209,7 +209,7 @@ if(haveuid==false)
 		
 	}
 }else{
-	msg="������Ϊ�û���½,�����˳�";
+	msg="您已作为用户登陆,请先退出";
 }
 
 	return msg;

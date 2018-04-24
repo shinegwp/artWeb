@@ -6,9 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/**
- * 濞ｆɑ绐愰崯鍡楃厔閼奉亜鐣炬稊澶婃惙鎼存梻绮ㄩ弸锟�
- */
+
 public class TaotaoResult implements Serializable{
 
     /**
@@ -19,19 +17,19 @@ public class TaotaoResult implements Serializable{
 
 
 
-	// 鐎规矮绠焜ackson鐎电钖�
+	//
     private static final ObjectMapper MAPPER = new ObjectMapper();
    
   
 
 
-	// 閸濆秴绨叉稉姘閻樿埖锟斤拷
+	
     private Integer status;
 
-    // 閸濆秴绨插☉鍫熶紖
+    
     private String msg;
 
-    // 閸濆秴绨叉稉顓犳畱閺佺増宓�
+    
     private Object data;
     
  
@@ -103,13 +101,7 @@ public class TaotaoResult implements Serializable{
         this.data = data;
     }
 
-    /**
-     * 鐏忓攬son缂佹挻鐏夐梿鍡氭祮閸栨牔璐烼aotaoResult鐎电钖�
-     * 
-     * @param jsonData json閺佺増宓�
-     * @param clazz TaotaoResult娑擃厾娈憃bject缁鐎�
-     * @return
-     */
+    
     public static TaotaoResult formatToPojo(String jsonData, Class<?> clazz) {
         try {
             if (clazz == null) {
@@ -131,12 +123,7 @@ public class TaotaoResult implements Serializable{
         }
     }
 
-    /**
-     * 濞屸剝婀乷bject鐎电钖勯惃鍕祮閸栵拷
-     * 
-     * @param json
-     * @return
-     */
+   
     public static TaotaoResult format(String json) {
         try {
             return MAPPER.readValue(json, TaotaoResult.class);
@@ -146,13 +133,7 @@ public class TaotaoResult implements Serializable{
         return null;
     }
 
-    /**
-     * Object閺勵垶娉﹂崥鍫ｆ祮閸栵拷
-     * 
-     * @param jsonData json閺佺増宓�
-     * @param clazz 闂嗗棗鎮庢稉顓犳畱缁鐎�
-     * @return
-     */
+    
     public static TaotaoResult formatToList(String jsonData, Class<?> clazz) {
         try {
             JsonNode jsonNode = MAPPER.readTree(jsonData);

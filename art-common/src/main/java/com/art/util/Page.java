@@ -5,28 +5,28 @@ import java.io.Serializable;
 public class Page implements Serializable  {
 	private static final long serialVersionUID = -3198048449643774660L;  
 	  
-	    private int pageNow = 1; // µ±Ç°Ò³Êı  
+	    private int pageNow = 1; // å½“å‰é¡µæ•°  
 	  
-	    private int pageSize = 4; // Ã¿Ò³ÏÔÊ¾¼ÇÂ¼µÄÌõÊı  
+	    private int pageSize = 4; // æ¯é¡µæ˜¾ç¤ºè®°å½•çš„æ¡æ•°  
 	  
-	    private int totalCount; // ×ÜµÄ¼ÇÂ¼ÌõÊı  
+	    private int totalCount; // æ€»çš„è®°å½•æ¡æ•°  
 	  
-	    private int totalPageCount; // ×ÜµÄÒ³Êı  
+	    private int totalPageCount; // æ€»çš„é¡µæ•°  
 	  
 	    @SuppressWarnings("unused")  
-	    private int startPos; // ¿ªÊ¼Î»ÖÃ£¬´Ó0¿ªÊ¼  
+	    private int startPos; // å¼€å§‹ä½ç½®ï¼Œä»0å¼€å§‹  
 	  
     @SuppressWarnings("unused")  
-    private boolean hasFirst;// ÊÇ·ñÓĞÊ×Ò³  
+    private boolean hasFirst;// æ˜¯å¦æœ‰é¦–é¡µ  
   
 	    @SuppressWarnings("unused")  
-    private boolean hasPre;// ÊÇ·ñÓĞÇ°Ò»Ò³  
+    private boolean hasPre;// æ˜¯å¦æœ‰å‰ä¸€é¡µ  
 		
 	    @SuppressWarnings("unused")  
-	    private boolean hasNext;// ÊÇ·ñÓĞÏÂÒ»Ò³  
+	    private boolean hasNext;// æ˜¯å¦æœ‰ä¸‹ä¸€é¡µ  
 	  
 	    @SuppressWarnings("unused")  
-    private boolean hasLast;// ÊÇ·ñÓĞ×îºóÒ»Ò³  
+    private boolean hasLast;// æ˜¯å¦æœ‰æœ€åä¸€é¡µ  
 	 
 	    public Page(int totalCount, int pageNow) {  
 	    	        this.totalCount = totalCount;  

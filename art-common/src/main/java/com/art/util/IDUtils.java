@@ -11,32 +11,32 @@ public class IDUtils implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Í¼Æ¬ÃûÉú³É
+	 * Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public static String genImageName() {
-		//È¡µ±Ç°Ê±¼äµÄ³¤ÕûĞÎÖµ°üº¬ºÁÃë
+		//å–å½“å‰æ—¶é—´çš„é•¿æ•´å½¢åŒ…å«ç§’æ•°
 		long millis = System.currentTimeMillis();
 		//long millis = System.nanoTime();
-		//¼ÓÉÏÈıÎ»Ëæ»úÊı
+		//åŠ ä¸Šä¸‰ä½éšæœºæ•°
 		Random random = new Random();
 		int end3 = random.nextInt(999);
-		//Èç¹û²»×ãÈıÎ»Ç°Ãæ²¹0
+		//å¦‚æœä¸è¶³ä¸‰ä½å‰é¢è¡¥0
 		String str = millis + String.format("%03d", end3);
 		
 		return str;
 	}
 	
 	/**
-	 * ÉÌÆ·idÉú³É
+	 * å•†å“idç”Ÿæˆ
 	 */
 	public static long genItemId() {
-		//È¡µ±Ç°Ê±¼äµÄ³¤ÕûĞÎÖµ°üº¬ºÁÃë
+		//å–å½“å‰æ—¶é—´çš„é•¿æ•´å½¢å€¼åŒ…å«æ¯«ç§’
 		long millis = System.currentTimeMillis();
 		//long millis = System.nanoTime();
-		//¼ÓÉÏÁ½Î»Ëæ»úÊı
+		//åŠ ä¸Šä¸¤ä½éšæœºæ•°
 		Random random = new Random();
 		int end2 = random.nextInt(99);
-		//Èç¹û²»×ãÁ½Î»Ç°Ãæ²¹0
+		//å¦‚æœä¸è¶³ä¸¤ä½å‰é¢è¡¥0
 		String str = millis + String.format("%02d", end2);
 		long id = new Long(str);
 		return id;

@@ -31,11 +31,11 @@ public class SessionController {
 	{System.out.println("getSession#######################################");
 	System.out.println("getSession#######################################");
 	System.out.println("getSession#######################################");
-	Cookie[] cookies = request.getCookies();//��������Ի�ȡһ��cookie����  
+	Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组 
 	SimpleDateFormat simpledate = new SimpleDateFormat("MM-dd-yyyy");
 	User u = new User();
 	if (null==cookies) {  
-        System.out.println("û��cookie=========");  
+        System.out.println("没有cookie=========");  
     } else {  
         for(Cookie cookie : cookies){ 
         	if(cookie.getName().equals("uid"))

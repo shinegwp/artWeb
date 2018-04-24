@@ -14,7 +14,7 @@ public interface ItemService {
   public List<Item> getFirstShowItemsByFirstShow(String firstshow);
   public int insertItem(Item item);
   public EUDataGridResult getItemList(int page, int rows);
-  public int InstockItem(Integer id);//ÉÏ¼Ü
+  public int InstockItem(Integer id);//ä¸Šæž¶
 
  
 public List<Item> getnewItems();

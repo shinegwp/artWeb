@@ -7,7 +7,7 @@ public interface CollectionService {
 
 	EUDataGridResult getControllerByUidAndPage(Integer uid, Integer page, Integer rows);
 
-	Collection getCollectionByIid(Integer id);//根据收藏商品的id查询商品
+	Collection getCollectionByIid(Integer id);//鏍规嵁鏀惰棌鍟嗗搧鐨刬d鏌ヨ鍟嗗搧
 
 	int insert(Collection collection);
 

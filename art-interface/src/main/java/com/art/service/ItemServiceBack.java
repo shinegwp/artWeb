@@ -6,7 +6,8 @@ import com.art.pojo.Item;
 import com.art.util.EUDataGridResult;
 
 public interface ItemServiceBack {
-	public int ReshelfItem(Integer id);
+	
+	public int ReshelfItem(Integer id);//下架
 	public int deleteItemById(Integer id);
 	public int insertItem(Item item);
 	public EUDataGridResult getItemList(int page, int rows);
