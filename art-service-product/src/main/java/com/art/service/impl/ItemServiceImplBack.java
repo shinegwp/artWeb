@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import com.art.mapper.ItemMapper;
 import com.art.pojo.Item;
@@ -20,6 +22,8 @@ import com.github.pagehelper.PageInfo;
 public class ItemServiceImplBack implements ItemServiceBack{
 	@Autowired
 	 ItemMapper itemMapper;
+	@Autowired 
+	private FreeMarkerConfigurer freeMarkerConfigurer;//
 	public int ReshelfItem(Integer id) {//后台
 		ItemExample example = new ItemExample();
 		Criteria criteria = example.createCriteria();
