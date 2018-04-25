@@ -45,7 +45,11 @@ public class UserController {
 	@Autowired
 	ItemService itemservice;
 	
-	
+	/**
+	 * @describe 通过user的id查询用户
+	 * @param uid（用户id）
+	 * @return 把用户的生日赋给TaotaoResult的msg,用户
+	 */
 	@RequestMapping("getUserById")
 	@ResponseBody
 	public String getUser(Integer uid)//通过user的id查询user返回一个Taotaoresul的字符串

@@ -166,6 +166,13 @@ public class ItemController {
 		return jsonarray.toString();
 
 	}
+	
+	/**
+	 * @describe 当在专场页面点进入专场的时候，请求此方法，分页查询某一类商品
+	 * @param 商品类别的id
+	 * @return  某一类商品的集合
+	 * 
+	 */
 	@RequestMapping(value ="getSpecialDetailListOrderBySale",produces = "text/html;charset=UTF-8" )
 	@ResponseBody
 	public String getSaleOrderItemByPageAndPid(String pid,String page,String rows) 
@@ -179,6 +186,12 @@ public class ItemController {
 		return jsonarray.toString();
 
 	}
+	
+	/**
+	 * @describe 按类别分页查询最新商品
+	 * @param 商品类别的id（pid），页号（page），每一页记录（rows）
+	 * @return  某一类商品的集合
+	 */
 	@RequestMapping(value ="getSpecialDetailListOrderByCreated",produces = "text/html;charset=UTF-8" )
 	@ResponseBody
 	public String getTimeOrderItemByPageAndPid(String pid,String page,String rows) 
@@ -192,7 +205,11 @@ public class ItemController {
 		return jsonarray.toString();
 
 	}
-	
+	/**
+	 * @describe 查询最新的商品
+	 * @param
+	 * @return  
+	 */
 	@RequestMapping(value ="/getNewItem",produces = "text/html;charset=UTF-8" )
 	@ResponseBody
 	public String  getNewItem() throws ParseException
@@ -203,7 +220,11 @@ public class ItemController {
 		
 		
 	}
-	//��ϲ����������ȡItem�б�
+	/**
+	 * @describe 按喜欢（收藏）的人数查询商品
+	 * @param 
+	 * @return  
+	 */
 	@RequestMapping(value ="/getItemBylikeCountOrder",produces = "text/html;charset=UTF-8" )
 	@ResponseBody
 	public String getItemBylikeCountOrder() 
@@ -215,6 +236,11 @@ public class ItemController {
 
 
 	}
+	/**
+	 * @describe 按时间排序分页查询商品
+	 * @param 页号（page）,每一页的记录数（rows）
+	 * @return  排好序的商品集合
+	 */
 	@RequestMapping(value ="/getItemBytimeOrder",produces = "text/html;charset=UTF-8" )
 	@ResponseBody
 	public String getItemByTimeOrderAndpage(String page,String rows) 
@@ -225,6 +251,11 @@ public class ItemController {
 
 
 	}
+	/**
+	 * @describe 按喜欢（收藏）的人数排序分页查询商品
+	 * @param 页号（page）,每一页的记录数（rows）
+	 * @return  排好序的商品集合
+	 */
 	@RequestMapping(value ="/getItemBylikenumOrder",produces = "text/html;charset=UTF-8" )
 	@ResponseBody
 	public String getItemBylikenumOrder(String page,String rows) 
@@ -234,6 +265,11 @@ public class ItemController {
 		   return JSONObject.fromObject(result).toString();
 
 	}
+	/**
+	 * @describe 按销量排序分页查询商品
+	 * @param 页号（page）,每一页的记录数（rows）
+	 * @return  排好序的商品集合
+	 */
 	@RequestMapping(value ="/getItemBySaleCountOrder",produces = "text/html;charset=UTF-8" )
 	@ResponseBody
 	public String getItemBySaleCountOrder(String page,String rows) 
@@ -243,7 +279,11 @@ public class ItemController {
 		   return JSONObject.fromObject(result).toString();
 
 	}
-
+	/**
+	 * @describe 的到商品详情
+	 * @param 商品的id
+	 * @return  带着商品的大图片（ItemImg1）和细节图片（ItemImg2）返回pro_detail页面
+	 */
 	@RequestMapping("/getDetail")
 	@ResponseBody
 	public ModelAndView getDetail(String id) 
@@ -261,6 +301,11 @@ public class ItemController {
 		return new ModelAndView("pro_detail",map);
 	
 	}
+	/**
+	 * @describe 查询优先显示的商品
+	 * @param 
+	 * @return  返回商品集合
+	 */
 	@RequestMapping("/getfirstShowlist")
 	@ResponseBody
 	public String getfirstShowlist() 
@@ -272,7 +317,11 @@ public class ItemController {
 	
 	}
 	
-	
+	/**
+	 * @describe 保存商品
+	 * @param title（商品标题）,price（商品价格）,desc（商品描述）,ownerId（商品拥有者id）,image（商品大图片）
+	 * @return  返回商品集合
+	 */
 	@RequestMapping(value="itemsave", method=RequestMethod.POST)//ǰ��̨����
 	@ResponseBody
 	private int createItem(String title,String price,String desc,String ownerId,String image) throws Exception {
@@ -289,7 +338,11 @@ public class ItemController {
 		return i;
 	}
 
-	
+	/**
+	 * @describe 分页查询商品
+	 * @param 页号（page）,每一页的记录数（rows）
+	 * @return  返回商品集合
+	 */
 	@RequestMapping(value ="itemlist",produces = "text/html;charset=UTF-8" )//ǰ��̨����
 	@ResponseBody
 	public String getItemList(Integer page, Integer rows) {
@@ -299,20 +352,7 @@ public class ItemController {
 		return JSONObject.fromObject(result).toString();
 	}
 
-	
-	
-	
-	@RequestMapping(value ="/getMySellListByPage",produces = "text/html;charset=UTF-8")//�õ��ҵļ�������Ʒ
-	@ResponseBody
-	public String getMySellListByPage(Integer uid,Integer page,Integer rows) 
-	{ 
-		  
-		  EUDataGridResult rlist = itemService.getItemByOwenId(uid,page, rows);
-		JSONObject jsonobject = JSONObject.fromObject(rlist);
-		
-		return jsonobject.toString();
-	
-	}
+
 	
 	
 }
