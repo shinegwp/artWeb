@@ -34,8 +34,6 @@ import com.art.util.TaotaoResult;
 import net.sf.json.JSONObject;
 
 @Controller
-@SessionAttributes("user") //往session里存【//取userid @SessionAttributes("userid")  ,@ModelAttribute("userid")int uid】
-
 public class UserController {
 
 	@Autowired
@@ -50,18 +48,20 @@ public class UserController {
 	
 	@RequestMapping("getUserById")
 	@ResponseBody
-	public String getUser(Integer uid)
+	public String getUser(Integer uid)//通过user的id查询user返回一个Taotaoresul的字符串
 	{   SimpleDateFormat simpledate = new SimpleDateFormat("MM-dd-yyyy");
 		User u = userService.getUserById(uid);
 		Date d = u.getBirthday();
 		String date = simpledate.format(d);
-		TaotaoResult result = new TaotaoResult();
+		TaotaoResult result = new TaotaoResult();//Taotaoresult带着user对象u和生日的字符串形式d返回前台
 		result.setMsg(date);
 		result.setData(u);
 			JSONObject json = JSONObject.fromObject(result);
 		
 		return json.toString() ;
 	}
+	
+	//减钱
 	@RequestMapping("payOne")
 	@ResponseBody
 	public String reduceOneMoney(HttpServletResponse response,HttpServletRequest request,String money,String uid) throws JsonParseException, JsonMappingException, UnsupportedEncodingException, IOException
@@ -88,11 +88,10 @@ public class UserController {
 		       for(Item item:list)
 		       {
 		    	   int j = itemservice.InstockItem(item.getId());
-		    	 
 		    	   buyerCart.setItems(new ArrayList<Item>());
-		    	    Writer w = new StringWriter();
-					 om.writeValue(w, buyerCart);
-					 Cookie cookie = new Cookie("car", URLEncoder.encode(w.toString(), "utf-8"));
+		    	   Writer w = new StringWriter();
+				   om.writeValue(w, buyerCart);
+				   Cookie cookie = new Cookie("car", URLEncoder.encode(w.toString(), "utf-8"));
 		       }
 		}
 		TaotaoResult result = new TaotaoResult();
@@ -144,7 +143,7 @@ public class UserController {
 	}
 //********************************************************************************************************************************
 	
-	@RequestMapping("usersave")
+	@RequestMapping("usersave")//保存用户
 	@ResponseBody
 	public int insertUser(User user)
 	{

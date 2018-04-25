@@ -41,7 +41,11 @@ public class ItemController {
 	
 	
 	
-	
+	/**
+	 * @describe 分页查询优先显示的商品
+	 * @param 传入  页号
+	 * @return 返回 Item集合
+	 */
 	@RequestMapping("/firstShowlist")
 	@ResponseBody
 	public String firstShowlist(String pageno)
@@ -52,7 +56,11 @@ public class ItemController {
 		
 		return jsonArray.toString();
 	}
-	
+	/**
+	 * @describe 根据Item的id查询Item
+	 * @param 传入  item的id
+	 * @return 返回 一个Item
+	 */
 	@RequestMapping(value ="/getOneItem",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String getOneItem(String id)
@@ -64,16 +72,25 @@ public class ItemController {
 		return jsonobject.toString();
 	}
 
-
+    /**
+     * @describe 当专场点击其中一个专场的时候，把商品类别的父类的id传类专场细节页面
+     * @param  pid=商品类别的id (parent.id)
+     * @return 带着pid,返回到special_detail页面
+     */
 	@RequestMapping(value ="/gotoSpecialDet",produces = "text/html;charset=UTF-8" )
 	@ResponseBody
 	public ModelAndView gotoSpecialDet(String pid) 
-	{  
+	{  //当专场点击其中一个专场的时候，把商品类别的父类的id传类专场细节页面
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("pid", pid);
 		return new ModelAndView("special_detail", map);
 
 	}
+	 /**
+     * @describe 去结算（这个还没写完，需要改）
+     * @param 
+     * @return 
+     */
 	@RequestMapping("/gotojiesuan")
 	@ResponseBody
 	public ModelAndView getShippingAddressByUid(String id) 
@@ -87,37 +104,41 @@ public class ItemController {
 		map.put("car", list);
 		return new ModelAndView("jiesuan", map);
 	}
+	 /**
+     * @describe 去结算（这个还没写完，需要改）
+     * @param 
+     * @return 
+     */
 	@RequestMapping(value ="/gotojs",produces = "text/html;charset=UTF-8" )//�ύ���ﳵ����Ʒ
 	@ResponseBody
 	public ModelAndView gotojiesuan(String Items) 
-	{   JSONObject job = JSONObject.fromObject(Items);
-	      Car car = (Car) JSONObject.toBean(job, Car.class);
-	  //  List<Item> list = (List<Item>) JSONArray.toCollection(JSONObject.fromObject(Items), Item.class);
+	{   //去结算（这个还没写完，需要改）
+		JSONObject job = JSONObject.fromObject(Items);
+	     Car car = (Car) JSONObject.toBean(job, Car.class);
 		Map<String, String> map = new HashMap<String, String>();
-		System.out.println(car.getItems());
-		
-//		Car car = new Car();
-//		String itemsstr = Items.substring(Items.indexOf(":"),Items.lastIndexOf("}"));
-//		System.out.println("str="+itemsstr);
-//		JSONArray json = JSONArray.fromObject(itemsstr);
-//		List<Item> list =(List<Item>)JSONArray.toCollection(json, Item.class);
-//		System.out.println("gotojs="+list);
-//		car.setItems(list);
-
-		//map.put("car", car.getItems());
-		map.put("text", "tes");
 		return new ModelAndView("jiesuan", map);
 
 	}
+	
+	/**
+	 * @describe 当在专场细节页面点击按销量排序的时候，请求此方法
+	 * @param 商品类别的id
+	 * @return  带着商品类别的id返回到sale_special_detail页面（按销量排序后的页面）
+	 */
 	@RequestMapping(value ="/gotoSaleSpecialDet",produces = "text/html;charset=UTF-8" )
 	@ResponseBody
 	public ModelAndView gotoSaleSpecialDet(String pid) 
-	{  
+	{ 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("pid", pid);
 		return new ModelAndView("sale_special_detail", map);
 
 	}
+	/**
+	 * @describe 当在专场细节页面点击按上市时间排序的时候，请求此方法
+	 * @param 商品类别的id
+	 * @return  带着商品类别的id返回到time_special_detail页面（按上市时间排序后的页面）
+	 */
 	@RequestMapping(value ="/gotoTimeSpecialDet",produces = "text/html;charset=UTF-8" )
 	@ResponseBody
 	public ModelAndView gotoTimeSpecialDet(String pid) 
@@ -127,6 +148,11 @@ public class ItemController {
 		return new ModelAndView("time_special_detail", map);
 
 	}
+	/**
+	 * @describe 当在专场页面点进入专场的时候，请求此方法，分页查询某一类商品
+	 * @param 商品类别的id
+	 * @return  某一类商品的集合
+	 */
 	@RequestMapping(value ="getSpecialDetailList",produces = "text/html;charset=UTF-8" )
 	@ResponseBody
 	public String getItemByPageAndPid(String pid,String page,String rows) 
