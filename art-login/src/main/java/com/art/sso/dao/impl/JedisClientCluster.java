@@ -1,12 +1,11 @@
 package com.art.sso.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.art.sso.dao.JedisClient;
 
 import redis.clients.jedis.JedisCluster;
-@Service
+
 public class JedisClientCluster implements JedisClient {
 
 	@Autowired
