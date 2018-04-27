@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 import net.sf.json.JSONObject;
 
@@ -102,7 +102,7 @@ public class PictureController {
         
        
        System.out.println("msg---"+msg+"---code"+code);
-        return JSONObject.fromObject(( TaotaoResult.build(code, null, msg))).toString();
+        return JSONObject.fromObject(( ArtResult.build(code, null, msg))).toString();
     }
 
 }

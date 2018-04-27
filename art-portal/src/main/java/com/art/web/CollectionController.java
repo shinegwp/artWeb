@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.art.pojo.Collection;
 import com.art.service.CollectionService;
 import com.art.util.EUDataGridResult;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 import net.sf.json.JSONObject;
 
@@ -31,7 +31,7 @@ public String getControllerByPageAndUid(Integer uid,Integer page,Integer rows)
 @ResponseBody
 public String addCollection(Integer uid,Integer id)
 {System.out.println("addCollection");
-	TaotaoResult result = new TaotaoResult();
+	ArtResult result = new ArtResult();
 	  Collection coll = collectionService.getCollectionByIid(id);
 	  System.out.println(coll);
 	  if(!(coll==null))

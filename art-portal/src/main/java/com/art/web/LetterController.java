@@ -12,7 +12,7 @@ import com.art.pojo.Letter;
 
 import com.art.service.LetterService;
 import com.art.util.EUDataGridResult;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 import net.sf.json.JSONObject;
 
@@ -46,7 +46,7 @@ ul.setTime(new Date());
 ul.setUtop(utop);
 System.out.println(ul);
 int i = letterService.insert(ul);
-TaotaoResult result = new TaotaoResult();
+ArtResult result = new ArtResult();
 result.setMsg(String.valueOf(i));
   JSONObject json = JSONObject.fromObject(result);
   return json.toString();

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.art.pojo.Professor;
 import com.art.service.ProfessorService;
 import com.art.util.EUDataGridResult;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -142,7 +142,7 @@ public String updataProfessor(String pid,String pname,String birthday,String tel
 	}
 	System.out.println(pro);
 	 int i =professorService.update(pro);
-	 TaotaoResult result = new TaotaoResult();
+	 ArtResult result = new ArtResult();
 	 if(i==1)
 	 {
 		
@@ -164,7 +164,7 @@ public String getProfessor(String pid)
 	pro.setUniversity(pro.getUniversity().substring(3));
 	SimpleDateFormat simpledate = new SimpleDateFormat("MM-dd-yyyy");
 	String bir=simpledate.format(pro.getBirthday());
-	TaotaoResult result = new TaotaoResult();
+	ArtResult result = new ArtResult();
 	result.setData(pro);
 	result.setMsg(bir);
 	return JSONObject.fromObject(result).toString();

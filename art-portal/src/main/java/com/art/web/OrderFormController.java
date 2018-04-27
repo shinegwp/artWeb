@@ -26,7 +26,7 @@ import com.art.pojo.OrderForm;
 import com.art.pojo.OrderFormWithBLOBs;
 import com.art.service.OrderFormService;
 import com.art.util.EUDataGridResult;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 import net.sf.json.JSONObject;
 
@@ -91,7 +91,7 @@ public class OrderFormController {
 		 List<Item> list = new ArrayList<Item>();
 		 Car car = null;
 		
-		 TaotaoResult result = new TaotaoResult();
+		 ArtResult result = new ArtResult();
 		 result.setStatus(1);
 		 if (null != cookies && cookies.length > 0) {
 		for(Cookie c:cookies)

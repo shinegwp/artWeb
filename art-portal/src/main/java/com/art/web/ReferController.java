@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.art.pojo.Refer;
 import com.art.service.ReferService;
 import com.art.util.EUDataGridResult;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 import net.sf.json.JSONObject;
 
@@ -37,7 +37,7 @@ rf.setContext(context);
 rf.setIid(Integer.parseInt(iid));
 rf.setTime(new Date());
   int i = referService.saveRefer(rf);
-  TaotaoResult result = new TaotaoResult();
+  ArtResult result = new ArtResult();
   result.setMsg(String.valueOf(i));
   
   return JSONObject.fromObject(result).toString();

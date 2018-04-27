@@ -29,7 +29,7 @@ import com.art.pojo.Item;
 import com.art.pojo.User;
 import com.art.service.ItemService;
 import com.art.service.UserService;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 import net.sf.json.JSONObject;
 
@@ -57,7 +57,7 @@ public class UserController {
 		User u = userService.getUserById(uid);
 		Date d = u.getBirthday();
 		String date = simpledate.format(d);
-		TaotaoResult result = new TaotaoResult();//Taotaoresult带着user对象u和生日的字符串形式d返回前台
+		ArtResult result = new ArtResult();//Taotaoresult带着user对象u和生日的字符串形式d返回前台
 		result.setMsg(date);
 		result.setData(u);
 			JSONObject json = JSONObject.fromObject(result);
@@ -98,7 +98,7 @@ public class UserController {
 				   Cookie cookie = new Cookie("car", URLEncoder.encode(w.toString(), "utf-8"));
 		       }
 		}
-		TaotaoResult result = new TaotaoResult();
+		ArtResult result = new ArtResult();
 		result.setStatus(i);;
 		result.setMsg(u.getMoney());
 			JSONObject json = JSONObject.fromObject(result);
@@ -138,7 +138,7 @@ public class UserController {
 					 Cookie cookie = new Cookie("car", URLEncoder.encode(w.toString(), "utf-8"));
 		       }
 		}
-		TaotaoResult result = new TaotaoResult();
+		ArtResult result = new ArtResult();
 		result.setStatus(i);;
 		result.setMsg(u.getMoney());
 			JSONObject json = JSONObject.fromObject(result);

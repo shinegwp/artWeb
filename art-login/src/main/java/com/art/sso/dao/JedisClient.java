@@ -1,5 +1,8 @@
 package com.art.sso.dao;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public interface JedisClient {
 
 	String get(String key);

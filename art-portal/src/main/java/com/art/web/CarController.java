@@ -26,7 +26,7 @@ import com.art.pojo.Car;
 import com.art.pojo.Item;
 
 import com.art.service.ItemService;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 import net.sf.json.JSONObject;
 
@@ -59,7 +59,7 @@ public class CarController {
 			                }
 			            }
 			        }
-				 TaotaoResult result = new TaotaoResult();
+				 ArtResult result = new ArtResult();
 				
 				 if(null==buyerCart)
 				 {
@@ -120,7 +120,7 @@ public class CarController {
 				 List<Item> list = new ArrayList<Item>();
 				 Car car = null;
 				
-				 TaotaoResult result = new TaotaoResult();
+				 ArtResult result = new ArtResult();
 				 if (null != cookies && cookies.length > 0) {
 				for(Cookie c:cookies)
 				{

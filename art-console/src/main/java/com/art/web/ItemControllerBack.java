@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.art.pojo.Item;
 import com.art.service.ItemServiceBack;
 import com.art.util.EUDataGridResult;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 import net.sf.json.JSONObject;
 
@@ -37,9 +37,9 @@ public class ItemControllerBack {
 	}
 //    @RequestMapping(value="restitemqueryitemdesc")
 	@ResponseBody
-	public TaotaoResult edit(Integer id)
+	public ArtResult edit(Integer id)
 	{   
-		TaotaoResult result = new TaotaoResult();
+		ArtResult result = new ArtResult();
 		Item item = itemServiceBack.getItemById(String.valueOf(id));
 		System.out.println(item);
 		if(item!=null)

@@ -54,7 +54,6 @@
 		<constructor-arg index="1" value="192.168.200.128"></constructor-arg>
 		<constructor-arg index="2" value="6379"></constructor-arg>
 	</bean>
-	<bean id="jedisClientCluster" class="com.art.sso.dao.impl.JedisClientCluster"></bean>
 	
 		
 </beans>
