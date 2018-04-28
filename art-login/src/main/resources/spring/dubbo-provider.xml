@@ -30,6 +30,8 @@
 	<!-- 3：dubbo://192.168.39.80:20880  默认  设置提供服务的端口号 -->
     <dubbo:protocol port="20882" name="dubbo"/>
 	<!-- 4： 暴露实现类-->
+	<dubbo:service interface="com.art.sso.service.UserServiceLogin" ref="userServiceLogin"/>
+	<bean id="userServiceLogin" class="com.art.sso.service.impl.UserServiceImplLogin" /> 
 	
 	
 	

@@ -1,11 +1,13 @@
-package com.art.sso.dao.impl;
+package com.art.sso.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.art.sso.dao.JedisClient;
+import com.art.sso.service.JedisClient;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+@Service
 public class JedisClientSingle implements JedisClient{
 	
 	@Autowired

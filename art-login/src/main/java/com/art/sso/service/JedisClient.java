@@ -1,6 +1,5 @@
-package com.art.sso.dao;
+package com.art.sso.service;
 
-import org.springframework.stereotype.Service;
 
 
 public interface JedisClient {
