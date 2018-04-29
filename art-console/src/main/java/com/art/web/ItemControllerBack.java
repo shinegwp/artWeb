@@ -20,7 +20,7 @@ public class ItemControllerBack {
 	@Autowired(required=true)
 	ItemServiceBack itemServiceBack;
 	
-//    @RequestMapping(value="restitemreshelf",method=RequestMethod.POST)
+    @RequestMapping(value="rest/item/reshelf",method=RequestMethod.POST)
 	@ResponseBody
 	public int itemReshelf(Integer[] ids)
 	{
@@ -35,7 +35,7 @@ public class ItemControllerBack {
 		}
 			return 0;
 	}
-//    @RequestMapping(value="restitemqueryitemdesc")
+    @RequestMapping(value="rest/item/query/item/desc")
 	@ResponseBody
 	public TaotaoResult edit(Integer id)
 	{   
@@ -49,7 +49,7 @@ public class ItemControllerBack {
 		}
 		return result;
 	}
-//    @RequestMapping(value="restitemdelete")
+    @RequestMapping(value="rest/item/delete")
 	@ResponseBody
 	public int delete(Integer[] ids)
 	{
@@ -65,7 +65,7 @@ public class ItemControllerBack {
 			return 0;
 	}
 //******************************************************************************************************88888	
-//    @RequestMapping(value="itemsaveback",method=RequestMethod.POST)
+    @RequestMapping(value="item/save/back",method=RequestMethod.POST)
 	@ResponseBody
 	private int createItem(String title,String price,String desc,String ownerId,String image) throws Exception {
 		
@@ -82,12 +82,12 @@ public class ItemControllerBack {
 	}
 
 	
-//    @RequestMapping(value="itemlistback",produces = "text/html;charset = utf-8")
+   // @RequestMapping(value="itemlistback",produces = "text/html;charset = utf-8")
+	@RequestMapping(value="item/list/back")
 	@ResponseBody
 	public String getItemList(Integer page, Integer rows) {
 		
 		EUDataGridResult result = itemServiceBack.getItemList(page, rows);
-		
 		return JSONObject.fromObject(result).toString();
 	}
 

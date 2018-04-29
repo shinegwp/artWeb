@@ -45,7 +45,7 @@
 	<dubbo:service interface="com.art.service.OrderFormService" ref="orderFormService"/>
 	<bean id="orderFormService" class="com.art.service.impl.OrderFormServiceImpl" /> 
 	<dubbo:service interface="com.art.service.ParentService" ref="parentService"/>
-	<bean id="parentService" class="com.art.service.impl.ParentServiceImpl" /> 
+	<!--  <bean id="parentService" class="com.art.service.impl.ParentServiceImpl" /> -->
 	<dubbo:service interface="com.art.service.ProfessorService" ref="professorService"/>
 	<bean id="professorService" class="com.art.service.impl.ProfessorServiceImpl" /> 
 	<dubbo:service interface="com.art.service.ReferService" ref="referService"/>
@@ -60,5 +60,4 @@
 	<bean id="tradeLogService" class="com.art.service.impl.TradeLogServiceImpl" /> 
 	<dubbo:service interface="com.art.service.UserService" ref="userService"/>
 	<bean id="userService" class="com.art.service.impl.UserServiceImpl" /> 
-	
 </beans>

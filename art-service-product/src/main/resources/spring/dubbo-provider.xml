@@ -33,7 +33,13 @@
 	
 	<dubbo:service interface="com.art.service.ItemServiceBack" ref="itemServiceBack"/>
 	<bean id="itemServiceBack" class="com.art.service.impl.ItemServiceImplBack" /> 
+	
 	<dubbo:service interface="com.art.service.UserServiceBack" ref="userServiceBack"/>
 	<bean id="userServiceBack" class="com.art.service.impl.UserServiceImplBack" /> 
+     
+    <dubbo:service interface="com.art.service.ContentCategoryService" ref="contentCategoryService"/>
+	<bean id="contentCategoryService" class="com.art.service.impl.ContentCategoryServiceImpl" /> 
 	
+	<dubbo:service interface="com.art.service.ContentService" ref="contentService"/>
+	<bean id="contentService" class="com.art.service.impl.ContentServiceImpl" />
 </beans>

@@ -47,21 +47,7 @@
 										个人中心
 									</a>
 								</li>
-								<li>
-									<a href="settled">
-										专家入驻
-									</a>
-								</li>
-								<li>
-									<a href="pro_sign">
-										专家登陆
-									</a>
-								</li>
-								<li>
-									<a href="pro_grxx">
-										专家个人中心
-									</a>
-								</li>
+							
 								
 							</ul>
 						</div>						
@@ -90,8 +76,7 @@
 					<li ><a href="index">首页</a></li>
 					<li class="cur"><a href="special">专场</a></li>
 					<li><a  href="mall" >商城</a></li>
-					<li><a href="artist">专家</a></li>
-					<li><a href="#" onclick="$.hasLogin()">我要寄卖</a></li>
+					
 				</ul>
 			</div>
 		</div>
@@ -170,17 +155,6 @@ $.displayUserName=function()//如果登陆了展示退出和欢迎
 	{
 	$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='sign' class='f1'>登陆</a></li><li><a href='register' >免费注册</a></li>")
 	}
-}
-$.hasLogin=function()//当点击我要寄卖时判断是否已登录
-{
-	 if($.cookie("user")==null)
-		 {
-		 alert("请先登录！");
-		 }
-	 else
-		 {
-		 window.location.href="wyjm";
-		 }
 }
 $.grxx=function()//当点击个人中心时判断是否已登录
 {

@@ -10,18 +10,20 @@
         http://www.springframework.org/schema/task    
 	http://www.springframework.org/schema/task/spring-task-3.1.xsd">
 
-	<context:component-scan base-package="com.art.web" />
+	<context:component-scan base-package="com.art.portal.controller" />
 	<task:annotation-driven/>
 	<context:annotation-config/>  
  <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>  
 <context:component-scan base-package="com.art.service.impl"/>
+<context:component-scan base-package="com.art.portal.service.impl"/>
 	<mvc:annotation-driven />
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
+<!-- 加载配置文件 -->
+	 <context:property-placeholder location="classpath:resource/resource.properties" /> 
 	<!-- 资源映射 -->
 	<mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
 	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
