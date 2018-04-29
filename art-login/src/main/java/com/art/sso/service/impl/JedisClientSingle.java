@@ -13,7 +13,6 @@ public class JedisClientSingle implements JedisClient{
 	@Autowired
 	private JedisPool jedisPool; 
 	
-	@Override
 	public String get(String key) {
 		Jedis jedis = jedisPool.getResource();
 		String string = jedis.get(key);
@@ -21,7 +20,6 @@ public class JedisClientSingle implements JedisClient{
 		return string;
 	}
 
-	@Override
 	public String set(String key, String value) {
 		Jedis jedis = jedisPool.getResource();
 		String string = jedis.set(key, value);
@@ -29,7 +27,6 @@ public class JedisClientSingle implements JedisClient{
 		return string;
 	}
 
-	@Override
 	public String hget(String hkey, String key) {
 		Jedis jedis = jedisPool.getResource();
 		String string = jedis.hget(hkey, key);
@@ -37,7 +34,6 @@ public class JedisClientSingle implements JedisClient{
 		return string;
 	}
 
-	@Override
 	public long hset(String hkey, String key, String value) {
 		Jedis jedis = jedisPool.getResource();
 		Long result = jedis.hset(hkey, key, value);
@@ -45,7 +41,6 @@ public class JedisClientSingle implements JedisClient{
 		return result;
 	}
 
-	@Override
 	public long incr(String key) {
 		Jedis jedis = jedisPool.getResource();
 		Long result = jedis.incr(key);
@@ -53,7 +48,6 @@ public class JedisClientSingle implements JedisClient{
 		return result;
 	}
 
-	@Override
 	public long expire(String key, int second) {
 		Jedis jedis = jedisPool.getResource();
 		Long result = jedis.expire(key, second);
@@ -61,7 +55,6 @@ public class JedisClientSingle implements JedisClient{
 		return result;
 	}
 
-	@Override
 	public long ttl(String key) {
 		Jedis jedis = jedisPool.getResource();
 		Long result = jedis.ttl(key);
@@ -69,7 +62,6 @@ public class JedisClientSingle implements JedisClient{
 		return result;
 	}
 
-	@Override
 	public long del(String key) {
 		Jedis jedis = jedisPool.getResource();
 		Long result = jedis.del(key);
@@ -77,7 +69,6 @@ public class JedisClientSingle implements JedisClient{
 		return result;
 	}
 
-	@Override
 	public long hdel(String hkey, String key) {
 		Jedis jedis = jedisPool.getResource();
 		Long result = jedis.hdel(hkey, key);

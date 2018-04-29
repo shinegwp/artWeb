@@ -35,7 +35,6 @@ public class UserServiceImplLogin implements UserServiceLogin {
 	@Autowired
 	private JedisClient jedisClient;
 	
-	@Override
 	/**
 	 * @describe 数据校验
 	 * 
@@ -64,7 +63,6 @@ public class UserServiceImplLogin implements UserServiceLogin {
 		return ArtResult.ok(false);
 	}
 	
-	@Override
 	/**
 	 * @describe 注册功能
 	 */
@@ -78,7 +76,6 @@ public class UserServiceImplLogin implements UserServiceLogin {
 
 	
 	
-	@Override
 	/**
 	 * @describe 登录功能
 	 */
@@ -115,7 +112,6 @@ public class UserServiceImplLogin implements UserServiceLogin {
 		return ArtResult.ok(token);
 	}
 
-	@Override
 	/**
 	 * @describe 通过token获取对象信息
 	 */
