@@ -32,20 +32,23 @@ public class ArtResult implements Serializable{
     
     private Object data;
     
- 
-   
+  
 
-	
     @Override
-	public String toString() {
-		return "TaotaoResult [status=" + status + ", msg=" + msg + ", data=" + data + "]";
-	}
+   	public String toString() {
+   		return "ArtResult [status=" + status + ", msg=" + msg + ", data=" + data + "]";
+   	}
+
+    
 
 	public static ArtResult build(Integer status, String msg, Object data) {
         return new ArtResult(status, msg, data);
     }
+    
 
-    public static ArtResult ok(Object data) {
+   
+
+	public static ArtResult ok(Object data) {
         return new ArtResult(data);
     }
 
@@ -66,12 +69,13 @@ public class ArtResult implements Serializable{
         this.msg = msg;
         this.data = data;
     }
-
+    
     public ArtResult(Object data) {
         this.status = 200;
         this.msg = "OK";
         this.data = data;
     }
+
 
 //    public Boolean isOK() {
 //        return this.status == 200;
