@@ -15,6 +15,13 @@
 		<meta name="format-detection" content="telephone=no">
 		<meta name="keywords" content="">
 		<meta name="description" content="">
+		
+		<link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <script src="../js/moment-with-locales.js"></script>
+    <script src="../js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../js/bootstrap-datetimepicker.zh-CN.js"></script>
+		
+		
 		<link rel="stylesheet" type="text/css" href="css/page.css" />
 		<link rel="stylesheet" type="text/css" href="css/base.css" />
 		<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
