@@ -33,7 +33,6 @@
          		<ul>
          		    <li data-options="attributes:{'url':'user-add'}">新增用户</li>
 	         		<li data-options="attributes:{'url':'user-list'}">查询用户</li>
-	         		<li data-options="attributes:{'url':'artist-list'}">查询艺术家</li>
 	         	</ul>
          	</li>
          	<li>

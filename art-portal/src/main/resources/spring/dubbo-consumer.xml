@@ -36,7 +36,6 @@
 	<dubbo:reference interface="com.art.service.ItemService" id="itemService" url="dubbo://127.0.0.1:20880"/>
 	<dubbo:reference interface="com.art.service.LetterService" id="letterService" url="dubbo://127.0.0.1:20880"/>
 	<dubbo:reference interface="com.art.service.OrderFormService" id="orderFormService" url="dubbo://127.0.0.1:20880"/>
-	<dubbo:reference interface="com.art.service.ParentService" id="parentService" url="dubbo://127.0.0.1:20880"/>
 	<dubbo:reference interface="com.art.service.ProfessorService" id="professorService" url="dubbo://127.0.0.1:20880"/>
 	<dubbo:reference interface="com.art.service.ReferService" id="referService" url="dubbo://127.0.0.1:20880"/>
 	<dubbo:reference interface="com.art.service.SaleAfterService" id="saleAfterService" url="dubbo://127.0.0.1:20880"/>
@@ -44,6 +43,7 @@
 	<dubbo:reference interface="com.art.service.TbItemParamItemService" id="tbItemParamItemService" url="dubbo://127.0.0.1:20880"/>
 	<dubbo:reference interface="com.art.service.TradeLogService" id="tradeLogService" url="dubbo://127.0.0.1:20880"/>
 	<dubbo:reference interface="com.art.service.UserService" id="userService" url="dubbo://127.0.0.1:20880"/>
+	   
 	<!-- 设置全局超时时间 -->
  	<dubbo:consumer timeout="60000"></dubbo:consumer>
 </beans>

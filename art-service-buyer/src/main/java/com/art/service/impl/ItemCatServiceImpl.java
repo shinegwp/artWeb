@@ -15,7 +15,10 @@ import com.art.util.EUTreeNode;
 @Service
 public class ItemCatServiceImpl implements ItemCatService {
 	@Autowired ItemCatMapper itemCatMapper;
-	
+
+    /**
+     * 
+     */
 	public List<EUTreeNode> getItemCatList(long parentId) {
 		ItemCatExample example = new ItemCatExample();
 		Criteria criteria = example.createCriteria();

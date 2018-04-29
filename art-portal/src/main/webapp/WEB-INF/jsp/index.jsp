@@ -45,21 +45,6 @@
 										个人中心
 									</a>
 								</li>
-								<li>
-									<a href="settled">
-										专家入驻
-									</a>
-								</li>
-								<li>
-									<a href="pro_sign">
-										专家登陆
-									</a>
-								</li>
-								<li>
-									<a href="#" onclick="$.pro_grxx()">
-										专家个人中心
-									</a>
-								</li>
 								
 							</ul>
 						</div>						
@@ -88,8 +73,7 @@
 					<li class="cur"><a href="index">首页</a></li>
 					<li><a href="special">专场</a></li>
 					<li><a  href="mall" >商城</a></li>
-					<li><a href="artist">专家</a></li>
-					<li><a href="#" onclick="$.hasLogin()">我要寄卖</a></li>
+				
 				</ul>
 			</div>
 		</div>
@@ -115,11 +99,9 @@
 	<script type="text/javascript">
 	 $(function()
 			 {
-		 //获取session
 		 $.getNewItem();
 		 $.JXshow();
-		 $.ZJshow();
-		 $.displayUserName();
+		 //$.displayUserName();
 			 });
 	</script>
 	<!-- 今日推荐 -->
@@ -139,17 +121,7 @@
 		$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='sign' class='f1'>登陆</a></li><li><a href='register' >免费注册</a></li>")
 		}
 	}
-	 $.hasLogin=function()//当点击我要寄卖时判断是否已登陆
-     {
-    	 if($.cookie("user")==null)
-    		 {
-    		 alert("请先登录！");
-    		 }
-    	 else
-    		 {
-    		 window.location.href="wyjm";
-    		 }
-     }
+
 	 $.tuichu=function()
 	 {
 		 $.ajax({
@@ -159,7 +131,7 @@
 			  { if(data=="successful")
 				  {
 				  alert("成功退出！");
-				  $("#displayName").html("<li ><a href='register'>注册/登陆</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='settled'>专家入驻</a></li><li><a href='pro_sign'>专家登陆</a></li><li><a href='#' onclick='$.pro_grxx()'>专家个人中心</a></li>")
+				  $("#displayName").html("<li ><a href='register'>注册/登陆</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li>")
 				  }
 			  else
 				  {
@@ -184,18 +156,53 @@
 		 window.location.href="grxx";
 		 } 
 	 }
-	$.getNewItem=function()
-	{
-	 $.ajax({
-		  url: "getNewItem",
+	 $.getNewItem=function()
+		{
+		 $.ajax({
+			  url: "getContent",
+			  type: "post",
+			  data:{
+				  categoryId:90  
+			  },
+			  success: function(data)
+			  {  
+				  var content=eval('('+data+')');
+				  for(var i=0;i<4;i++)
+					{
+					$("#src"+i).attr("src",content[i].pic);//显示图片
+				 	$("#p"+i).html(content[i].title);
+					$("#span"+i).text(content[i].price);
+					}
+			  },
+			  error:function()
+			  {
+				  alert("error");
+			  }
+			  
+			});
+		}
+
+	
+	</script>
+	<!-- 商城精选显示 -->
+	<script type="text/javascript">
+	var d;
+	$.JXshow=function()
+	{ $.ajax({
+		  url: "getContent",
 		  type: "post",
-		  dataType: "json",
-		 
+		  data:{
+			  categoryId:89  
+		  },
 		  success: function(data)
-		  { //var str = "upload/wwsc/mmy/2.jpg";
-			 
-			  $.TJshow(data);
-			  //$("#src1").attr("src",str);
+		  {  
+			  var content=eval('('+data+')');  
+			  for(var i=0;i<9;i++)
+			  { 
+				$("#jxsrc"+i).attr("src",content[i].pic);
+			    $("#jxp"+i).html(content[i].title);
+			    $("#price"+i).html(content[i].price);
+			  }	
 		  },
 		  error:function()
 		  {
@@ -203,78 +210,6 @@
 		  }
 		  
 		});
-	}
-	
-	</script>
-	<!-- 推荐显示 -->
-	<script type="text/javascript">
-	$.TJshow=function(data)
-	{
-		for(var i=1;i<=4;i++)
-			{
-			$("#src"+i).attr("src",data[i-1].imgAddress);
-			$("#p"+i).html(data[i-1].pname);
-			$("#span"+i).text(data[i-1].price);
-			}
-		
-		
-	}
-	</script>
-
-	<!-- 商城精选显示 -->
-	<script type="text/javascript">
-	var d;
-	$.JXshow=function()
-	{
-		 $.ajax({
-			  url: "getItemBylikeCountOrder",
-			  type: "post",
-			  dataType:"json",
-			  success: function(data)
-			  { d = data;
-			    
-			  for(var i=1;i<=9;i++)
-			  { 
-				$("#jxsrc"+i).attr("src",data[i-1].imgAddress);
-			    $("#jxp"+i).html(data[i-1].title);
-			    $("#price"+i).html(data[i-1].price);
-			  }			 
-			  },
-			  error:function()
-			  {
-				  alert("JXerror");
-			  }
-			  
-			});
-	}
-	//专家推荐
-	$.ZJshow=function()
-	{
-		$.ajax({
-			  url: "getProfessors",
-			  type: "post",
-			  dataType:"json",
-			  success: function(data)
-			  { for(var i=0;i<4;i++)
-				  {
-				  $("#zjimg"+(i+1+0)).attr("src",data[i].img);
-				  $("#zjname"+(i+1+0)).html(data[i].pname);
-				  $("#zjlocation"+(i+1+0)).html(data[i].broLocation);
-				  $("#zjskill"+(i+1+0)).html(data[i].skill);
-				  $("#university"+(i+1+0)).html(data[i].university);  
-				  $("#professorDiv"+(i+1+0)).attr("value",data[i].pid);  
-				 
-				  }
-				  
-			 
-			  
-			  },
-			  error:function()
-			  {
-				  alert("ZJerror");
-			  }
-			  
-			});
 	}
 
 	$.enterSpecial=function(e)
@@ -307,16 +242,16 @@
 							<a href="#" >
 								<!--备注：第一张图 宽度：418像素，高度：710像素-->
 								<div class="tu clearfix">
-									<img src="\WEB-INF\upload\ghxh\other\2.jpg" id="src1"/>
+									<img src="" id="src0"/>
 									<span></span>
 								</div>
 								<div class="listxia clearfix ta-center">
 									<h2>
-										<p id="p1">
+										<p id="p0">
 											孙瑾晨				
 											
 										</p>
-										<p id="span1">
+										<p id="span0">
 										
 										</p>
 									</h2>
@@ -328,7 +263,30 @@
 							<a href="#">
 								<!--备注：第二张图 宽度：438像素，高度：376像素-->
 								<div class="tu clearfix">
-									<img src="upload/1-3.png" id="src2"/>
+									<img src="upload/1-3.png" id="src1"/>
+									<span></span>
+								</div>
+								<div class="listxia clearfix ta-center">
+									<h2>
+										<p id="p1">
+											孙瑾晨
+											
+										</p>
+										<p id="span1">
+										
+										</p>
+									</h2>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="right clearfix fr">
+<!-- 第三张图---------------------------------------------------------------- -->					
+						<div class="listone listthree clearfix fl">
+							<a href="#">
+								<!--备注：第三张图 宽度：530像素，高度：638像素-->
+								<div class="tu clearfix">
+									<img src="upload/1-2.png" id="src2"/>
 									<span></span>
 								</div>
 								<div class="listxia clearfix ta-center">
@@ -344,14 +302,12 @@
 								</div>
 							</a>
 						</div>
-					</div>
-					<div class="right clearfix fr">
-<!-- 第三张图---------------------------------------------------------------- -->					
-						<div class="listone listthree clearfix fl">
+<!-- 第四张图---------------------------------------------------------------- -->						
+						<div class="listone listfour clearfix fr">
 							<a href="#">
-								<!--备注：第三张图 宽度：530像素，高度：638像素-->
+								<!--备注：第四张图 宽度：438像素，高度：480像素-->
 								<div class="tu clearfix">
-									<img src="upload/1-2.png" id="src3"/>
+									<img src="upload/1-4.png" id="src3"/>
 									<span></span>
 								</div>
 								<div class="listxia clearfix ta-center">
@@ -361,27 +317,6 @@
 											
 										</p>
 										<p id="span3">
-										
-										</p>
-									</h2>
-								</div>
-							</a>
-						</div>
-<!-- 第四张图---------------------------------------------------------------- -->						
-						<div class="listone listfour clearfix fr">
-							<a href="#">
-								<!--备注：第四张图 宽度：438像素，高度：480像素-->
-								<div class="tu clearfix">
-									<img src="upload/1-4.png" id="src4"/>
-									<span></span>
-								</div>
-								<div class="listxia clearfix ta-center">
-									<h2>
-										<p id="p4">
-											孙瑾晨
-											
-										</p>
-										<p id="span4">
 										
 										</p>
 									</h2>
@@ -416,6 +351,33 @@
 <!--第一张图 -------------------------------------------------------->
 				<div class="list clearfix transition">
 					<div class="tu clearfix">
+						<img src="upload/1.jpg" id="jxsrc0"/>
+						<span></span>
+						
+						<div class="ycang clearfix">
+							<samp class="opa8"></samp>
+							<div class="nr clearfix">
+								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
+								<ul>
+									<li class="box-s transition">收藏</li>
+									<li class="box-s transition">购物车</li>
+								</ul>
+							</div>								
+						</div>
+					</div>
+					<div class="xia clearfix box-s">
+						<p class="bt over" id="jxp0">
+							尹毅画作
+						</p>
+						<div class="price clearfix">
+							<span class="fl" id="price0">￥00.00</span>
+							<a href="pro_detail.html" class="goumai fr ra3 transition">立即购买</a>
+						</div>
+					</div>
+				</div>
+<!--第二张图 -------------------------------------------------------->				
+				<div class="list clearfix transition">
+					<div class="tu clearfix">
 						<img src="upload/1.jpg" id="jxsrc1"/>
 						<span></span>
 						
@@ -440,7 +402,7 @@
 						</div>
 					</div>
 				</div>
-<!--第二张图 -------------------------------------------------------->				
+<!--第三张图 -------------------------------------------------------->				
 				<div class="list clearfix transition">
 					<div class="tu clearfix">
 						<img src="upload/1.jpg" id="jxsrc2"/>
@@ -467,7 +429,7 @@
 						</div>
 					</div>
 				</div>
-<!--第三张图 -------------------------------------------------------->				
+<!--第四张图 -------------------------------------------------------->				
 				<div class="list clearfix transition">
 					<div class="tu clearfix">
 						<img src="upload/1.jpg" id="jxsrc3"/>
@@ -494,7 +456,7 @@
 						</div>
 					</div>
 				</div>
-<!--第四张图 -------------------------------------------------------->				
+<!--第五张图 -------------------------------------------------------->				
 				<div class="list clearfix transition">
 					<div class="tu clearfix">
 						<img src="upload/1.jpg" id="jxsrc4"/>
@@ -521,7 +483,7 @@
 						</div>
 					</div>
 				</div>
-<!--第五张图 -------------------------------------------------------->				
+<!--第六张图 -------------------------------------------------------->		
 				<div class="list clearfix transition">
 					<div class="tu clearfix">
 						<img src="upload/1.jpg" id="jxsrc5"/>
@@ -548,7 +510,7 @@
 						</div>
 					</div>
 				</div>
-<!--第六张图 -------------------------------------------------------->		
+<!--第七张图 -------------------------------------------------------->	
 				<div class="list clearfix transition">
 					<div class="tu clearfix">
 						<img src="upload/1.jpg" id="jxsrc6"/>
@@ -575,7 +537,7 @@
 						</div>
 					</div>
 				</div>
-<!--第七张图 -------------------------------------------------------->	
+<!--第八张图 -------------------------------------------------------->		
 				<div class="list clearfix transition">
 					<div class="tu clearfix">
 						<img src="upload/1.jpg" id="jxsrc7"/>
@@ -602,7 +564,7 @@
 						</div>
 					</div>
 				</div>
-<!--第八张图 -------------------------------------------------------->		
+<!--第九张图 -------------------------------------------------------->		
 				<div class="list clearfix transition">
 					<div class="tu clearfix">
 						<img src="upload/1.jpg" id="jxsrc8"/>
@@ -629,174 +591,11 @@
 						</div>
 					</div>
 				</div>
-<!--第九张图 -------------------------------------------------------->		
-				<div class="list clearfix transition">
-					<div class="tu clearfix">
-						<img src="upload/1.jpg" id="jxsrc9"/>
-						<span></span>
-						
-						<div class="ycang clearfix">
-							<samp class="opa8"></samp>
-							<div class="nr clearfix">
-								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
-								<ul>
-									<li class="box-s transition">收藏</li>
-									<li class="box-s transition">购物车</li>
-								</ul>
-							</div>								
-						</div>
-					</div>
-					<div class="xia clearfix box-s">
-						<p class="bt over" id="jxp9">
-							尹毅画作
-						</p>
-						<div class="price clearfix">
-							<span class="fl" id="price9">￥00.00</span>
-							<a href="pro_detail.html" class="goumai fr ra3 transition">立即购买</a>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 		<!--choice end-->
  		
-		<!--art star-->
-		<div class="art clearfix">
-			<div class="content clearfix box-s">
-				<div class="art-ctent clearfix box-s">
-					<div class="recom-tit clearfix">
-						<p class="engtit ta-center">
-							ART WRITER
-						</p>
-						<div class="middle clearfix">
-							<span class="line"></span>
-							<span class="wenzi">专家</span>
-							<span class="line"></span>
-						</div>
-					</div>
-					<div class="bottom clearfix box-s">
-						<div class="scrollBox" style="margin:0 auto">
-							<div class="ohbox">
-								<ul class="piclist">
-<!-- 第一个专家----------------------------------------------------------------------------------------- -->								
-									<li>
-										<div class="list clearfix fl box-s transition">
-											<div class="tu clearfix box-s">
-												<img src="upload/people.jpg" id="zjimg1"/>
-												<span></span>
-											</div>
-											<div class="ctent clearfix box-s">
-												<div class="shang clearfix">
-													<p class="over ta-center" id="zjname1">孙瑾晨</p>
-													<span></span>
-												</div>
-												<div class="xia clearfix"  value="">
-												   <p id="zjlocation1">
-												   <p></p>
-												   
-												   <p id="zjskill1">
-												   <p></p>
-												   <p id="university1"></p>
-												   
-												   
-												   <p></p>
-													<a href="#" onclick="$.enterSpecial($(this));" value="" id="professorDiv1" class="more">
-															查看更多&gt;&gt;
-													</a>
-												</div>
-											</div>
-										</div>
-									</li>
-<!-- 第二个专家----------------------------------------------------------------------------------------- -->									
-									<li>
-										<div class="list clearfix fl box-s transition">
-											<div class="tu clearfix box-s">
-												<img src="upload/people.jpg" id="zjimg2"/>
-												<span></span>
-											</div>
-											<div class="ctent clearfix box-s">
-												<div class="shang clearfix">
-													<p class="over ta-center" id="zjname2">孙瑾晨</p>
-													<span></span>
-												</div>
-												<div class="xia clearfix" id="professorDiv2" value="">
-													<p id="zjlocation2">
-													<p></p>
-												   <p id="zjskill2">
-												   <p></p>
-												   <p id="university2">
-												   <p></p>
-													<a href="#"  onclick="$.enterSpecial($(this));" id="professorDiv2" value="" class="more">
-															查看更多&gt;&gt;
-														</a>
-												</div>
-											</div>
-										</div>
-									</li>
-<!-- 第三个专家----------------------------------------------------------------------------------------- -->																		
-									<li>
-										<div class="list clearfix fl box-s transition">
-											<div class="tu clearfix box-s">
-												<img src="upload/people.jpg" id="zjimg3"/>
-												<span></span>
-											</div>
-											<div class="ctent clearfix box-s">
-												<div class="shang clearfix">
-													<p class="over ta-center" id="zjname3">孙瑾晨</p>
-													<span></span>
-												</div>
-												<div class="xia clearfix"  value="">
-												<p id="zjlocation3">
-													<p></p>
-												   <p id="zjskill3">
-												   <p></p>
-												   <p id="university3">
-												   <p></p>
-													<a href="#"  onclick="$.enterSpecial($(this));" id="professorDiv3" value="" class="more">
-															查看更多&gt;&gt;
-														</a>
-												
-												</div>
-											</div>
-										</div>
-									</li>
-<!-- 第四个专家----------------------------------------------------------------------------------------- -->																											
-									<li>
-										<div class="list clearfix fl box-s transition">
-											<div class="tu clearfix box-s">
-												<img src="upload/people.jpg" id="zjimg4"/>
-												<span></span>
-											</div>
-											<div class="ctent clearfix box-s">
-												<div class="shang clearfix">
-													<p class="over ta-center" id="zjname4">孙瑾晨</p>
-													<span></span>
-												</div>
-												<div class="xia clearfix"  value="">
-													<p id="zjlocation4">
-													<p></p>
-												   <p id="zjskill4">
-												   <p></p>
-												   <p id="university4">
-												   <p></p>
-													<a href="#"  onclick="$.enterSpecial($(this))" id="professorDiv4" value="" class="more">
-															查看更多&gt;&gt;
-														</a>
-													
-												</div>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-							
-						</div>
-					</div>		
-					
-				</div>
-			</div>
-		</div>
-		<!--art end-->
+	
 		
 		<!--footer star-->
 		<div class="footer clearfix">

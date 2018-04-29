@@ -6,4 +6,18 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>jedis</artifactId>
+  <dependencies>
+       	<dependency>
+  		<groupId>com.art</groupId>
+  		<artifactId>art-common</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	    </dependency>
+  	   
+  	    
+  	     <dependency>
+  		<groupId>com.art</groupId>
+  		 <artifactId>art-dao</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	    </dependency>
+  </dependencies>
 </project>

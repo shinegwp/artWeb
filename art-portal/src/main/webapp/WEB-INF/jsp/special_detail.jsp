@@ -128,7 +128,7 @@ $(function()
 		{
 	
 	 pid = ${pid};
-	 $.getspecialListByPage();
+   $.getspecialListByPage();
 	$.displayUserName();
 		});
 $.getSale=function()
@@ -144,11 +144,7 @@ $.getSale=function()
 {
 		 window.location.href ="gotoSpecialDet?pid="+pid;
 }
-	
-	
-</script>	
 
-<script type="text/javascript">
 $.displayUserName=function()
 {
 if($.cookie("user")!=null)
@@ -164,6 +160,7 @@ else
 	$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='sign' class='f1'>登陆</a></li><li><a href='register' >免费注册</a></li>")
 	}
 }
+//分页查询商品
 $.getspecialListByPage=function(e)
 { 
 	
