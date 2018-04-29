@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.art.pojo.ArtContent;
 import com.art.rest.service.ContentService;
 import com.art.util.ExceptionUtil;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 
 
@@ -33,13 +33,13 @@ public class ContentController {
 	
 	@RequestMapping("/list/{contentCategoryId}")
 	@ResponseBody
-	public TaotaoResult getContentList(@PathVariable Long contentCategoryId) {
+	public ArtResult getContentList(@PathVariable Long contentCategoryId) {
 		try {
 			List<ArtContent> list = contentService.getContentList(contentCategoryId);
-			return TaotaoResult.ok(list);
+			return ArtResult.ok(list);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return TaotaoResult.build(500, ExceptionUtil.getStackTrace(e));
+			return ArtResult.build(500, ExceptionUtil.getStackTrace(e));
 		}
 	}
 }

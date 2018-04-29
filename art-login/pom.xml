@@ -13,5 +13,11 @@
   		<artifactId>art-interface</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
+  	
+  	<dependency>
+  		<groupId>com.art</groupId>
+  		<artifactId>art-dao</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
 </project>

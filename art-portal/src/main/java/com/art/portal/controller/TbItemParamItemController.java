@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.art.pojo.TbItemParamItem;
 import com.art.service.TbItemParamItemService;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 @Controller
 public class TbItemParamItemController {
@@ -17,10 +17,10 @@ public class TbItemParamItemController {
 	
 	@RequestMapping("restitemparamitemquery")
 	@ResponseBody
-public TaotaoResult getTbItemParam(Integer id)
+public ArtResult getTbItemParam(Integer id)
 {
 	TbItemParamItem tbitemparamItem = tbItemParamItemService.selectTbItemParamItemServiceById(id);
-	TaotaoResult result = new TaotaoResult();
+	ArtResult result = new ArtResult();
 	if(tbitemparamItem!=null)
 	{
 		result.setData(tbitemparamItem);

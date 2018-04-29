@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.art.pojo.ArtContent;
 import com.art.service.ContentService;
 import com.art.util.EUDataGridResult;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 
 
@@ -32,8 +32,8 @@ public class ContentController {
 	
 	@RequestMapping("contentsave")
 	@ResponseBody
-	public TaotaoResult insertContent(ArtContent content) {
-		TaotaoResult result = contentService.insertContent(content);
+	public ArtResult insertContent(ArtContent content) {
+		ArtResult result = contentService.insertContent(content);
 		return result;
 	}
 	

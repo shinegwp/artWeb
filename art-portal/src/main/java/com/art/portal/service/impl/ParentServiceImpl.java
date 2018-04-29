@@ -13,7 +13,7 @@ import com.art.portal.service.ParentService;
 import com.art.util.EUDataGridResult;
 import com.art.util.HttpClientUtil;
 import com.art.util.JsonUtils;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 @Service
@@ -26,11 +26,11 @@ public class ParentServiceImpl implements ParentService{
 	
 	public String getParrentListByPage(int page, int rows) {
 		String result = HttpClientUtil.doGet(REST_BASE_URL + REST_INDEX_PARENT_URL);
-		//把字符串转换成TaotaoResult
+		//把字符串转换成ArtResult
 		try {
-			TaotaoResult taotaoResult = TaotaoResult.formatToList(result, Parent.class);
+			ArtResult artResult = ArtResult.formatToList(result, Parent.class);
 			//取内容列表
-			List<Parent> list = (List<Parent>) taotaoResult.getData();
+			List<Parent> list = (List<Parent>) artResult.getData();
 			
 			return JsonUtils.objectToJson(list);
 		} catch (Exception e) {

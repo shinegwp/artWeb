@@ -15,7 +15,7 @@ import com.art.pojo.ItemExample;
 import com.art.pojo.ArtContentExample.Criteria;
 import com.art.service.ContentService;
 import com.art.util.EUDataGridResult;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 import com.github.pagehelper.PageHelper;
 
 
@@ -41,7 +41,7 @@ public class ContentServiceImpl implements ContentService {
 	
 	
 
-	public TaotaoResult insertContent(ArtContent content) {
+	public ArtResult insertContent(ArtContent content) {
 		//补全pojo内容
 		content.setCreated(new Date());
 		content.setUpdated(new Date());
@@ -54,7 +54,7 @@ public class ContentServiceImpl implements ContentService {
 //			e.printStackTrace();
 //		}
 		
-		return TaotaoResult.ok();
+		return ArtResult.ok();
 	}
 
 

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.art.pojo.User;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 import net.sf.json.JSONObject;
 @SessionAttributes("user")
@@ -84,7 +84,7 @@ public class SessionController {
 	System.out.println(u);	
 	Date d = u.getBirthday();
 	String date = simpledate.format(d);
-	TaotaoResult result = new TaotaoResult();
+	ArtResult result = new ArtResult();
 	result.setMsg(date);
 	result.setData(u);
 		JSONObject json = JSONObject.fromObject(result);

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-public class TaotaoResult implements Serializable{
+public class ArtResult implements Serializable{
 
     /**
 	 * 
@@ -41,33 +41,33 @@ public class TaotaoResult implements Serializable{
 		return "TaotaoResult [status=" + status + ", msg=" + msg + ", data=" + data + "]";
 	}
 
-	public static TaotaoResult build(Integer status, String msg, Object data) {
-        return new TaotaoResult(status, msg, data);
+	public static ArtResult build(Integer status, String msg, Object data) {
+        return new ArtResult(status, msg, data);
     }
 
-    public static TaotaoResult ok(Object data) {
-        return new TaotaoResult(data);
+    public static ArtResult ok(Object data) {
+        return new ArtResult(data);
     }
 
-    public static TaotaoResult ok() {
-        return new TaotaoResult(null);
+    public static ArtResult ok() {
+        return new ArtResult(null);
     }
 
-    public TaotaoResult() {
+    public ArtResult() {
 
     }
 
-    public static TaotaoResult build(Integer status, String msg) {
-        return new TaotaoResult(status, msg, null);
+    public static ArtResult build(Integer status, String msg) {
+        return new ArtResult(status, msg, null);
     }
 
-    public TaotaoResult(Integer status, String msg, Object data) {
+    public ArtResult(Integer status, String msg, Object data) {
         this.status = status;
         this.msg = msg;
         this.data = data;
     }
 
-    public TaotaoResult(Object data) {
+    public ArtResult(Object data) {
         this.status = 200;
         this.msg = "OK";
         this.data = data;
@@ -102,10 +102,10 @@ public class TaotaoResult implements Serializable{
     }
 
     
-    public static TaotaoResult formatToPojo(String jsonData, Class<?> clazz) {
+    public static ArtResult formatToPojo(String jsonData, Class<?> clazz) {
         try {
             if (clazz == null) {
-                return MAPPER.readValue(jsonData, TaotaoResult.class);
+                return MAPPER.readValue(jsonData, ArtResult.class);
             }
             JsonNode jsonNode = MAPPER.readTree(jsonData);
             JsonNode data = jsonNode.get("data");
@@ -124,9 +124,9 @@ public class TaotaoResult implements Serializable{
     }
 
    
-    public static TaotaoResult format(String json) {
+    public static ArtResult format(String json) {
         try {
-            return MAPPER.readValue(json, TaotaoResult.class);
+            return MAPPER.readValue(json, ArtResult.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -134,7 +134,7 @@ public class TaotaoResult implements Serializable{
     }
 
     
-    public static TaotaoResult formatToList(String jsonData, Class<?> clazz) {
+    public static ArtResult formatToList(String jsonData, Class<?> clazz) {
         try {
             JsonNode jsonNode = MAPPER.readTree(jsonData);
             JsonNode data = jsonNode.get("data");

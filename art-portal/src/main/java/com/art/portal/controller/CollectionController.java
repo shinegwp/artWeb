@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.art.pojo.Collection;
 import com.art.service.CollectionService;
 import com.art.util.EUDataGridResult;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 import net.sf.json.JSONObject;
 
@@ -28,6 +28,7 @@ CollectionService collectionService;
 @ResponseBody
 public String getControllerByPageAndUid(Integer uid,Integer page,Integer rows)
 {
+	System.out.println("controller");
 	  EUDataGridResult clist = collectionService.getControllerByUidAndPage(uid, page, rows);
 	  JSONObject json = JSONObject.fromObject(clist);
 	  return json.toString();
@@ -37,13 +38,14 @@ public String getControllerByPageAndUid(Integer uid,Integer page,Integer rows)
  * @describe 收藏商品
  * @param uid 用户id
  * @param id 商品id
- * @return TaotaoResult.status 1为添加成功
+ * @return ArtResult.status 1为添加成功
  */
+
 @RequestMapping(value ="addCollection",produces = "text/html;charset=UTF-8")
 @ResponseBody
 public String addCollection(Integer uid,Integer id)
-{
-	TaotaoResult result = new TaotaoResult();
+{System.out.println("addCollection");
+	ArtResult result = new ArtResult();
 	  Collection coll = collectionService.getCollectionByIid(id);
 	  System.out.println(coll);
 	  if(!(coll==null))
@@ -68,12 +70,6 @@ public String addCollection(Integer uid,Integer id)
 	  }
 	  JSONObject json = JSONObject.fromObject(result);
 	  return json.toString();
-}
-@RequestMapping(value ="test",produces = "text/html;charset=UTF-8")
-public String test()
-{
-	System.out.println("测试");
-	return null;
 }
 
 }

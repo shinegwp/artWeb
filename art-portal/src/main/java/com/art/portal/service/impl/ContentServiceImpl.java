@@ -12,7 +12,7 @@ import com.art.pojo.ArtContent;
 import com.art.portal.service.ContentService;
 import com.art.util.HttpClientUtil;
 import com.art.util.JsonUtils;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 
 /**
@@ -34,11 +34,11 @@ public class ContentServiceImpl implements ContentService {
 	public String getContentList(int categoryId) {
 		//调用服务层的服务
 		String result = HttpClientUtil.doGet(REST_BASE_URL + REST_INDEX_AD_URL+categoryId);
-		//把字符串转换成TaotaoResult
+		//把字符串转换成ArtResult
 		try {
-			TaotaoResult taotaoResult = TaotaoResult.formatToList(result, ArtContent.class);
+			ArtResult artResult = ArtResult.formatToList(result, ArtContent.class);
 			//取内容列表
-			List<ArtContent> list = (List<ArtContent>) taotaoResult.getData();
+			List<ArtContent> list = (List<ArtContent>) artResult.getData();
 			
 			return JsonUtils.objectToJson(list);
 		} catch (Exception e) {

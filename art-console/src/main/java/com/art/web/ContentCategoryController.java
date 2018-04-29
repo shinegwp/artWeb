@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.art.service.ContentCategoryService;
 import com.art.util.EUTreeNode;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 
 /**
@@ -38,8 +38,8 @@ public class ContentCategoryController {
 	
 	@RequestMapping("contentcategorycreate")
 	@ResponseBody
-	public TaotaoResult createContentCategory(Long parentId, String name) {
-		TaotaoResult result = contentCategoryService.insertContentCategory(parentId, name);
+	public ArtResult createContentCategory(Long parentId, String name) {
+		ArtResult result = contentCategoryService.insertContentCategory(parentId, name);
 		return result;
 	}
 }

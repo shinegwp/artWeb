@@ -14,7 +14,7 @@ import com.art.pojo.ArtContentCategoryExample.Criteria;
 import com.art.pojo.ArtContentCategoryExample.Criterion;
 import com.art.service.ContentCategoryService;
 import com.art.util.EUTreeNode;
-import com.art.util.TaotaoResult;
+import com.art.util.ArtResult;
 
 
 /**
@@ -50,7 +50,7 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 		}
 		return resultList;
 	}
-	public TaotaoResult insertContentCategory(long parentId, String name) {
+	public ArtResult insertContentCategory(long parentId, String name) {
 		
 		//创建一个pojo
 		ArtContentCategory contentCategory = new ArtContentCategory();
@@ -73,7 +73,7 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 			contentCategoryMapper.updateByPrimaryKey(parentCat);
 		}
 		//返回结果
-		return TaotaoResult.ok(contentCategory);
+		return ArtResult.ok(contentCategory);
 	}
 
 }
