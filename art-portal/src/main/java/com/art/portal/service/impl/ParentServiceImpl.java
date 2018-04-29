@@ -24,19 +24,20 @@ public class ParentServiceImpl implements ParentService{
 	@Value("${REST_INDEX_PARENT_URL}")
 	private String REST_INDEX_PARENT_URL;
 	
-	public String getParrentListByPage(int page, int rows) {
-		String result = HttpClientUtil.doGet(REST_BASE_URL + REST_INDEX_PARENT_URL);
+
+	public String getParentListByPage(int page, int rows) {
+
+		String result = HttpClientUtil.doGet(REST_BASE_URL + REST_INDEX_PARENT_URL+"/"+page+"/"+rows);
+		System.out.println(result);
 		//把字符串转换成ArtResult
 		try {
-			ArtResult artResult = ArtResult.formatToList(result, Parent.class);
-			//取内容列表
-			List<Parent> list = (List<Parent>) artResult.getData();
 			
-			return JsonUtils.objectToJson(list);
+			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+	
 	}
 
 }
