@@ -1,8 +1,9 @@
 package com.art.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ArtContent {
+public class ArtContent implements Serializable {
     private Long id;
 
     private Long categoryId;
