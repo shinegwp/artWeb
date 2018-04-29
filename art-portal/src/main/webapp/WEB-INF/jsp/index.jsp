@@ -45,6 +45,763 @@
 										个人中心
 									</a>
 								</li>
+<<<<<<< HEAD
+								<li>
+									<a href="settled">
+										专家入驻
+									</a>
+								</li>
+								<li>
+									<a href="pro_sign">
+										专家登陆
+									</a>
+								</li>
+								<li>
+									<a href="#" onclick="$.pro_grxx()">
+										专家个人中心
+									</a>
+								</li>
+								
+							</ul>
+						</div>						
+						<div class="shopcar-btn clearfix fl">
+							<a href="shopping" class="box-s">
+								购物车（0）
+							</a>
+						</div>
+					
+					</div>					
+				</div>
+			</div>			
+			<div class="bottom clearfix">
+				<div class="logo clearfix">
+					<a href="index.html"></a>
+				</div>
+				<div class="search clearfix fr ra5">
+					<input type="text" class="fl" name="" id="" value="" placeholder="请输入您要搜索的内容" />
+					<input type="button" name="" id="" value="搜索" class="fl box-s" />
+				</div>
+			</div>
+		</div>
+		<!--header end-->
+		
+		<!--navbar star-->
+		<div class="navbar clearfix">
+			<div class="content clearfix">
+				<ul>
+					<li class="cur"><a href="index">首页</a></li>
+					<li><a href="special">专场</a></li>
+					<li><a  href="mall" >商城</a></li>
+					<li><a href="artist">专家</a></li>
+					<li><a href="#" onclick="$.hasLogin()">我要寄卖</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!--navbar end-->
+		
+		<!--banner star-->
+		<div class="banner">		
+			<div class="bd">
+				<ul>
+					<li style="background:url(upload/banner.jpg) #194982 center 0 no-repeat;"><a href="#"></a></li>
+					<li style="background:url(upload/banner.jpg) #15181e center 0 no-repeat;"><a href="#"></a></li>
+					<li style="background:url(upload/banner.jpg) #0b0b0b center 0 no-repeat;"><a href="#"></a></li>
+					<li style="background:url(upload/banner.jpg) #000000 center 0 no-repeat;"><a href="#"></a></li>
+					<li style="background:url(upload/banner.jpg) #04304b center 0 no-repeat;"><a href="#"></a></li>
+				</ul>
+			</div>
+			<div class="hd"><ul></ul></div>
+		</div>
+		<!--banner end-->
+	<!--script -->	
+	<!-- 初始化页面 -->
+	<script type="text/javascript">
+	 $(function()
+			 {
+		 //获取session
+		 $.getNewItem();
+		 $.JXshow();
+		 $.ZJshow();
+		 $.displayUserName();
+			 });
+	</script>
+	<!-- 今日推荐 -->
+	<script type="text/javascript">
+	$.displayUserName=function()//如果登陆了展示退出和欢迎
+	{var a = $.cookie("user");
+	 var user=eval('('+a+')');
+		if($.cookie("user")!=null)
+
+	     {
+			
+			$("#displayName").html("<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+user.uname+
+					"</a>进入商场</li><li><a href='register' >免费注册</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.tuichu()'>退出</a></li>")
+	     }
+		else
+		{
+		$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='sign' class='f1'>登陆</a></li><li><a href='register' >免费注册</a></li>")
+		}
+	}
+	 $.hasLogin=function()//当点击我要寄卖时判断是否已登陆
+     {
+    	 if($.cookie("user")==null)
+    		 {
+    		 alert("请先登录！");
+    		 }
+    	 else
+    		 {
+    		 window.location.href="wyjm";
+    		 }
+     }
+	 $.tuichu=function()
+	 {
+		 $.ajax({
+			  url: "tuichu",
+			  type:"post",
+			  success: function(data)
+			  { if(data=="successful")
+				  {
+				  alert("成功退出！");
+				  $("#displayName").html("<li ><a href='register'>注册/登陆</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='settled'>专家入驻</a></li><li><a href='pro_sign'>专家登陆</a></li><li><a href='#' onclick='$.pro_grxx()'>专家个人中心</a></li>")
+				  }
+			  else
+				  {
+				  alert("操作有误");
+				  }
+			  },
+			  error:function()
+			  {
+				  alert("error");
+			  }
+			  
+			});
+	 }
+	 $.grxx=function()//当点击个人中心时判断是否已登录
+	 {  
+		 if($.cookie("user")==null)
+		 {
+		 alert("请先登录！");
+		 }
+	 else
+		 {
+		 window.location.href="grxx";
+		 } 
+	 }
+	$.getNewItem=function()
+	{
+	 $.ajax({
+		  url: "getNewItem",
+		  type: "post",
+		  dataType: "json",
+		 
+		  success: function(data)
+		  { //var str = "upload/wwsc/mmy/2.jpg";
+			 
+			  $.TJshow(data);
+			  //$("#src1").attr("src",str);
+		  },
+		  error:function()
+		  {
+			  alert("error");
+		  }
+		  
+		});
+	}
+	
+	</script>
+	<!-- 推荐显示 -->
+	<script type="text/javascript">
+	$.TJshow=function(data)
+	{
+		for(var i=1;i<=4;i++)
+			{
+			$("#src"+i).attr("src",data[i-1].imgAddress);
+			$("#p"+i).html(data[i-1].pname);
+			$("#span"+i).text(data[i-1].price);
+			}
+		
+		
+	}
+	</script>
+
+	<!-- 商城精选显示 -->
+	<script type="text/javascript">
+	var d;
+	$.JXshow=function()
+	{
+		 $.ajax({
+			  url: "getItemBylikeCountOrder",
+			  type: "post",
+			  dataType:"json",
+			  success: function(data)
+			  { d = data;
+			    
+			  for(var i=1;i<=9;i++)
+			  { 
+				$("#jxsrc"+i).attr("src",data[i-1].imgAddress);
+			    $("#jxp"+i).html(data[i-1].title);
+			    $("#price"+i).html(data[i-1].price);
+			  }			 
+			  },
+			  error:function()
+			  {
+				  alert("JXerror");
+			  }
+			  
+			});
+	}
+	//专家推荐
+	$.ZJshow=function()
+	{
+		$.ajax({
+			  url: "getProfessors",
+			  type: "post",
+			  dataType:"json",
+			  success: function(data)
+			  { for(var i=0;i<4;i++)
+				  {
+				  $("#zjimg"+(i+1+0)).attr("src",data[i].img);
+				  $("#zjname"+(i+1+0)).html(data[i].pname);
+				  $("#zjlocation"+(i+1+0)).html(data[i].broLocation);
+				  $("#zjskill"+(i+1+0)).html(data[i].skill);
+				  $("#university"+(i+1+0)).html(data[i].university);  
+				  $("#professorDiv"+(i+1+0)).attr("value",data[i].pid);  
+				 
+				  }
+				  
+			 
+			  
+			  },
+			  error:function()
+			  {
+				  alert("ZJerror");
+			  }
+			  
+			});
+	}
+
+	$.enterSpecial=function(e)
+	{    
+	     window.location.href ="artist-detail?pid="+e.val();
+	         
+		}
+	</script>
+		<!--recom star-->
+		<div class="recom clearfix">
+			<div class="content clearfix">
+				<div class="recom-tit clearfix">
+					<p class="engtit ta-center">
+						RECOMMENDS
+					</p>
+					<div class="middle clearfix">
+						<span class="line"></span>
+						<span class="wenzi">今日推荐</span>
+						<span class="line"></span>
+					</div>
+					<p class="fu-tit">
+						好作品无需多说 你会由心的看清它的诉说
+					</p>
+				</div>
+	<!-- 推荐 -->			
+				<div class="bottom clearfix box-s">
+					<div class="left clearfix fl">
+<!-- 第一张图---------------------------------------------------------------- -->
+						<div class="listone clearfix fl">
+							<a href="#" >
+								<!--备注：第一张图 宽度：418像素，高度：710像素-->
+								<div class="tu clearfix">
+									<img src="\WEB-INF\upload\ghxh\other\2.jpg" id="src1"/>
+									<span></span>
+								</div>
+								<div class="listxia clearfix ta-center">
+									<h2>
+										<p id="p1">
+											孙瑾晨				
+											
+										</p>
+										<p id="span1">
+										
+										</p>
+									</h2>
+								</div>
+							</a>
+						</div>
+<!-- 第二张图---------------------------------------------------------------- -->						
+						<div class="listone listtwo clearfix fl">
+							<a href="#">
+								<!--备注：第二张图 宽度：438像素，高度：376像素-->
+								<div class="tu clearfix">
+									<img src="upload/1-3.png" id="src2"/>
+									<span></span>
+								</div>
+								<div class="listxia clearfix ta-center">
+									<h2>
+										<p id="p2">
+											孙瑾晨
+											
+										</p>
+										<p id="span2">
+										
+										</p>
+									</h2>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="right clearfix fr">
+<!-- 第三张图---------------------------------------------------------------- -->					
+						<div class="listone listthree clearfix fl">
+							<a href="#">
+								<!--备注：第三张图 宽度：530像素，高度：638像素-->
+								<div class="tu clearfix">
+									<img src="upload/1-2.png" id="src3"/>
+									<span></span>
+								</div>
+								<div class="listxia clearfix ta-center">
+									<h2>
+										<p id="p3">
+											孙瑾晨
+											
+										</p>
+										<p id="span3">
+										
+										</p>
+									</h2>
+								</div>
+							</a>
+						</div>
+<!-- 第四张图---------------------------------------------------------------- -->						
+						<div class="listone listfour clearfix fr">
+							<a href="#">
+								<!--备注：第四张图 宽度：438像素，高度：480像素-->
+								<div class="tu clearfix">
+									<img src="upload/1-4.png" id="src4"/>
+									<span></span>
+								</div>
+								<div class="listxia clearfix ta-center">
+									<h2>
+										<p id="p4">
+											孙瑾晨
+											
+										</p>
+										<p id="span4">
+										
+										</p>
+									</h2>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--recom end-->
+		
+		<!--choice star-->
+		<div class="choice clearfix">
+			<div class="bgdian"></div>
+			<div class="recom-tit clearfix">
+				<p class="engtit ta-center">
+					SHOPPING MALL
+				</p>
+				<div class="middle clearfix">
+					<span class="line"></span>
+					<span class="wenzi">商城精选</span>
+					<span class="line"></span>
+				</div>
+				<p class="fu-tit">
+					画品丰富多类 抽象 印象 自然 城市皆有
+				</p>
+			</div>
+			<div class="content clearfix box-s">
+				<a href="#" class="choice-more">MORE+</a>
+<!--商城精选 ---------------------------------------------------- -->
+<!--第一张图 -------------------------------------------------------->
+				<div class="list clearfix transition">
+					<div class="tu clearfix">
+						<img src="upload/1.jpg" id="jxsrc1"/>
+						<span></span>
+						
+						<div class="ycang clearfix">
+							<samp class="opa8"></samp>
+							<div class="nr clearfix">
+								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
+								<ul>
+									<li class="box-s transition">收藏</li>
+									<li class="box-s transition">购物车</li>
+								</ul>
+							</div>								
+						</div>
+					</div>
+					<div class="xia clearfix box-s">
+						<p class="bt over" id="jxp1">
+							尹毅画作
+						</p>
+						<div class="price clearfix">
+							<span class="fl" id="price1">￥00.00</span>
+							<a href="pro_detail.html" class="goumai fr ra3 transition">立即购买</a>
+						</div>
+					</div>
+				</div>
+<!--第二张图 -------------------------------------------------------->				
+				<div class="list clearfix transition">
+					<div class="tu clearfix">
+						<img src="upload/1.jpg" id="jxsrc2"/>
+						<span></span>
+						
+						<div class="ycang clearfix">
+							<samp class="opa8"></samp>
+							<div class="nr clearfix">
+								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
+								<ul>
+									<li class="box-s transition">收藏</li>
+									<li class="box-s transition">购物车</li>
+								</ul>
+							</div>								
+						</div>
+					</div>
+					<div class="xia clearfix box-s">
+						<p class="bt over" id="jxp2">
+							尹毅画作
+						</p>
+						<div class="price clearfix">
+							<span class="fl" id="price2">￥00.00</span>
+							<a href="pro_detail.html" class="goumai fr ra3 transition">立即购买</a>
+						</div>
+					</div>
+				</div>
+<!--第三张图 -------------------------------------------------------->				
+				<div class="list clearfix transition">
+					<div class="tu clearfix">
+						<img src="upload/1.jpg" id="jxsrc3"/>
+						<span></span>
+						
+						<div class="ycang clearfix">
+							<samp class="opa8"></samp>
+							<div class="nr clearfix">
+								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
+								<ul>
+									<li class="box-s transition">收藏</li>
+									<li class="box-s transition">购物车</li>
+								</ul>
+							</div>								
+						</div>
+					</div>
+					<div class="xia clearfix box-s">
+						<p class="bt over" id="jxp3">
+							尹毅画作
+						</p>
+						<div class="price clearfix">
+							<span class="fl" id="price3">￥00.00</span>
+							<a href="pro_detail.html" class="goumai fr ra3 transition">立即购买</a>
+						</div>
+					</div>
+				</div>
+<!--第四张图 -------------------------------------------------------->				
+				<div class="list clearfix transition">
+					<div class="tu clearfix">
+						<img src="upload/1.jpg" id="jxsrc4"/>
+						<span></span>
+						
+						<div class="ycang clearfix">
+							<samp class="opa8"></samp>
+							<div class="nr clearfix">
+								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
+								<ul>
+									<li class="box-s transition">收藏</li>
+									<li class="box-s transition">购物车</li>
+								</ul>
+							</div>								
+						</div>
+					</div>
+					<div class="xia clearfix box-s">
+						<p class="bt over" id="jxp4">
+							尹毅画作
+						</p>
+						<div class="price clearfix">
+							<span class="fl" id="price4">￥00.00</span>
+							<a href="pro_detail.html" class="goumai fr ra3 transition">立即购买</a>
+						</div>
+					</div>
+				</div>
+<!--第五张图 -------------------------------------------------------->				
+				<div class="list clearfix transition">
+					<div class="tu clearfix">
+						<img src="upload/1.jpg" id="jxsrc5"/>
+						<span></span>
+						
+						<div class="ycang clearfix">
+							<samp class="opa8"></samp>
+							<div class="nr clearfix">
+								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
+								<ul>
+									<li class="box-s transition">收藏</li>
+									<li class="box-s transition">购物车</li>
+								</ul>
+							</div>								
+						</div>
+					</div>
+					<div class="xia clearfix box-s">
+						<p class="bt over" id="jxp5">
+							尹毅画作
+						</p>
+						<div class="price clearfix">
+							<span class="fl" id="price5">￥00.00</span>
+							<a href="pro_detail.html" class="goumai fr ra3 transition">立即购买</a>
+						</div>
+					</div>
+				</div>
+<!--第六张图 -------------------------------------------------------->		
+				<div class="list clearfix transition">
+					<div class="tu clearfix">
+						<img src="upload/1.jpg" id="jxsrc6"/>
+						<span></span>
+						
+						<div class="ycang clearfix">
+							<samp class="opa8"></samp>
+							<div class="nr clearfix">
+								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
+								<ul>
+									<li class="box-s transition">收藏</li>
+									<li class="box-s transition">购物车</li>
+								</ul>
+							</div>								
+						</div>
+					</div>
+					<div class="xia clearfix box-s">
+						<p class="bt over" id="jxp6">
+							尹毅画作
+						</p>
+						<div class="price clearfix">
+							<span class="fl" id="price6">￥00.00</span>
+							<a href="pro_detail.html" class="goumai fr ra3 transition">立即购买</a>
+						</div>
+					</div>
+				</div>
+<!--第七张图 -------------------------------------------------------->	
+				<div class="list clearfix transition">
+					<div class="tu clearfix">
+						<img src="upload/1.jpg" id="jxsrc7"/>
+						<span></span>
+						
+						<div class="ycang clearfix">
+							<samp class="opa8"></samp>
+							<div class="nr clearfix">
+								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
+								<ul>
+									<li class="box-s transition">收藏</li>
+									<li class="box-s transition">购物车</li>
+								</ul>
+							</div>								
+						</div>
+					</div>
+					<div class="xia clearfix box-s">
+						<p class="bt over" id="jxp7">
+							尹毅画作
+						</p>
+						<div class="price clearfix">
+							<span class="fl" id="price7">￥00.00</span>
+							<a href="pro_detail.html" class="goumai fr ra3 transition">立即购买</a>
+						</div>
+					</div>
+				</div>
+<!--第八张图 -------------------------------------------------------->		
+				<div class="list clearfix transition">
+					<div class="tu clearfix">
+						<img src="upload/1.jpg" id="jxsrc8"/>
+						<span></span>
+						
+						<div class="ycang clearfix">
+							<samp class="opa8"></samp>
+							<div class="nr clearfix">
+								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
+								<ul>
+									<li class="box-s transition">收藏</li>
+									<li class="box-s transition">购物车</li>
+								</ul>
+							</div>								
+						</div>
+					</div>
+					<div class="xia clearfix box-s">
+						<p class="bt over" id="jxp8">
+							尹毅画作
+						</p>
+						<div class="price clearfix">
+							<span class="fl" id="price8">￥00.00</span>
+							<a href="pro_detail.html" class="goumai fr ra3 transition">立即购买</a>
+						</div>
+					</div>
+				</div>
+<!--第九张图 -------------------------------------------------------->		
+				<div class="list clearfix transition">
+					<div class="tu clearfix">
+						<img src="upload/1.jpg" id="jxsrc9"/>
+						<span></span>
+						
+						<div class="ycang clearfix">
+							<samp class="opa8"></samp>
+							<div class="nr clearfix">
+								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
+								<ul>
+									<li class="box-s transition">收藏</li>
+									<li class="box-s transition">购物车</li>
+								</ul>
+							</div>								
+						</div>
+					</div>
+					<div class="xia clearfix box-s">
+						<p class="bt over" id="jxp9">
+							尹毅画作
+						</p>
+						<div class="price clearfix">
+							<span class="fl" id="price9">￥00.00</span>
+							<a href="pro_detail.html" class="goumai fr ra3 transition">立即购买</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--choice end-->
+ 		
+		<!--art star-->
+		<div class="art clearfix">
+			<div class="content clearfix box-s">
+				<div class="art-ctent clearfix box-s">
+					<div class="recom-tit clearfix">
+						<p class="engtit ta-center">
+							ART WRITER
+						</p>
+						<div class="middle clearfix">
+							<span class="line"></span>
+							<span class="wenzi">专家</span>
+							<span class="line"></span>
+						</div>
+					</div>
+					<div class="bottom clearfix box-s">
+						<div class="scrollBox" style="margin:0 auto">
+							<div class="ohbox">
+								<ul class="piclist">
+<!-- 第一个专家----------------------------------------------------------------------------------------- -->								
+									<li>
+										<div class="list clearfix fl box-s transition">
+											<div class="tu clearfix box-s">
+												<img src="upload/people.jpg" id="zjimg1"/>
+												<span></span>
+											</div>
+											<div class="ctent clearfix box-s">
+												<div class="shang clearfix">
+													<p class="over ta-center" id="zjname1">孙瑾晨</p>
+													<span></span>
+												</div>
+												<div class="xia clearfix"  value="">
+												   <p id="zjlocation1">
+												   <p></p>
+												   
+												   <p id="zjskill1">
+												   <p></p>
+												   <p id="university1"></p>
+												   
+												   
+												   <p></p>
+													<a href="#" onclick="$.enterSpecial($(this));" value="" id="professorDiv1" class="more">
+															查看更多&gt;&gt;
+													</a>
+												</div>
+											</div>
+										</div>
+									</li>
+<!-- 第二个专家----------------------------------------------------------------------------------------- -->									
+									<li>
+										<div class="list clearfix fl box-s transition">
+											<div class="tu clearfix box-s">
+												<img src="upload/people.jpg" id="zjimg2"/>
+												<span></span>
+											</div>
+											<div class="ctent clearfix box-s">
+												<div class="shang clearfix">
+													<p class="over ta-center" id="zjname2">孙瑾晨</p>
+													<span></span>
+												</div>
+												<div class="xia clearfix" id="professorDiv2" value="">
+													<p id="zjlocation2">
+													<p></p>
+												   <p id="zjskill2">
+												   <p></p>
+												   <p id="university2">
+												   <p></p>
+													<a href="#"  onclick="$.enterSpecial($(this));" id="professorDiv2" value="" class="more">
+															查看更多&gt;&gt;
+														</a>
+												</div>
+											</div>
+										</div>
+									</li>
+<!-- 第三个专家----------------------------------------------------------------------------------------- -->																		
+									<li>
+										<div class="list clearfix fl box-s transition">
+											<div class="tu clearfix box-s">
+												<img src="upload/people.jpg" id="zjimg3"/>
+												<span></span>
+											</div>
+											<div class="ctent clearfix box-s">
+												<div class="shang clearfix">
+													<p class="over ta-center" id="zjname3">孙瑾晨</p>
+													<span></span>
+												</div>
+												<div class="xia clearfix"  value="">
+												<p id="zjlocation3">
+													<p></p>
+												   <p id="zjskill3">
+												   <p></p>
+												   <p id="university3">
+												   <p></p>
+													<a href="#"  onclick="$.enterSpecial($(this));" id="professorDiv3" value="" class="more">
+															查看更多&gt;&gt;
+														</a>
+												
+												</div>
+											</div>
+										</div>
+									</li>
+<!-- 第四个专家----------------------------------------------------------------------------------------- -->																											
+									<li>
+										<div class="list clearfix fl box-s transition">
+											<div class="tu clearfix box-s">
+												<img src="upload/people.jpg" id="zjimg4"/>
+												<span></span>
+											</div>
+											<div class="ctent clearfix box-s">
+												<div class="shang clearfix">
+													<p class="over ta-center" id="zjname4">孙瑾晨</p>
+													<span></span>
+												</div>
+												<div class="xia clearfix"  value="">
+													<p id="zjlocation4">
+													<p></p>
+												   <p id="zjskill4">
+												   <p></p>
+												   <p id="university4">
+												   <p></p>
+													<a href="#"  onclick="$.enterSpecial($(this))" id="professorDiv4" value="" class="more">
+															查看更多&gt;&gt;
+														</a>
+													
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+							
+						</div>
+					</div>		
+					
+				</div>
+			</div>
+		</div>
+		<!--art end-->
+=======
 								
 							</ul>
 						</div>						
@@ -596,6 +1353,7 @@
 		<!--choice end-->
  		
 	
+>>>>>>> branch 'master' of https://github.com/shinegwp/artWeb.git
 		
 		<!--footer star-->
 		<div class="footer clearfix">
