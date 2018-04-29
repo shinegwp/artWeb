@@ -92,11 +92,11 @@ public class UserControllerLogin {
   //用户登录
   	@RequestMapping(value="/login", method=RequestMethod.POST)
   	@ResponseBody
-  	public ArtResult userLogin(String uname, String upassword,
+  	public ArtResult userLogin(User user,
   			HttpServletRequest request, HttpServletResponse response) {
   		try {
   			
-  			ArtResult result = userServiceLogin.userLogin(uname, upassword, request, response);
+  			ArtResult result = userServiceLogin.userLogin(user.getUname(), user.getUpassword(), request, response);
   			return result;
   		} catch (Exception e) {
   			e.printStackTrace();
