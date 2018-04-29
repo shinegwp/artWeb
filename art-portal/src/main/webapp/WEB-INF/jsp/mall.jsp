@@ -24,14 +24,6 @@
 
 	<body>
 	<!-- ------------------------------------------script--------------------------------------------- -->
-	                    <!-- alert("页："+page);
-								   $("#fy").append("<a href='#' onclick='$.getfirstShowList("+1+");' >上一页</a>");
-								   for(var i=1;i<=data;i++)
-									   {
-									   $("#fy").append("<a href='#' onclick='$.getfirstShowList("+i+");'>"+i+"</a>"); 
-									   }
-								     $("#fy").append("<a href='#' class='pre box-s' >下一页</a>");
-								   -->
 	                     <script type="text/javascript">
 	                     var a = $.cookie("user");
 	                 	 var user=eval('('+a+')');
@@ -77,17 +69,7 @@
 	                     		  
 	                     		});
 	                     }
-	                     $.hasLogin=function()//当点击我要寄卖时判断是否已登陆
-	                     {
-	                    	 if($.cookie("user")==null)
-	                    		 {
-	                    		 alert("请先登录！");
-	                    		 }
-	                    	 else
-	                    		 {
-	                    		 window.location.href="wyjm";
-	                    		 }
-	                     }
+	            
 	                     $.grxx=function()//当点击个人中心时判断是否已登录
 	                     {
 	                     	 if($.cookie("user")==null)
@@ -293,21 +275,7 @@
 										个人中心
 									</a>
 								</li>
-								<li>
-									<a href="settled">
-										专家入驻
-									</a>
-								</li>
-								<li>
-									<a href="pro_sign">
-										专家登陆
-									</a>
-								</li>
-								<li>
-									<a href="pro_grxx">
-										专家个人中心
-									</a>
-								</li>
+								
 								
 							</ul>
 						</div>						
@@ -336,8 +304,7 @@
 					<li ><a href="index">首页</a></li>
 					<li><a href="special">专场</a></li>
 					<li class="cur"><a  href="mall" >商城</a></li>
-					<li><a href="artist">专家</a></li>
-					<li><a href="#" onclick="$.hasLogin()">我要寄卖</a></li>
+					
 				</ul>
 			</div>
 		</div>

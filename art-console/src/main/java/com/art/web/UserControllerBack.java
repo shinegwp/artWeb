@@ -37,7 +37,7 @@ public class UserControllerBack {
 	@RequestMapping(value ="restUserDelete",produces = "text/html;charset=UTF-8")//��̨
 	@ResponseBody
 	public int deleteUsers(Integer[] ids)
-	{	System.out.println("删除");
+	{	
 		int i = 0;	
 		for(Integer id:ids)
 			{
@@ -71,7 +71,7 @@ public class UserControllerBack {
 		userServiceBack.update(u);
 		return u;
 	}
-	@RequestMapping("usersaveback")//
+	@RequestMapping("usersaveback")
 	@ResponseBody
 	public int insertUser(User user)
 	{

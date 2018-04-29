@@ -1,13 +1,18 @@
 package com.art.sso.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.art.pojo.User;
 import com.art.sso.service.UserServiceLogin;
 import com.art.util.ArtResult;
 import com.art.util.ExceptionUtil;
@@ -26,6 +31,9 @@ public class UserControllerLogin {
     
     @RequestMapping("/check/{param}/{type}")
     @ResponseBody
+    /**
+	 * @describe  获取参数验证类型与返回路径
+	 */
     public Object checkDate(@PathVariable String param, @PathVariable Integer type, String callBack){
     	ArtResult result = null;
     	
@@ -64,4 +72,62 @@ public class UserControllerLogin {
 			return result;
 		}
     }
+    
+  //创建用户
+  	@RequestMapping(value="/register", method=RequestMethod.POST)
+  	@ResponseBody
+  	/**
+	 * @describe 进行注册
+	 */
+  	public ArtResult createUser(User user) {
+  		
+  		try {
+  			ArtResult result = userServiceLogin.createUser(user);
+  			return result;
+  		} catch (Exception e) {
+  			e.printStackTrace();
+  			return ArtResult.build(500, ExceptionUtil.getStackTrace(e));
+  		}
+  	}
+  //用户登录
+  	@RequestMapping(value="/login", method=RequestMethod.POST)
+  	@ResponseBody
+  	public ArtResult userLogin(String uname, String upassword,
+  			HttpServletRequest request, HttpServletResponse response) {
+  		try {
+  			
+  			ArtResult result = userServiceLogin.userLogin(uname, upassword, request, response);
+  			return result;
+  		} catch (Exception e) {
+  			e.printStackTrace();
+  			return ArtResult.build(500, ExceptionUtil.getStackTrace(e));
+  		}
+  	}
+  	
+  	@RequestMapping("/token/{token}")
+  	@ResponseBody
+  	/**
+	 * @describe 通过cookie 来查询确定该用户登录是否过期
+	 * 
+	 */
+  	public Object getUserByToken(@PathVariable String token, String callback) {
+  		ArtResult result = null;
+  		try {
+  			result = userServiceLogin.getUserByToken(token);
+  		} catch (Exception e) {
+  			e.printStackTrace();
+  			result = ArtResult.build(500, ExceptionUtil.getStackTrace(e));
+  		}
+  		
+  		//判断是否为jsonp调用
+  		if (StringUtils.isBlank(callback)) {
+  			return result;
+  		} else {
+  			MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(result);
+  			mappingJacksonValue.setJsonpFunction(callback);
+  			return mappingJacksonValue;
+  		}
+  		
+  	}
+    
 }

@@ -168,7 +168,6 @@
 								else
 									{
 									alert(data);
-									// $("#result").html(data);
 									}
 								
 								

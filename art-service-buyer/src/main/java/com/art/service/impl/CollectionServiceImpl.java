@@ -23,12 +23,11 @@ public EUDataGridResult getControllerByUidAndPage(Integer uid, Integer page, Int
 	Criteria criteria = example.createCriteria();
 	criteria.andUidEqualTo(uid);
 	PageHelper.startPage(page, rows); 
-	List<Collection> clist = collectionMapper.selectByExample(example);
+	 List<Collection> clist = collectionMapper.selectByExample(example);
 	 PageInfo<Collection> p=new PageInfo<Collection>(clist);
 	 EUDataGridResult result = new EUDataGridResult();
 	 result.setRows(clist);
 	 result.setPageinfo(p);
-	 System.out.println(result);
 	return result;
 }
 
