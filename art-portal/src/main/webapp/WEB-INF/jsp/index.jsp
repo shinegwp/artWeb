@@ -76,7 +76,10 @@
 				<div class="logo clearfix">
 					<a href="index.html"></a>
 				</div>
-				
+				<div class="search clearfix fr ra5">
+					<input type="text" class="fl" name="" id="" value="" placeholder="请输入您要搜索的内容" />
+					<input type="button" name="" id="" value="搜索" class="fl box-s" />
+				</div>
 			</div>
 		</div>
 		<!--header end-->
