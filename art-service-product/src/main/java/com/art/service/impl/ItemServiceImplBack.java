@@ -1,5 +1,11 @@
 package com.art.service.impl;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +23,43 @@ import com.art.util.EUDataGridResult;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import freemarker.template.Template;
+
 @Service
 @Component
 public class ItemServiceImplBack implements ItemServiceBack{
 	@Autowired
 	 ItemMapper itemMapper;
 	@Autowired 
-	private FreeMarkerConfigurer freeMarkerConfigurer;//
+	private FreeMarkerConfigurer freeMarkerConfigurer;//静态化页面工具类
+	
+	
 	public int ReshelfItem(Integer id) {//后台
 		ItemExample example = new ItemExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andIdEqualTo(id);
-		Item item = new Item();
+		Item item = itemMapper.selectByPrimaryKey(id);
+		
+		
+		Writer out = null;
+		try {
+			File outFile = new File("C:/trainSW/workT/artWeb/art-portal/src/main/webapp/WEB-INF/jsp/item-html");
+			out = new OutputStreamWriter(new FileOutputStream(outFile));
+			
+			//获取模板所在路径
+//			Template template = freeMarkerConfigurer.createConfiguration().getTemplate("");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				out.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		item.setStatus(1);
 		int i = itemMapper.updateByExampleSelective(item, example);
 		return i;
