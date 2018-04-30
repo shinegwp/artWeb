@@ -129,4 +129,11 @@ public class UserServiceImplLogin implements UserServiceLogin {
 		return ArtResult.ok(JsonUtils.jsonToPojo(json, User.class));
 	}
 
+	public ArtResult outLogin(HttpServletRequest request, HttpServletResponse response) {
+		
+		CookieUtils.deleteCookie(request, response, "TT_TOKEN");
+		
+		return ArtResult.ok();
+		
+	}
 }

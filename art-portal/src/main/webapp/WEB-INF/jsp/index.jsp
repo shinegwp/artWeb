@@ -110,19 +110,25 @@
 	<!-- 今日推荐 -->
 	<script type="text/javascript">
 	$.displayUserName=function()//如果登陆了展示退出和欢迎
-	{var a = $.cookie("user");
-	 var user=eval('('+a+')');
-		if($.cookie("user")!=null)
-
-	     {
-			
-			$("#displayName").html("<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+user.uname+
-					"</a>进入商场</li><li><a href='register' >免费注册</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.tuichu()'>退出</a></li>")
-	     }
-		else
-		{
-		$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='sign' class='f1'>登陆</a></li><li><a href='register' >免费注册</a></li>")
+	{
+		
+		var _ticket = $.cookie("TT_TOKEN");
+		if(!_ticket){
+			$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='sign' class='f1'>登陆</a></li><li><a href='register' >免费注册</a></li>")
 		}
+		$.ajax({
+			url : "http://sso.taotao.com/user/token/" + _ticket,
+			dataType : "jsonp",
+			type : "GET",
+			success : function(data){
+				if(data.status == 200){
+					var uname = data.data.uname;
+					var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+uname+
+					"</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.tuichu()'>退出</a></li>"
+					$("#displayName").html(html);
+				}
+			}
+		});
 	}
 
 	 $.tuichu=function()
