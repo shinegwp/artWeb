@@ -190,29 +190,25 @@ $.getParentListByPage=function(e)
 			
 		 },
 		 success:function(data)
-		 { 
-			 
-				 var jsondata = eval('('+data+')');
+		 {    	 var artresult =eval('('+data+')');
+				 $("#firstPage").attr("value",artresult.data.firstPage);
+				 $("#nexPage").attr("value",artresult.data.nextPage);
+				 $("#lastPage").attr("value",artresult.data.lastPage);
+				 $("#prePage").attr("value",artresult.data.prePage);
 				
-				 $("#firstPage").attr("value",jsondata.pageinfo.firstPage);
-				 $("#nexPage").attr("value",jsondata.pageinfo.nextPage);
-				 $("#lastPage").attr("value",jsondata.pageinfo.lastPage);
-				 $("#prePage").attr("value",jsondata.pageinfo.prePage);
-				
-				 for(var j=0;j<=9;j++){
+				 for(var j=0;j<5;j++){//先隐藏所有的专场div
 					 $("#let"+j).hide();
 					 
 				 }
 				 
-				 for(var i=0;i<jsondata.pageinfo.list.length;i++)
+				 for(var i=0;i<artresult.data.list.length;i++)
 					 {
 					    
 						
-						$("#imgsrc"+(i+1+0)).attr("src",jsondata.pageinfo.list[i].imgaddress);
-						$("#name"+(i+1+0)).html(jsondata.pageinfo.list[i].pname+"系列专场");
-						$("#special"+(i+1+0)).val(jsondata.pageinfo.list[i].id);
-
-				
+						$("#imgsrc"+(i+1+0)).attr("src",artresult.data.list[i].imgaddress);
+						$("#name"+(i+1+0)).html(artresult.data.list[i].pname+"系列专场");
+						$("#special"+(i+1+0)).val(artresult.data.list[i].id);
+						 $("#let"+i).show();//显示专场的div
 					 }
 		 },error:function()
 		 {
@@ -240,7 +236,7 @@ $.enterSpecial=function(e)
 </script>
 <!-- 第一个-------------------------------------------------------------------------------------------------- -->
 			<div class="content clearfix box-s">
-				<div class="list clearfix fl box-s transition">
+				<div class="list clearfix fl box-s transition" id="let0">
 					<div class="tu clearfix fl">
 						<img src="upload\z\yd1.jpg"/ id="imgsrc1">
 						<span></span>
@@ -256,7 +252,7 @@ $.enterSpecial=function(e)
 					</div>
 				</div>
 <!-- 第二个------------------------------------------------- -->
-				<div class="list clearfix fl box-s transition">
+				<div class="list clearfix fl box-s transition" id="let1">
 					<div class="tu clearfix fl">
 						<img src="upload\z\shxh.jpg" id="imgsrc2"/>
 						<span></span>
@@ -272,7 +268,7 @@ $.enterSpecial=function(e)
 					</div>
 				</div>
 <!-- 第三个-------------------------------------------------------------------------------- -->				
-				<div class="list clearfix fl box-s transition">
+				<div class="list clearfix fl box-s transition" id="let2">
 					<div class="tu clearfix fl">
 						<img src="upload\z\zb.jpg" id="imgsrc3"/>
 						<span></span>
@@ -288,7 +284,7 @@ $.enterSpecial=function(e)
 					</div>
 				</div>
 <!-- 第四个--------------------------------------------------------------------------------------------- -->				
-				<div class="list clearfix fl box-s transition">
+				<div class="list clearfix fl box-s transition" id="let3">
 					<div class="tu clearfix fl">
 						<img src="upload\z\zb.jpg" id="imgsrc4"/>
 						<span></span>
@@ -303,7 +299,7 @@ $.enterSpecial=function(e)
 					</div>
 				</div>
 <!-- 第五个--------------------------------------------------------------------------------------------- -->					
-				<div class="list clearfix fl box-s transition">
+				<div class="list clearfix fl box-s transition" id="let4">
 					<div class="tu clearfix fl">
 						<img src="upload\z\cqzs.jpg" id="imgsrc5"/>
 						<span></span>
