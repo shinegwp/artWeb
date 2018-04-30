@@ -2,14 +2,14 @@ package com.art.solr.pojo;
 
 public class Solr_Item {
 	
-	private Integer id;
+	private String id;
 	private String title;
 	private String pname;
 	private Long price;
 	private String img_address;
 	private String description;
 	public Solr_Item(){}
-	public Solr_Item(Integer id, String title, String pname, Long price, String imgAddress, String description) {
+	public Solr_Item(String id, String title, String pname, Long price, String imgAddress, String description) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -18,10 +18,10 @@ public class Solr_Item {
 		this.img_address = imgAddress;
 		this.description = description;
 	}
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getTitle() {
