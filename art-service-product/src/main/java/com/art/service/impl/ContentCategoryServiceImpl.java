@@ -83,5 +83,9 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 		contentCategoryMapper.updateByPrimaryKey(acc);
 		return 1;
 	}
+	public int deleteById(long id) {
+		contentCategoryMapper.deleteByPrimaryKey(id);
+		return 1;
+	}
 
 }
