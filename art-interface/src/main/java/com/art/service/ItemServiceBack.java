@@ -7,9 +7,10 @@ import com.art.util.EUDataGridResult;
 
 public interface ItemServiceBack {
 	
-	public int ReshelfItem(Integer id);//下架
+	public int ReshelfItem(Integer id);
 	public int deleteItemById(Integer id);
 	public int insertItem(Item item);
 	public EUDataGridResult getItemList(int page, int rows);
 	public Item getItemById(String id);
+	public int updateById(Item item);
 }

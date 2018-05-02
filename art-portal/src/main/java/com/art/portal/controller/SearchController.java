@@ -37,7 +37,6 @@ public class SearchController {
 		SearchResult result = (SearchResult) artResult.getData();
 		result.setQueryString(queryString);
 		List<Solr_Item> slist = result.getItemList();
-		System.out.println(slist.size());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("SearchResult", JsonUtils.objectToJson(result));
 		return new ModelAndView("search",map);

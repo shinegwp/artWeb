@@ -56,7 +56,7 @@
 				<div class="search clearfix fr ra5">
 				<form id="form1" name="f1" action="search" method="post">
 					<input type="text" class="fl" name="q" placeholder="请输入您要搜索的内容" />
-					<input type="submit" value="搜索" class="fl box-s" />
+					<input type="button" value="搜索" class="fl box-s" />
 				</form>
 				</div>
 			</div>

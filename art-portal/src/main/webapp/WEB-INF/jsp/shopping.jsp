@@ -38,19 +38,19 @@
 			<div class="top clearfix">
 				<div class="topctent clearfix">
 					<div class="left clearfix fl">
-						公告：您好，欢迎登录北京椿龄文化发展有限公司
+						公告：您好，欢迎访问酱油文化艺术品商城
 					</div>
 					<div class="right clearfix fr">
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl">
 								<li>
 									<span class="fl">欢迎</span>
-									<a href="grxx.html" class="fl">瑾晨0212</a>
+									<a href="grxx.html" class="fl">Rg</a>
 									<span class="fl">进入商城</span>
 								</li>
 								<li>
 									<a href="register.html">
-										免费注册
+										
 									</a>
 								</li>
 							
@@ -58,7 +58,7 @@
 						</div>
 						<div class="shopcar-btn clearfix fl">
 							<a href="#" class="box-s">
-								购物车（0）
+								购物车
 							</a>
 						</div>
 						<div class="fenxiang clearfix fl">

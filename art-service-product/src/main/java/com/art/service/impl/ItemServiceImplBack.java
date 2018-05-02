@@ -94,5 +94,8 @@ public class ItemServiceImplBack implements ItemServiceBack{
 		// TODO Auto-generated method stub
 		return itemMapper.selectByPrimaryKey(Integer.parseInt(id));
 	}
+	public int updateById(Item item) {
+		return itemMapper.updateByPrimaryKeySelective(item);
+	}
 
 }
