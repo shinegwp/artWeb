@@ -41,14 +41,12 @@ public class CarController {
 
 	@Autowired(required=true)
 	CartService cartService;
-	       /**
-	        *测试一波
-	        */
+	    
 //	@RequestMapping("cartadd/{itemId}")
 //	public String addCartItem(@PathVariable Long itemId, 
 //			@RequestParam(defaultValue="1")Integer num, 
 //			HttpServletRequest request, HttpServletResponse response) {System.out.println("测试一波");}
-	
+
             /**
              * 
              * @describe 往购物车里添加商品 

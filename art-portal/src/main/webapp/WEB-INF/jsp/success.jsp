@@ -45,8 +45,8 @@
 							</ul>
 						</div>						
 						<div class="shopcar-btn clearfix fl">
-							<a href="shopping.html" class="box-s">
-								购物车（0）
+							<a href="cartShow" class="box-s">
+								购物车
 							</a>
 						</div>
 						<div class="fenxiang clearfix fl">
@@ -98,7 +98,10 @@
 							</p>
 							<p class="fu-tit ta-c">
 								<a href="mall">继续购物</a>
-								<a href="shopping.html">去购物车结算</a>
+								<a href="cartShow" class="box-s">
+								去购物车结算
+							</a>
+								
 							</p>
 						</div>
 					</div>			
