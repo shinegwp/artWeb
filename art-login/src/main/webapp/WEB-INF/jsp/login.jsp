@@ -134,6 +134,7 @@
 				    
 				});
 				var redirectUrl = "${redirect}";
+				alert(redirectUrl);
 				var LOGIN = {
 						checkInput:function() {
 							if ($("#uname").val() == "") {

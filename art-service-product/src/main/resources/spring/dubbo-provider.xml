@@ -42,4 +42,7 @@
 	
 	<dubbo:service interface="com.art.service.ContentService" ref="contentService"/>
 	<bean id="contentService" class="com.art.service.impl.ContentServiceImpl" />
+	
+	<dubbo:service interface="com.art.service.ItemCatServiceBack" ref="itemCatServiceBack"/>
+	<bean id="itemCatServiceBack" class="com.art.service.impl.ItemCatServiceImplBack" />
 </beans>

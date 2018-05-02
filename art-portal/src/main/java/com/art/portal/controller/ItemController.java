@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,7 @@ import com.art.service.ItemService;
 
 import com.art.util.Detail;
 import com.art.util.EUDataGridResult;
+import com.art.util.HttpClientUtil;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -39,6 +41,10 @@ public class ItemController {
 	@Autowired
 	ItemImg2Service itemimg2Service;
 	
+	@Value("${REST_BASE_URL}")
+	private String REST_BASE_URL;
+	@Value("${ITME_INFO_URL}")
+	private String ITME_INFO_URL;
 	
 	
 //	/**
@@ -278,8 +284,9 @@ public class ItemController {
 	@RequestMapping("/getDetail")
 	@ResponseBody
 	public ModelAndView getDetail(String id) 
-	{ 
-	   Detail detail = new Detail();
+	{  System.out.println("收到的id="+id);
+	   String result = HttpClientUtil.doGet(REST_BASE_URL + ITME_INFO_URL+id);
+	    Detail detail = new Detail();
 	    Item item = itemService.getItemById(Integer.parseInt(id));
 	    List<ItemImg1> itemimg1list = itemimg1Service.getItemImg1ById(Integer.parseInt(id));
 	    List<ItemImg2> itemimg2list = itemimg2Service.getItemImg2ById(Integer.parseInt(id));
@@ -315,12 +322,11 @@ public class ItemController {
 	 */
 	@RequestMapping(value="itemsave", method=RequestMethod.POST)//ǰ��̨����
 	@ResponseBody
-	private int createItem(String title,String price,String desc,String ownerId,String image) throws Exception {
+	private int createItem(String title,String price,String desc,String image) throws Exception {
 		
 		Item item = new Item();
 		item.setTitle(title);
 		item.setPrice(Long.decode(price));
-		item.setOwnerId(Integer.parseInt(ownerId));
 		item.setDescription(desc);
 		item.setImgAddress(image);
 		item.setCreated(new Date());

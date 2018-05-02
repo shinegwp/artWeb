@@ -39,7 +39,15 @@
 								
 							</ul>
 						</div>						
+<<<<<<< HEAD
+						<div class="shopcar-btn clearfix fl">
+							<a href="cartShow" class="box-s">
+								购物车
+							</a>
+						</div>
+=======
 						
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 					
 					</div>					
 				</div>
@@ -111,6 +119,7 @@
 			dataType : "jsonp",
 			type : "GET",
 			success : function(data){
+			
 				if(data.status == 200){
 					var uname = data.data.uname;
 					var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+uname+
@@ -125,12 +134,10 @@
 	 {
 		 $.ajax({
 			  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
-			  dataType : "json",
+			  dataType : "jsonp",
 			  type:"GET",
+			  
 			  success: function(data)
-			  
-			  
-			  
 			  
 			  { if(data.msg=="OK")
 				  {
@@ -145,7 +152,7 @@
 			  error:function()
 			  {
 				  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
-
+                  
 				  alert("error");
 				  alert(data.msg);
 			  }

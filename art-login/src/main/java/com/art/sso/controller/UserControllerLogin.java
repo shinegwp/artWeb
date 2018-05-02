@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.noggit.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import com.art.pojo.User;
 import com.art.sso.service.UserServiceLogin;
 import com.art.util.ArtResult;
 import com.art.util.ExceptionUtil;
+import com.art.util.JsonUtils;
 
 /**
  * @time 18.4.27
@@ -133,8 +135,9 @@ public class UserControllerLogin {
   	}
   	@RequestMapping("/outLogin")
   	@ResponseBody
-  	public Object outLogin(HttpServletRequest request, HttpServletResponse response) {
-  		System.out.println("jinru推出方法");
-  		return new MappingJacksonValue(userServiceLogin.outLogin(request, response));
+  	public Object outLogin(HttpServletRequest request, HttpServletResponse response, String callback) {
+  		MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(userServiceLogin.outLogin(request, response));
+			mappingJacksonValue.setJsonpFunction(callback);
+			return mappingJacksonValue;
   	}
 }

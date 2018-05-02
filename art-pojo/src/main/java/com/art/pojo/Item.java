@@ -4,12 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Item implements Serializable{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private Integer id;
+    private Integer id;
 
     private String title;
 
@@ -27,25 +22,13 @@ public class Item implements Serializable{
 
     private Date updated;
 
-    private Integer ownerId;
-
     private String imgAddress;
 
     private String description;
 
-    private String fistShow;
-
     private Integer likeCount;
 
-    @Override
-	public String toString() {
-		return "Item [id=" + id + ", title=" + title + ", status=" + status + ", cid=" + cid + ", pname=" + pname
-				+ ", salesVolume=" + salesVolume + ", price=" + price + ", created=" + created + ", updated=" + updated
-				+ ", ownerId=" + ownerId + ", imgAddress=" + imgAddress + ", description=" + description + ", fistShow="
-				+ fistShow + ", likeCount=" + likeCount + "]";
-	}
-
-	public Integer getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -117,14 +100,6 @@ public class Item implements Serializable{
         this.updated = updated;
     }
 
-    public Integer getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Integer ownerId) {
-        this.ownerId = ownerId;
-    }
-
     public String getImgAddress() {
         return imgAddress;
     }
@@ -139,14 +114,6 @@ public class Item implements Serializable{
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
-    }
-
-    public String getFistShow() {
-        return fistShow;
-    }
-
-    public void setFistShow(String fistShow) {
-        this.fistShow = fistShow == null ? null : fistShow.trim();
     }
 
     public Integer getLikeCount() {

@@ -23,7 +23,7 @@ public class ItemCatController {
 	 * @param parentId 父类的Id
 	 * @return EUTreeNode
 	 */
-	@RequestMapping("itemcatlist")
+	@RequestMapping("itemcatlistfront")
 	@ResponseBody
 	private List<EUTreeNode> getCatList(@RequestParam(value="id",defaultValue="0")long parentId) {
 		List<EUTreeNode> list = itemcatService.getItemCatList(parentId);

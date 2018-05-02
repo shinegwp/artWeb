@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -330,7 +333,11 @@
 								<span class="fs16 darkgray clearfix">商品总价：<em class="fr orange fs24 f-arial" id="sumPrice">¥ 999.00</em></span>
 							</p>
 							<p class="mt10 fr">
+<<<<<<< HEAD
+								<a href="#" onclick="$.submitOrder()" class="fr orange-but fs20 radius3">下单</a>
+=======
 								<a href="#" onclick="$.submitOrder()" class="fr orange-but fs20 radius3">去结算</a>
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 							</p>
 						</div>
 
@@ -484,6 +491,8 @@
 	</body>
 	<script src="js/other.js" type="text/javascript" ></script>
 
+<<<<<<< HEAD
+=======
 =======
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -1027,4 +1036,5 @@
 	<script src="js/other.js" type="text/javascript" ></script>
 
 >>>>>>> 330f807fd3271849b0d27df6085560bf9d134b58
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 </html>

@@ -7,7 +7,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta charset='utf-8'>
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
+<<<<<<< HEAD
+		<title>加入购物车成功</title>
+=======
 		<title>艺术家入驻成功</title>
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta http-equiv="Cache-Control" content="no-siteapp">
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,6 +24,8 @@
 		<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.js"></script>
 	</head>
+<<<<<<< HEAD
+=======
 	
 	<script type="text/javascript">
 	$(function() {
@@ -83,6 +89,7 @@
 	}
 </script>
 	
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 	<body>
 		<!--header star-->
 		<div class="header clearfix">			
@@ -93,6 +100,17 @@
 					</div>
 					<div class="right clearfix fr">
 						<div class="zuo clearfix fl">
+<<<<<<< HEAD
+							<ul class="clearfix fl">
+								<li>
+									<span class="fl">欢迎</span>
+									<a href="grxx.html" class="fl">瑾晨0212</a>
+									<span class="fl">进入商城</span>
+								</li>
+								<li>
+									<a href="register.html">
+										免费注册
+=======
 							<ul class="clearfix fl" id="displayName">
 								
 								<li >
@@ -104,6 +122,7 @@
 								<li>
 									<a href="#" onclick="$.grxx()">
 										个人中心
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 									</a>
 								</li>
 								
@@ -144,7 +163,11 @@
 					<li class="cur"><a href="index.html">首页</a></li>
 					<li><a href="special.html">专场</a></li>
 					<li><a href="mall.html">商城</a></li>
+<<<<<<< HEAD
+					
+=======
 					<li><a href="artist.html">艺术家</a></li>
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 				</ul>
 			</div>
 		</div>
@@ -154,6 +177,9 @@
 		<div class="homepage clearfix">
 			<div class="content clearfix">
 				<div class="media-right clearfix box-s">
+<<<<<<< HEAD
+					
+=======
 					<div class="top clearfix">
 						<samp class="line db"></samp>
 						<samp class="curline db" style="width: 100%;"></samp>
@@ -184,15 +210,24 @@
 							</li>
 						</ul>
 					</div>
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 					<div class="success-bottom clearfix box-s">
 						<div class="success clearfix ta-c">
 							<img src="img/success.png">
 							<p class="tit ta-c">
+<<<<<<< HEAD
+								添加商品成功！
+							</p>
+							<p class="fu-tit ta-c">
+								<a href="mall">继续购物</a>
+								<a href="shopping.html">去购物车结算</a>
+=======
 								恭喜您，注册成功！
 							</p>
 							<p class="fu-tit ta-c">
 								<span>5</span>
 								秒后自动跳转到<a href="sign.html">登录</a>页
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 							</p>
 						</div>
 					</div>			
@@ -259,7 +294,11 @@
 							<div class="xia clearfix">
 								<ul>
 									<li><a href="friend-link.html">友情链接</a></li>
+<<<<<<< HEAD
+									
+=======
 									<li><a href="ysjrz.html">艺术家入驻</a></li>
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 								</ul>
 							</div>
 						</div>
