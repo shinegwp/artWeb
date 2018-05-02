@@ -47,10 +47,17 @@ public class ContentCategoryController {
 	@RequestMapping("contentcategoryupdate")
 	@ResponseBody
 	public String updateContentCategory(Long id, String name) {
-		System.out.println("nb"+id);
 		ArtContentCategory acc = contentCategoryService.selectById(id);
 		acc.setName(name);
 		contentCategoryService.updateNameById(acc);
 		return "content-category";
 	}
+	
+	@RequestMapping("contentcategorydelete")
+	@ResponseBody
+	public String deleteContentCategory(Long id) {
+		contentCategoryService.deleteById(id);
+		return "content-category";
+	}
+	
 }

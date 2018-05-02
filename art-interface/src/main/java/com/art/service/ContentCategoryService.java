@@ -12,5 +12,6 @@ public interface ContentCategoryService {
 	ArtContentCategory selectById(long parentId);
 	List<EUTreeNode> getCategoryList(long id);
 	ArtResult insertContentCategory(long parentId, String name);
+	int deleteById(long id);
 	int updateNameById(ArtContentCategory acc);
 }
