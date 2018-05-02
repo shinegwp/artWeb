@@ -153,7 +153,7 @@
 								if (data.status == 200) {
 									alert("登录成功！");
 									if (redirectUrl == "") {
-										location.href = "http://www.taobao.com";
+										location.href = "http://www.jiangyou-art.com";
 									} else {
 										location.href = redirectUrl;
 									}

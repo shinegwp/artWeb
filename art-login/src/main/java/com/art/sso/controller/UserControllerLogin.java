@@ -94,6 +94,7 @@ public class UserControllerLogin {
   	@ResponseBody
   	public ArtResult userLogin(User user,
   			HttpServletRequest request, HttpServletResponse response) {
+  		System.out.println(user.getUname());
   		try {
   			
   			ArtResult result = userServiceLogin.userLogin(user.getUname(), user.getUpassword(), request, response);
@@ -111,6 +112,7 @@ public class UserControllerLogin {
 	 * 
 	 */
   	public Object getUserByToken(@PathVariable String token, String callback) {
+  		System.out.println("wojinlaile ");
   		ArtResult result = null;
   		try {
   			result = userServiceLogin.getUserByToken(token);
@@ -129,5 +131,10 @@ public class UserControllerLogin {
   		}
   		
   	}
-    
+  	@RequestMapping("/outLogin")
+  	@ResponseBody
+  	public Object outLogin(HttpServletRequest request, HttpServletResponse response) {
+  		System.out.println("jinru推出方法");
+  		return new MappingJacksonValue(userServiceLogin.outLogin(request, response));
+  	}
 }

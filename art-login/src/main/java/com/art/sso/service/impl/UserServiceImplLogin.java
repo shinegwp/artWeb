@@ -1,8 +1,11 @@
 package com.art.sso.service.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -88,11 +91,13 @@ public class UserServiceImplLogin implements UserServiceLogin {
 		List<User> list = userMapper.selectByExample(example);
 		//如果没有此用户名
 		if (null == list || list.size() == 0) {
+			System.out.println("查无此人");
 			return ArtResult.build(400, "用户名或密码错误");
 		}
 		User user = list.get(0);
 		//比对密码
 		if (!DigestUtils.md5DigestAsHex(upassword.getBytes()).equals(user.getUpassword())) {
+			System.out.println("密码错误");
 			return ArtResult.build(400, "用户名或密码错误");
 		}
 		//生成token
@@ -106,8 +111,9 @@ public class UserServiceImplLogin implements UserServiceLogin {
 		jedisClient.expire("REDIS_USER_SESSION:" + token, 18000);
 		
 		//添加写cookie的逻辑，cookie的有效期是关闭浏览器就失效。
+		System.out.println(request.getRequestURI()+"shezhishi"+request.getContextPath());
 		CookieUtils.setCookie(request, response, "TT_TOKEN", token);
-		
+		System.out.println(CookieUtils.getCookieValue(request, "TT_TOKEN")+"这是从页面中取得token");
 		//返回token
 		return ArtResult.ok(token);
 	}
@@ -117,23 +123,30 @@ public class UserServiceImplLogin implements UserServiceLogin {
 	 */
 	public ArtResult getUserByToken(String token) {
 		
+		
 		//根据token从redis中查询用户信息
 		String json = jedisClient.get("REDIS_USER_SESSION:" + token);
+		System.out.println(json+"查用户信息");
 		//判断是否为空
 		if (StringUtils.isBlank(json)) {
 			return ArtResult.build(400, "此session已经过期，请重新登录");
 		}
 		//更新过期时间
-		jedisClient.expire("REDIS_USER_SESSION:" + token, 18000);
+		jedisClient.expire("REDIS_USER_SESSION:" + token, 180);
 		//返回用户信息
 		return ArtResult.ok(JsonUtils.jsonToPojo(json, User.class));
 	}
-
+    //退出登录
 	public ArtResult outLogin(HttpServletRequest request, HttpServletResponse response) {
-		
-		CookieUtils.deleteCookie(request, response, "TT_TOKEN");
-		
-		return ArtResult.ok();
+		System.out.println("我进推出方法了");
+		System.out.println(request.getRequestURI());
+		CookieUtils.setCookie(request, response, "TT_TOKEN", null);
+		CookieUtils.setCookie(request, response, "TT_TOKEN", "dad");
+		CookieUtils.setCookie(request, response, "TT_TOK", "aa ");
+		CookieUtils.deleteCookie(request, response, "TT_TOK");
+		System.out.println("执行完毕");
+		System.out.println(ArtResult.ok(new User()).toString());
+		return ArtResult.ok(new User());
 		
 	}
 }

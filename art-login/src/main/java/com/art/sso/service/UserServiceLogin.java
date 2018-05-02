@@ -20,5 +20,6 @@ public interface UserServiceLogin {
 	ArtResult userLogin(String username, String password, HttpServletRequest request, HttpServletResponse response);
 
 	ArtResult getUserByToken(String token);
-
+    
+	ArtResult outLogin(HttpServletRequest request, HttpServletResponse response);
 }
