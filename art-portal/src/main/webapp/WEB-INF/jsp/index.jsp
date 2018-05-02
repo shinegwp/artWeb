@@ -39,15 +39,12 @@
 								
 							</ul>
 						</div>						
-<<<<<<< HEAD
 						<div class="shopcar-btn clearfix fl">
 							<a href="cartShow" class="box-s">
 								购物车
 							</a>
 						</div>
-=======
 						
->>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 					
 					</div>					
 				</div>
@@ -100,9 +97,9 @@
 	
 	 $(function()
 			 {
+		 $.displayUserName();
 		 $.getNewItem();
 		 $.JXshow();
-		 $.displayUserName();
 			 });
 	</script>
 	<!-- 今日推荐 -->
@@ -202,7 +199,8 @@
 	<script type="text/javascript">
 	var d;
 	$.JXshow=function()
-	{ $.ajax({
+	{ 
+		$.ajax({
 		  url: "getContent",
 		  type: "post",
 		  data:{
