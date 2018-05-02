@@ -66,7 +66,6 @@
 				<li class="cur"><a href="index">首页</a></li>
 				<li><a href="special">专场</a></li>
 				<li><a href="mall">商城</a></li>
-				<li><a href="artist">艺术家</a></li>
 			</ul>
 		</div>
 	</div>
@@ -74,8 +73,6 @@
 
 	<script type="text/javascript">
 		//页面初始化
-		var a = $.cookie("user");
-		var user = eval('(' + a + ')');
 		$(function() {
 			$.displayUserName();
 			$.saveUpdate();
@@ -86,13 +83,10 @@
 		$.displayUserName = function()//如果登陆了展示退出和欢迎
 		{
 			if (!_ticket) {
-				$("#displayName")
-						.html(
-								"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
-								grxx();
+				alert("请先登录！");
+				window.location.href = "http://sso.jiangyou-art.com/page/login?";
 			}
-			$
-					.ajax({
+			$.ajax({
 						url : "http://sso.jiangyou-art.com/userLogin/token/"
 								+ _ticket,
 
@@ -101,14 +95,15 @@
 						success : function(data) {
 							if (data.status == 200) {
 								user = data.data;
-								alert(user.uname+"aaa");
+								
+								alert(data.birthday+"aaa");
 								var uname = data.data.uname;
 								var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
 										+ uname
 										+ "</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
 								$("#displayName").html(html);
 								$("#uname").attr("value", user.uname);
-								$("#birthday").attr("value", user.birthday);
+								$("#birthday").attr("value", data.birthday);
 								var sex = user.sex;
 								if (sex == "男") {
 									$('input:radio[name=sex]')[0].checked = true;
@@ -145,21 +140,13 @@
 
 					});
 		}
-		$.grxx = function()//当点击个人中心时判断是否已登录
-		{
-			if ($.cookie("TT_TOKEN") == null) {
-				alert("请先登录！");
-			} else {
-				window.location.href = "grxx";
-			}
-		}
         
 		//保存修改
 		$.saveUpdate = function() {
 			alert(1);
 			alert(user.uid+"jjjj");
 			$.ajax({
-				url : "restuserupdate",
+				url : "restuserupdatefront",
 				type : "post",
 				data : {
 					"uid" : user.uid,
@@ -211,7 +198,7 @@
 								</li>
 
 								<li><label class="fl l-option">生日：</label><input
-									id="birthday" type="text" onClick="laydate()" class="fl ml10"
+									id="birthday" type="date" onClick="laydate()" class="fl ml10"
 									placeholder=""></li>
 								<li class="radio-li"><label class="fl l-option">性别：</label>
 									<div class="radio-box" id="sex">
@@ -231,17 +218,7 @@
 									onclick="$.saveUpdate();"></li>
 							</ul>
 						</div>
-						<div class="fr user-photo pr50 mr10">
-							<p class="photo">
-								<img src="img/photo.jpg" alt="" />
-							</p>
-							<input type="button"
-								onMouseMove="f.style.pixelLeft=event.x-60;f.style.pixelTop=this.offsetTop;"
-								value="更换头像" onClick="f.click()"
-								class="edit_photo fs14 green radius3 mt10"> <input
-								type="file" id="f" onChange="txt.value=this.value" name="f"
-								class="files" size="1" hidefocus>
-						</div>
+						
 					</form>
 
 				</div>

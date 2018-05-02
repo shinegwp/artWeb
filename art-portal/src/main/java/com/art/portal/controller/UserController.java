@@ -6,6 +6,8 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -164,5 +166,28 @@ public class UserController {
 	{
 		int i = userService.insert(user);
 		return i ;
+	}
+	
+	@RequestMapping(value ="restuserupdatefront")
+	@ResponseBody
+	public User updata(String money,String upassword,Integer uid,String uname,String birthday,String sex,String tel,String qq,String email) throws ParseException
+	{  System.out.println(money);
+	    DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");	  
+		User u = new User();
+		u.setUid(uid);
+	    u.setUpassword(upassword);
+	    if(birthday!=null)
+	    {
+	    	u.setBirthday(fmt.parse(birthday));
+	    }
+		u.setUname(uname);
+		u.setSex(sex);
+		u.setTel(tel);
+		u.setQq(qq);
+		u.setEmail(email);
+		u.setMoney(money);
+		System.out.println("updata"+u);
+		userService.update(u);
+		return u;
 	}
 }

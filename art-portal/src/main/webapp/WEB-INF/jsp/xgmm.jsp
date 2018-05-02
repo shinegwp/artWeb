@@ -36,39 +36,16 @@
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
 								
-								<li >
-									<a href="http://sso.jiangyou-art.com/page/register">
-										注册/登陆
-									</a>
-								</li>
 								
-								<li>
-									<a href="#" onclick="$.grxx()">
-										个人中心
-									</a>
-								</li>
 								
 							</ul>
 						</div>
 						<div class="shopcar-btn clearfix fl">
 							<a href="shopping" class="box-s">
-								购物车（0）
+								购物车
 							</a>
 						</div>
-						<div class="fenxiang clearfix fl">
-							<span class="fl">分享到：</span>
-							<ul class="clearfix fl">
-								<li>
-									<a href="#"><img src="img/sina.png" /></a>
-								</li>
-								<li>
-									<a href="#"><img src="img/qq.png" /></a>
-								</li>
-								<li>
-									<a href="#"><img src="img/wechat.png" /></a>
-								</li>
-							</ul>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -96,9 +73,6 @@
 					</li>
 					<li>
 						<a href="mall">商城</a>
-					</li>
-					<li>
-						<a href="artist">艺术家</a>
 					</li>
 				</ul>
 			</div>
@@ -211,7 +185,7 @@ $.updatapassword=function()
 			<div class="wrapper pt40 pb40 clearfix">
 				<div class="fl slide-nav white-box">
 					<ul>
-						<li class="on">
+						<li >
 							<a href="grxx" class="db fs16">个人信息</a>
 						</li>
 						<li>
@@ -225,7 +199,7 @@ $.updatapassword=function()
 							<a href="wdsc" class="db fs16">我的收藏</a>
 						</li>
 						
-						<li>
+						<li class="on">
 							<a href="xgmm" class="db fs16">修改密码</a>
 						</li>
 						<li>

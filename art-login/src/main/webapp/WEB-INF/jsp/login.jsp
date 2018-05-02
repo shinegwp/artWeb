@@ -35,7 +35,7 @@
 	<body class="sign-bg">
 		<div class="sign clearfix">
 			<div class="top clearfix">
-				<a href="index" class="fl fanhui">返回首页</a>
+				<a href="http://www.jiangyou-art.com" class="fl fanhui">返回首页</a>
 				<p class="fr">
 					还没有商城账号？
 					<a href="register.html" class="zhuce ra3">
@@ -54,13 +54,11 @@
 
 					
 						<li>
-							<span class="fl mima"></span>
 							<input type="text" name="uname" id="uname" value="" placeholder="用户名" class="fl shuru" required/>
 						</li>
 						
 						<li>
-							<span class="fl mima"></span>
-							<input type="password" name="upassword" id="upassword" value="" placeholder="密码（五位纯数字）" class="fl shuru" required/>
+							<input type="password" name="upassword" id="upassword" value="" placeholder="密码（中英文数字下划线组成）" class="fl shuru" required/>
 						</li>
 						
 			           </ul>
@@ -109,9 +107,7 @@
 							},
                          
 							password : {
-								isPassword:true,
-								maxlength:"5",
-								minlength:"5",
+								stringCheck:true,
 								
 							},
 							
@@ -119,11 +115,11 @@
 						messages : {
 							uname : {
 								
-								stringCheck : "只能包括中文字、英文字母、数字和下划线"
+								stringCheck : "只能包括中英文字母、数字和下划线"
 							},
 						
 							upassword : {
-								isPassword : "密码必须为纯数字"
+								stringCheck : "只能包括中英文字母、数字和下划线"
 								
 							},
 							
@@ -134,7 +130,6 @@
 				    
 				});
 				var redirectUrl = "${redirect}";
-				alert(redirectUrl);
 				var LOGIN = {
 						checkInput:function() {
 							if ($("#uname").val() == "") {
@@ -183,7 +178,7 @@
 			
 			</div>
 			<div class="xia clearfix">
-				<p>Copyright © 2003-2015 椿龄文化(chunlingwenhua). All Rights Reserved.</p>
+				<p>Copyright © 2003-2015 酱油文化. All Rights Reserved.</p>
 			</div>
 		</div>
 	</body>

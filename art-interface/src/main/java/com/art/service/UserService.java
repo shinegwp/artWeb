@@ -10,5 +10,6 @@ public interface UserService {
 	public User getUserById(Integer uid);
 	public int reduceMoney(User u) ;
 	public void userJedisTest();//jedis的测试
+	public int update(User u);
 
 }

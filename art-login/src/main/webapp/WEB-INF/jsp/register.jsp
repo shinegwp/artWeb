@@ -209,9 +209,8 @@
 											},
 
 											password2 : {
-												isPassword : true,
-												maxlength : "5",
-												minlength : "5",
+												stringCheck : true,
+												minlength : "2",
 												equalTo : "#upassword"
 
 											},
@@ -364,7 +363,7 @@
 			</script>
 		</div>
 		<div class="xia clearfix">
-			<p>Copyright © 2003-2015 椿龄文化(chunlingwenhua). All Rights
+			<p>Copyright © 2003-2015 酱油文化. All Rights
 				Reserved.</p>
 		</div>
 	</div>

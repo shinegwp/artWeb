@@ -68,7 +68,11 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userMapper.updateByPrimaryKeySelective(u);
 	}
-
+	public int update(User user) {
+		int i = userMapper.updateByPrimaryKeySelective(user);
+		System.out.println(i);
+		return i;
+	}
 
 
 
