@@ -22,6 +22,68 @@
 		<script type="text/javascript" src="js/jquery.cookie.js"></script>
 	</head>
 
+    <script type="text/javascript">
+	$(function() {
+		$.displayUserName();
+	});
+	$.displayUserName = function()//如果登陆了展示退出和欢迎
+	{
+		var _ticket = $.cookie("TT_TOKEN");
+		if (!_ticket) {
+			$("#displayName")
+					.html(
+							"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+		}
+		$
+				.ajax({
+					url : "http://sso.jiangyou-art.com/userLogin/token/"
+							+ _ticket,
+
+					dataType : "jsonp",
+					type : "GET",
+					success : function(data) {
+						if (data.status == 200) {
+							var uname = data.data.uname;
+							var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
+									+ uname
+									+ "</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
+							$("#displayName").html(html);
+						}
+					}
+				});
+	}
+
+	$.outLogin = function() {
+		$
+				.ajax({
+					url : "http://sso.jiangyou-art.com/userLogin/outLogin",
+					type : "post",
+					success : function(data) {
+						if (data.msg == "OK") {
+							alert("成功退出！");
+							$("#displayName")
+									.html(
+											"<li ><a href='sso.jiangyou-art.com/page/register'>注册/登陆</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li>")
+						} else {
+							alert("操作有误");
+						}
+					},
+					error : function() {
+						alert("error");
+					}
+
+				});
+	}
+	$.grxx = function()//当点击个人中心时判断是否已登录
+	{
+		if ($.cookie("TT_TOKEN") == null) {
+			alert("请先登录！");
+		} else {
+			window.location.href = "grxx";
+		}
+	}
+</script>
+    
 	<body>
 		<!--header star-->
 		<div class="header clearfix">
@@ -32,22 +94,20 @@
 					</div>
 					<div class="right clearfix fr">
 						<div class="zuo clearfix fl">
-							<ul class="clearfix fl">
-								<li>
-									<span class="fl">欢迎</span>
-									<a href="grxx" class="fl">瑾晨0212</a>
-									<span class="fl">进入商城</span>
-								</li>
-								<li>
-									<a href="register">
-										免费注册
+							<ul class="clearfix fl" id="displayName">
+								
+								<li >
+									<a href="http://sso.jiangyou-art.com/page/register">
+										注册/登陆
 									</a>
 								</li>
+								
 								<li>
-									<a href="settled">
-										艺术家入驻
+									<a href="#" onclick="$.grxx()">
+										个人中心
 									</a>
 								</li>
+								
 							</ul>
 						</div>
 						<div class="shopcar-btn clearfix fl">
