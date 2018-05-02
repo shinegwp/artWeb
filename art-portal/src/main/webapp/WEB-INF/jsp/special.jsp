@@ -52,9 +52,10 @@
 							</ul>
 						</div>						
 						<div class="shopcar-btn clearfix fl">
-							<a href="shopping.html" class="box-s">
-								购物车（0）
+							<a href="cartShow" class="box-s">
+								购物车
 							</a>
+					
 						</div>
 					
 					</div>	

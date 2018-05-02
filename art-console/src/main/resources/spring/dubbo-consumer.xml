@@ -38,6 +38,7 @@
 	
 	<dubbo:reference interface="com.art.service.ContentService" id="contentService" url="dubbo://127.0.0.1:20881"/>
 	
+		<dubbo:reference interface="com.art.service.ItemCatServiceBack" id="itemCatServiceBack" url="dubbo://127.0.0.1:20881"/>
 	<!-- 设置全局超时时间 -->
  	<dubbo:consumer timeout="60000"></dubbo:consumer>
 </beans>

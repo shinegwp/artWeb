@@ -329,7 +329,7 @@
 								<span class="fs16 darkgray clearfix">商品总价：<em class="fr orange fs24 f-arial" id="sumPrice">¥ 999.00</em></span>
 							</p>
 							<p class="mt10 fr">
-								<a href="#" onclick="$.submitOrder()" class="fr orange-but fs20 radius3">去结算</a>
+								<a href="#" onclick="$.submitOrder()" class="fr orange-but fs20 radius3">下单</a>
 							</p>
 						</div>
 

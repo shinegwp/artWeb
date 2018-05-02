@@ -67,12 +67,12 @@ public class ItemControllerBack {
 //******************************************************************************************************88888	
     @RequestMapping(value="item/save/back",method=RequestMethod.POST)
 	@ResponseBody
-	private int createItem(String title,String price,String desc,String ownerId,String image) throws Exception {
+	private int createItem(String title,String price,String desc,String image) throws Exception {
 		
 		Item item = new Item();
 		item.setTitle(title);
 		item.setPrice(Long.decode(price));
-		item.setOwnerId(Integer.parseInt(ownerId));
+//		item.setOwnerId(Integer.parseInt(ownerId));
 		item.setDescription(desc);
 		item.setImgAddress(image);
 		item.setCreated(new Date());

@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta charset='utf-8'>
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<title>艺术家入驻成功</title>
+		<title>加入购物车成功</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta http-equiv="Cache-Control" content="no-siteapp">
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -41,11 +41,7 @@
 										免费注册
 									</a>
 								</li>
-								<li>
-									<a href="settled.html">
-										艺术家入驻
-									</a>
-								</li>
+								
 							</ul>
 						</div>						
 						<div class="shopcar-btn clearfix fl">
@@ -83,7 +79,7 @@
 					<li class="cur"><a href="index.html">首页</a></li>
 					<li><a href="special.html">专场</a></li>
 					<li><a href="mall.html">商城</a></li>
-					<li><a href="artist.html">艺术家</a></li>
+					
 				</ul>
 			</div>
 		</div>
@@ -93,45 +89,16 @@
 		<div class="homepage clearfix">
 			<div class="content clearfix">
 				<div class="media-right clearfix box-s">
-					<div class="top clearfix">
-						<samp class="line db"></samp>
-						<samp class="curline db" style="width: 100%;"></samp>
-						<ul>
-							<li class="fl">
-								<div class="shu cur clearfix box-s">
-									<span class="cur">
-										1
-									</span>
-								</div>
-								<p class="cur">注册账号</p>
-							</li>
-							<li class="fl">
-								<div class="shu cur clearfix box-s">
-									<span class="cur">
-										2
-									</span>
-								</div>
-								<p class="cur">完善资料</p>
-							</li>
-							<li class="fl">
-								<div class="shu cur clearfix box-s">
-									<span class="cur">
-										3
-									</span>
-								</div>
-								<p class="cur">注册成功</p>
-							</li>
-						</ul>
-					</div>
+					
 					<div class="success-bottom clearfix box-s">
 						<div class="success clearfix ta-c">
 							<img src="img/success.png">
 							<p class="tit ta-c">
-								恭喜您，注册成功！
+								添加商品成功！
 							</p>
 							<p class="fu-tit ta-c">
-								<span>5</span>
-								秒后自动跳转到<a href="sign.html">登录</a>页
+								<a href="mall">继续购物</a>
+								<a href="shopping.html">去购物车结算</a>
 							</p>
 						</div>
 					</div>			
@@ -198,7 +165,7 @@
 							<div class="xia clearfix">
 								<ul>
 									<li><a href="friend-link.html">友情链接</a></li>
-									<li><a href="ysjrz.html">艺术家入驻</a></li>
+									
 								</ul>
 							</div>
 						</div>

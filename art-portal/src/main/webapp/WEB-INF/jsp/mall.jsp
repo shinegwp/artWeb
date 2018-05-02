@@ -163,48 +163,25 @@
 						{
 	                 		 window.location.href ="mall";
 						}
-	                 	$.addItem=function(e)//添加购物车
-	                 	{ 
-	                 	  var itemid = e.attr("value");
-
-	                 	if(user==null)
-	                 		{
-	                 		alert("请先登录！");
-	                 		}
-	                 	else
-	                 		{
+	                 	$.addItem=function(e)
+	                 	{var itemid = e.attr("value");
 	                 		$.ajax({
 	                 			url:"addItemtoCar",
 	                 			data:{
 	                 				id:itemid,
-	                 				
-	                 			},async:true,
+	                 			},
 	                 			type:"post",
-	                 			dataType:"json",
 	                 			success:function(jsonresult)
-	                 			{ 
-	                 				if(jsonresult.status==2)//当返回值为2的时候购物车已满，需要删除部分商品
-	                 				  {
-	                 				  alert("购物车已满！");
-	                 				  
-	                 				  }
-	                 				if(jsonresult.status==0)//当返回值为0的时候，该商品已经在购物车里。
-	                 				  {
-	                 				  alert("该商品已经在您购物车里");
-	                 				  
-	                 				  }
-	                 			  if(jsonresult.status==1)//当返回值为1的时候添加成功
-	                 				  {
-	                 				  alert("添加成功！")
-	                 				//  window.location.href ="shopping";
-	                 				  }
-	                 				
+	                 			{    if(jsonresult="success")
+	                 				{
+	                 				window.location.href ="success";
+	                 				}
+	                 				 
 	                 				
 	                 			},error:function()
 	                 			{ alert("操作有误！");
 	                 			}
 	                 		});
-	                 		}
 	                 		}
 	                 	$.addCollection=function(e)//关注商品
 	                 	{ 
@@ -280,8 +257,8 @@
 							</ul>
 						</div>						
 						<div class="shopcar-btn clearfix fl">
-							<a href="shopping.html" class="box-s">
-								购物车（0）
+							<a href="cartShow" class="box-s">
+								购物车
 							</a>
 						</div>
 					

@@ -43,26 +43,15 @@
 										免费注册
 									</a>
 								</li>
-								<li>
-									<a href="settled.html">
-										艺术家入驻
-									</a>
-								</li>
+								
 							</ul>
 						</div>						
 						<div class="shopcar-btn clearfix fl">
-							<a href="shopping.html" class="box-s">
-								购物车（0）
+							<a href="cartShow" class="box-s">
+								购物车
 							</a>
 						</div>
-						<div class="fenxiang clearfix fl">
-							<span class="fl">分享到：</span>
-							<ul class="clearfix fl">
-								<li><a href="#"><img src="img/sina.png"/></a></li>
-								<li><a href="#"><img src="img/qq.png"/></a></li>
-								<li><a href="#"><img src="img/wechat.png"/></a></li>
-							</ul>
-						</div>
+						
 					</div>					
 				</div>
 			</div>			
@@ -85,7 +74,7 @@
 					<li><a href="index">首页</a></li>
 					<li class="cur"><a href="special">专场</a></li>
 					<li><a href="mall">商城</a></li>
-					<li><a href="artist">艺术家</a></li>
+					
 				</ul>
 			</div>
 		</div>
@@ -225,49 +214,27 @@ $.gotoprodetail=function(e)
 	
 	 window.location.href ="getDetail?id="+e.val();
 	}
-$.addItem=function(e)//添加购物车
-{ 
-  var itemid = e.attr("value");
-
-if(user==null)
-	{
-	alert("请先登录！");
-	}else
-	{
-
+$.addItem=function(e)
+{var itemid = e.attr("value");
 	$.ajax({
 		url:"addItemtoCar",
 		data:{
 			id:itemid,
-			
-		},async:true,
+		},
 		type:"post",
-		dataType:"json",
 		success:function(jsonresult)
-		{ 
-			if(jsonresult.status==2)//当返回值为2的时候购物车已满，需要删除部分商品
-			  {
-			  alert("购物车已满！");
-			  
-			  }
-			if(jsonresult.status==0)//当返回值为0的时候，该商品已经在购物车里。
-			  {
-			  alert("该商品已经在您购物车里");
-			  
-			  }
-		  if(jsonresult.status==1)//当返回值为1的时候添加成功
-			  {
-			  alert("添加成功！")
-			//  window.location.href ="shopping";
-			  }
-			
+		{    if(jsonresult="success")
+			{
+			window.location.href ="success";
+			}
+			 
 			
 		},error:function()
 		{ alert("操作有误！");
 		}
 	});
 	}
-	}
+
 $.addCollection=function(e)//关注商品
 { 
 if(user==null)
@@ -727,7 +694,7 @@ else
 							<div class="xia clearfix">
 								<ul>
 									<li><a href="friend-link.html">友情链接</a></li>
-									<li><a href="ysjrz.html">艺术家入驻</a></li>
+								
 								</ul>
 							</div>
 						</div>
