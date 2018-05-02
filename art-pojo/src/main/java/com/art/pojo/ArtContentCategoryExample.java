@@ -1,10 +1,11 @@
 package com.art.pojo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ArtContentCategoryExample {
+public class ArtContentCategoryExample implements Serializable{
     protected String orderByClause;
 
     protected boolean distinct;

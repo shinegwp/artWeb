@@ -22,7 +22,6 @@ public class SearchDaoImpl implements SearchDao {
 	@Autowired
 	private SolrServer solrServer;
 
-	@Override
 	public SearchResult search(SolrQuery query) throws Exception {
 		//返回值对象
 		SearchResult result = new SearchResult();

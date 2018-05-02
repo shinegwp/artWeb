@@ -21,6 +21,8 @@ public interface ArtContentCategoryMapper {
     List<ArtContentCategory> selectByExample(ArtContentCategoryExample example);
 
     ArtContentCategory selectByPrimaryKey(Long id);
+    
+    int updateNameById(ArtContentCategory acc);
 
     int updateByExampleSelective(@Param("record") ArtContentCategory record, @Param("example") ArtContentCategoryExample example);
 

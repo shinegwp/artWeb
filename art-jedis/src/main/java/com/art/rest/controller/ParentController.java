@@ -44,7 +44,6 @@ public class ParentController {
 			e.printStackTrace();
 			return ArtResult.build(500, ExceptionUtil.getStackTrace(e));
 		}
-	
 	}
 	
 }

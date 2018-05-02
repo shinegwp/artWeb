@@ -7,7 +7,11 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta charset='utf-8'>
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
+<<<<<<< HEAD
 		<title>加入购物车成功</title>
+=======
+		<title>艺术家入驻成功</title>
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta http-equiv="Cache-Control" content="no-siteapp">
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -20,6 +24,72 @@
 		<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.js"></script>
 	</head>
+<<<<<<< HEAD
+=======
+	
+	<script type="text/javascript">
+	$(function() {
+		$.displayUserName();
+	});
+	$.displayUserName = function()//如果登陆了展示退出和欢迎
+	{
+		var _ticket = $.cookie("TT_TOKEN");
+		if (!_ticket) {
+			$("#displayName")
+					.html(
+							"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+		}
+		$
+				.ajax({
+					url : "http://sso.jiangyou-art.com/userLogin/token/"
+							+ _ticket,
+
+					dataType : "jsonp",
+					type : "GET",
+					success : function(data) {
+						if (data.status == 200) {
+							var uname = data.data.uname;
+							var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
+									+ uname
+									+ "</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
+							$("#displayName").html(html);
+						}
+					}
+				});
+	}
+
+	$.outLogin = function() {
+		$
+				.ajax({
+					url : "http://sso.jiangyou-art.com/userLogin/outLogin",
+					type : "post",
+					success : function(data) {
+						if (data.msg == "OK") {
+							alert("成功退出！");
+							$("#displayName")
+									.html(
+											"<li ><a href='sso.jiangyou-art.com/page/register'>注册/登陆</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li>")
+						} else {
+							alert("操作有误");
+						}
+					},
+					error : function() {
+						alert("error");
+					}
+
+				});
+	}
+	$.grxx = function()//当点击个人中心时判断是否已登录
+	{
+		if ($.cookie("TT_TOKEN") == null) {
+			alert("请先登录！");
+		} else {
+			window.location.href = "grxx";
+		}
+	}
+</script>
+	
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 	<body>
 		<!--header star-->
 		<div class="header clearfix">			
@@ -30,6 +100,7 @@
 					</div>
 					<div class="right clearfix fr">
 						<div class="zuo clearfix fl">
+<<<<<<< HEAD
 							<ul class="clearfix fl">
 								<li>
 									<span class="fl">欢迎</span>
@@ -39,6 +110,19 @@
 								<li>
 									<a href="register.html">
 										免费注册
+=======
+							<ul class="clearfix fl" id="displayName">
+								
+								<li >
+									<a href="http://sso.jiangyou-art.com/page/register">
+										注册/登陆
+									</a>
+								</li>
+								
+								<li>
+									<a href="#" onclick="$.grxx()">
+										个人中心
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 									</a>
 								</li>
 								
@@ -79,7 +163,11 @@
 					<li class="cur"><a href="index.html">首页</a></li>
 					<li><a href="special.html">专场</a></li>
 					<li><a href="mall.html">商城</a></li>
+<<<<<<< HEAD
 					
+=======
+					<li><a href="artist.html">艺术家</a></li>
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 				</ul>
 			</div>
 		</div>
@@ -89,16 +177,57 @@
 		<div class="homepage clearfix">
 			<div class="content clearfix">
 				<div class="media-right clearfix box-s">
+<<<<<<< HEAD
 					
+=======
+					<div class="top clearfix">
+						<samp class="line db"></samp>
+						<samp class="curline db" style="width: 100%;"></samp>
+						<ul>
+							<li class="fl">
+								<div class="shu cur clearfix box-s">
+									<span class="cur">
+										1
+									</span>
+								</div>
+								<p class="cur">注册账号</p>
+							</li>
+							<li class="fl">
+								<div class="shu cur clearfix box-s">
+									<span class="cur">
+										2
+									</span>
+								</div>
+								<p class="cur">完善资料</p>
+							</li>
+							<li class="fl">
+								<div class="shu cur clearfix box-s">
+									<span class="cur">
+										3
+									</span>
+								</div>
+								<p class="cur">注册成功</p>
+							</li>
+						</ul>
+					</div>
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 					<div class="success-bottom clearfix box-s">
 						<div class="success clearfix ta-c">
 							<img src="img/success.png">
 							<p class="tit ta-c">
+<<<<<<< HEAD
 								添加商品成功！
 							</p>
 							<p class="fu-tit ta-c">
 								<a href="mall">继续购物</a>
 								<a href="shopping.html">去购物车结算</a>
+=======
+								恭喜您，注册成功！
+							</p>
+							<p class="fu-tit ta-c">
+								<span>5</span>
+								秒后自动跳转到<a href="sign.html">登录</a>页
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 							</p>
 						</div>
 					</div>			
@@ -165,7 +294,11 @@
 							<div class="xia clearfix">
 								<ul>
 									<li><a href="friend-link.html">友情链接</a></li>
+<<<<<<< HEAD
 									
+=======
+									<li><a href="ysjrz.html">艺术家入驻</a></li>
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 								</ul>
 							</div>
 						</div>
