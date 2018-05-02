@@ -138,15 +138,20 @@ public class UserServiceImplLogin implements UserServiceLogin {
 	}
     //退出登录
 	public ArtResult outLogin(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("我进推出方法了");
-		System.out.println(request.getRequestURI());
-		CookieUtils.setCookie(request, response, "TT_TOKEN", null);
-		CookieUtils.setCookie(request, response, "TT_TOKEN", "dad");
-		CookieUtils.setCookie(request, response, "TT_TOK", "aa ");
-		CookieUtils.deleteCookie(request, response, "TT_TOK");
-		System.out.println("执行完毕");
-		System.out.println(ArtResult.ok(new User()).toString());
-		return ArtResult.ok(new User());
+		try {
+			System.out.println("我进推出方法了");
+			System.out.println(request.getRequestURI());
+			CookieUtils.setCookie(request, response, "TT_TOKEN", null);
+			CookieUtils.setCookie(request, response, "TT_TOKEN", "dad");
+			CookieUtils.setCookie(request, response, "TT_TOK", "aa ");
+			CookieUtils.deleteCookie(request, response, "TT_TOK");
+			System.out.println("执行完毕");
+			System.out.println(ArtResult.ok(new User()).toString());
+			return ArtResult.ok(new User());
+			
+		}finally {
+			System.out.println(ArtResult.ok(new User()));
+		}
 		
 	}
 }
