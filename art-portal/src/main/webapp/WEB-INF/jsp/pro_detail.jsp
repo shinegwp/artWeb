@@ -54,7 +54,7 @@
 						</div>
 						<div class="shopcar-btn clearfix fl">
 							<a href="cartShow" class="box-s">
-								购物车（0）
+								购物车
 							</a>
 						</div>
 						<div class="fenxiang clearfix fl">

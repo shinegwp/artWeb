@@ -30,7 +30,11 @@
 		<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.js"></script>
    <script>
+<<<<<<< HEAD
    	var pageConfig  = {};
+=======
+  
+>>>>>>> a8c3cef13f5641b18ef29e2cd8782c7fd35ceec3
    </script>
 <body>
 		<!--header star-->
@@ -38,19 +42,31 @@
 			<div class="top clearfix">
 				<div class="topctent clearfix">
 					<div class="left clearfix fl">
+<<<<<<< HEAD
 						公告：您好，欢迎访问酱油文化艺术品商城
+=======
+						公告：您好，欢迎登录北京椿龄文化发展有限公司
+>>>>>>> a8c3cef13f5641b18ef29e2cd8782c7fd35ceec3
 					</div>
 					<div class="right clearfix fr">
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl">
 								<li>
 									<span class="fl">欢迎</span>
+<<<<<<< HEAD
 									<a href="grxx.html" class="fl">Rg</a>
+=======
+									<a href="grxx.html" class="fl">瑾晨0212</a>
+>>>>>>> a8c3cef13f5641b18ef29e2cd8782c7fd35ceec3
 									<span class="fl">进入商城</span>
 								</li>
 								<li>
 									<a href="register.html">
+<<<<<<< HEAD
 										
+=======
+										免费注册
+>>>>>>> a8c3cef13f5641b18ef29e2cd8782c7fd35ceec3
 									</a>
 								</li>
 							
@@ -58,7 +74,11 @@
 						</div>
 						<div class="shopcar-btn clearfix fl">
 							<a href="#" class="box-s">
+<<<<<<< HEAD
 								购物车
+=======
+								购物车（0）
+>>>>>>> a8c3cef13f5641b18ef29e2cd8782c7fd35ceec3
 							</a>
 						</div>
 						<div class="fenxiang clearfix fl">
@@ -114,7 +134,10 @@
         <div class="column t-checkbox form"></div>
         <div class="column t-goods">商品</div>
         <div class="column t-price">淘淘价</div>
+<<<<<<< HEAD
         <div class="column t-promotion">优惠</div>
+=======
+>>>>>>> a8c3cef13f5641b18ef29e2cd8782c7fd35ceec3
         <div class="column t-inventory">库存</div>
         <div class="column t-quantity">数量</div>
         <div class="column t-action">操作</div>
@@ -156,12 +179,82 @@
         </c:forEach>
         
     </div><!-- product-list结束 -->
+<<<<<<< HEAD
           <div class="cart-toolbar clearfix">
             <div class="total fr">
                 <p><span class="totalSkuPrice">¥<fmt:formatNumber value="${totalPrice}" maxFractionDigits="2" minFractionDigits="2" groupingUsed="true"/></span>总计：</p>
                 <p><span id="totalRePrice">- ¥0.00</span>优惠：</p>
             </div>
             <div class="amout fr"><span id="selectedCount">1</span> 件商品</div>
+=======
+    <!--Main-wrap-->
+		<div class="main-wrap graybg pt40 pb40">
+			<div class="js-box wrapper white-box">
+				<!--收货人信息-->
+				<div class="consignee-info">
+					<div class="title line-bot"><span class="fs18 pl20 ml40 darkgray">收货人地址</span></div>
+					<div class="consignee-box clearfix">
+						<div class="consignee-block check-box check_on  radius5" id="div0">
+							<em></em>
+							<p class="fs14 lh40 clearfix">
+								<span class="fl darkgray" id="sname0"><i class="iconfont fs24">&#xe60e;</i>飞天猪</span>
+								<input id="hsname0" type="hidden" value="">
+								<a id = "bj0" href="javascript:" class="fr green edit alertbox" onclick="$.xiugai($(this));" val=""><i class="iconfont fs24 green ">&#xe60f;</i>编辑</a>
+							</p>
+							<input type="hidden" id="hte0" value="qqq">
+							<input type="hidden" id="hidco0" value="hid">
+							<p class="fs14 darkgray lh40" id="stel0"><i class="iconfont fs24">&#xe60c;</i>18056000000
+								</>
+							
+							
+								<p class="fs14 darkgray lh30 clearfix">
+									<i class="fl iconfont fs24">&#xe610;</i><span class="fl address" id="addressDetail0">合肥市蜀山区长江西路100号拓基城市广场  金座A2002</span>
+								</p>
+						</div>
+						<div class="consignee-block check-box radius5" id="div1">
+							<em></em>
+							<p class="fs14 lh40 clearfix">
+								<span class="fl darkgray" id="sname1"> <i class="iconfont fs24">&#xe60e;</i>飞天猪</span>
+								<input id="hsname1" type="hidden" value="">
+								<a id = "bj1" href="javascript:" class="fr green edit alertbox" onclick="$.xiugai($(this));" val=""><i class="iconfont fs24 green">&#xe60f;</i>编辑</a>
+							</p>
+							<input type="hidden" id="hte1" value="qqq">
+							<input type="hidden" id="hidco1" value="hid">
+							<p class="fs14 darkgray lh40" id="stel1"><i class="iconfont fs24">&#xe60c;</i>18056000000
+								</>
+								
+								
+								<p class="fs14 darkgray lh30 clearfix">
+									<i class="fl iconfont fs24">&#xe610;</i><span class="fl address" id="addressDetail1">合肥市蜀山区长江西路100号拓基城市广场  金座A2002</span>
+								</p>
+						</div>
+						<div class="consignee-block check-box radius5" id="div2">
+							<em></em>
+							<p class="fs14 lh40 clearfix">
+								<span class="fl darkgray" id="sname2"> <i class="iconfont fs24">&#xe60e;</i>飞天猪</span>
+								<input id="hsname2" type="hidden" value="">
+								<a id = "bj2" href="javascript:" class="fr green edit alertbox" onclick="$.xiugai($(this));" val=""><i class="iconfont fs24 green">&#xe60f;</i>编辑</a>
+							</p>
+							<input type="hidden" id="hte2" value="qqq">
+							<input type="hidden" id="hidco2" value="hid">
+							<p class="fs14 darkgray lh40" id="stel2"><i class="iconfont fs24">&#xe60c;</i>18056000000
+								</>
+								
+								
+								<p class="fs14 darkgray lh30 clearfix">
+									<i class="fl iconfont fs24">&#xe610;</i><span class="fl address" id="addressDetail2">合肥市蜀山区长江西路100号拓基城市广场  金座A2002</span>
+								</p>
+						</div>
+						
+					</div>
+				</div>
+				<!--/end-->
+          <div class="cart-toolbar clearfix">
+            <div class="total fr">
+                <p><span class="totalSkuPrice">¥<fmt:formatNumber value="${totalPrice}" maxFractionDigits="2" minFractionDigits="2" groupingUsed="true"/></span>总计：</p>
+                
+            </div>
+>>>>>>> a8c3cef13f5641b18ef29e2cd8782c7fd35ceec3
         </div>
         <div class="ui-ceilinglamp-1" style="width: 988px; height: 49px;"><div class="cart-dibu ui-ceilinglamp-current" style="width: 988px; height: 49px;">
           <div class="control fdibu fdibucurrent">
@@ -177,10 +270,19 @@
                   <a href="/" target="_blank" clstag="clickcart|keycount|xincart|coudanlink" id="continue">继续购物</a>
               </span>
           </div>
+<<<<<<< HEAD
           <div class="cart-total-2014">
               <div class="cart-button">
                   <span class="check-comm-btns" id="checkout-jd">
                       <a class="checkout fr orange-but fs20 radius3" href="jiesuan.html" clstag="clickcart|keycount|xincart|gotoOrderInfo" id="toSettlement">去结算<b></b></a>
+=======
+          
+          
+          <div class="cart-total-2014">
+              <div class="cart-button">
+                  <span class="check-comm-btns" id="checkout-jd">
+                      <a class="checkout fr orange-but fs20 radius3" href="jiesuan" id="toSettlement">去结算<b></b></a>
+>>>>>>> a8c3cef13f5641b18ef29e2cd8782c7fd35ceec3
                   </span>
                
               </div> 
@@ -191,6 +293,10 @@
           </div>
       </div></div>
 </div><!-- cart-inner结束 -->
+<<<<<<< HEAD
+=======
+
+>>>>>>> a8c3cef13f5641b18ef29e2cd8782c7fd35ceec3
 </div>
 </div>
 <!--推荐位html修改处-->

@@ -23,36 +23,48 @@
 	<!-- Dubbo提供方 -->
 	<!-- 名称  计算机 区别 唯一 -->
 	<dubbo:application name="art-service-buyer"/>
+<<<<<<< HEAD
 	<dubbo:registry address="N/A"/>
 	<!--dubbo://192.168.39.80:20880  默认  设置提供服务的端口号 -->
 	<dubbo:protocol port="20880" name="dubbo"/>
 	<!-- 暴露实现类-->
 	<dubbo:service interface="com.art.service.CollectionService" ref="collectionService"/>
+=======
+	<!-- 2：设置注册中心  地址  zookeeper在哪里  redis ... -->
+	<!-- <dubbo:registry address="192.168.200.128:2181,192.168.200.129:2181,192.168.200.130:2181" protocol="zookeeper"/>  -->
+	<!-- <dubbo:registry address="192.168.200.128:2181" protocol="zookeeper"/> -->
+	<!--<dubbo:registry address="N/A"/>-->
+	<!-- 3：dubbo://192.168.39.80:20880  默认  设置提供服务的端口号 -->
+	<dubbo:protocol port="20880" name="dubbo"/>
+	
+	<!-- 4： 暴露实现类-->
+	<dubbo:service interface="com.art.service.CollectionService" ref="collectionService" registry="N/A"/>
+>>>>>>> a8c3cef13f5641b18ef29e2cd8782c7fd35ceec3
 	<bean id="collectionService" class="com.art.service.impl.CollectionServiceImpl" />  
-	<dubbo:service interface="com.art.service.ItemCatService" ref="itemCatService"/>
+	<dubbo:service interface="com.art.service.ItemCatService" ref="itemCatService" registry="N/A"/>
 	<bean id="itemCatService" class="com.art.service.impl.ItemCatServiceImpl" /> 
-	<dubbo:service interface="com.art.service.ItemImg1Service" ref="itemImg1Service"/>
+	<dubbo:service interface="com.art.service.ItemImg1Service" ref="itemImg1Service" registry="N/A"/>
 	<bean id="itemImg1Service" class="com.art.service.impl.ItemImg1ServiceImpl" /> 
-	<dubbo:service interface="com.art.service.ItemImg2Service" ref="itemImg2Service"/>
+	<dubbo:service interface="com.art.service.ItemImg2Service" ref="itemImg2Service" registry="N/A"/>
 	<bean id="itemImg2Service" class="com.art.service.impl.ItemImg2ServiceImpl" /> 
-	<dubbo:service interface="com.art.service.ItemService" ref="itemService"/>
+	<dubbo:service interface="com.art.service.ItemService" ref="itemService" registry="N/A"/>
 	<bean id="itemService" class="com.art.service.impl.ItemServiceImpl" /> 
-	<dubbo:service interface="com.art.service.LetterService" ref="letterService"/>
+	<dubbo:service interface="com.art.service.LetterService" ref="letterService" registry="N/A"/>
 	<bean id="letterService" class="com.art.service.impl.LetterServiceImpl" /> 
-	<dubbo:service interface="com.art.service.OrderFormService" ref="orderFormService"/>
+	<dubbo:service interface="com.art.service.OrderFormService" ref="orderFormService" registry="N/A"/>
 	<bean id="orderFormService" class="com.art.service.impl.OrderFormServiceImpl" /> 
-	<dubbo:service interface="com.art.service.ProfessorService" ref="professorService"/>
+	<dubbo:service interface="com.art.service.ProfessorService" ref="professorService" registry="N/A"/>
 	<bean id="professorService" class="com.art.service.impl.ProfessorServiceImpl" /> 
-	<dubbo:service interface="com.art.service.ReferService" ref="referService"/>
+	<dubbo:service interface="com.art.service.ReferService" ref="referService" registry="N/A"/>
 	<bean id="referService" class="com.art.service.impl.ReferServiceImpl" /> 
-	<dubbo:service interface="com.art.service.SaleAfterService" ref="saleAfterService"/>
+	<dubbo:service interface="com.art.service.SaleAfterService" ref="saleAfterService" registry="N/A"/>
 	<bean id="saleAfterService" class="com.art.service.impl.SaleAfterServiceImpl" /> 
-	<dubbo:service interface="com.art.service.ShippingAddressService" ref="shippingAddressService"/>
+	<dubbo:service interface="com.art.service.ShippingAddressService" ref="shippingAddressService" registry="N/A"/>
 	<bean id="shippingAddressService" class="com.art.service.impl.ShippingAddressServiceImpl" /> 
-	<dubbo:service interface="com.art.service.TbItemParamItemService" ref="tbItemParamItemService"/>
+	<dubbo:service interface="com.art.service.TbItemParamItemService" ref="tbItemParamItemService" registry="N/A"/>
 	<bean id="tbItemParamItemService" class="com.art.service.impl.TbItemParamItemServiceImpl" /> 
-	<dubbo:service interface="com.art.service.TradeLogService" ref="tradeLogService"/>
+	<dubbo:service interface="com.art.service.TradeLogService" ref="tradeLogService" registry="N/A"/>
 	<bean id="tradeLogService" class="com.art.service.impl.TradeLogServiceImpl" /> 
-	<dubbo:service interface="com.art.service.UserService" ref="userService"/>
+	<dubbo:service interface="com.art.service.UserService" ref="userService" registry="N/A"/>
 	<bean id="userService" class="com.art.service.impl.UserServiceImpl" /> 
 </beans>

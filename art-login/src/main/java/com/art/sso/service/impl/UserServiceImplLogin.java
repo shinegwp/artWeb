@@ -2,6 +2,8 @@ package com.art.sso.service.impl;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -96,6 +98,7 @@ public class UserServiceImplLogin implements UserServiceLogin {
 		}
 		User user = list.get(0);
 		//比对密码
+		System.out.println(user.getBirthday());
 		if (!DigestUtils.md5DigestAsHex(upassword.getBytes()).equals(user.getUpassword())) {
 			System.out.println("密码错误");
 			return ArtResult.build(400, "用户名或密码错误");
@@ -134,17 +137,17 @@ public class UserServiceImplLogin implements UserServiceLogin {
 		//更新过期时间
 		jedisClient.expire("REDIS_USER_SESSION:" + token, 180);
 		//返回用户信息
-		return ArtResult.ok(JsonUtils.jsonToPojo(json, User.class));
+		if (JsonUtils.jsonToPojo(json, User.class).getBirthday()!=null) {
+			return ArtResult.ok(JsonUtils.jsonToPojo(json, User.class),(new SimpleDateFormat("yyyy-MM-dd").format(JsonUtils.jsonToPojo(json, User.class).getBirthday())));
+		}
+		return ArtResult.ok(JsonUtils.jsonToPojo(json, User.class),"");
 	}
     //退出登录
 	public ArtResult outLogin(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			System.out.println("我进推出方法了");
 			System.out.println(request.getRequestURI());
-			CookieUtils.setCookie(request, response, "TT_TOKEN", null);
-			CookieUtils.setCookie(request, response, "TT_TOKEN", "dad");
-			CookieUtils.setCookie(request, response, "TT_TOK", "aa ");
-			CookieUtils.deleteCookie(request, response, "TT_TOK");
+			CookieUtils.deleteCookie(request, response, "TT_TOKEN");
 			System.out.println("执行完毕");
 			System.out.println(ArtResult.ok(new User()).toString());
 			return ArtResult.ok(new User());
