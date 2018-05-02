@@ -75,5 +75,13 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 		//返回结果
 		return ArtResult.ok(contentCategory);
 	}
+	public ArtContentCategory selectById(long parentId) {
+		ArtContentCategory acc = contentCategoryMapper.selectByPrimaryKey(parentId);
+		return acc;
+	}
+	public int updateNameById(ArtContentCategory acc) {
+		contentCategoryMapper.updateByPrimaryKey(acc);
+		return 1;
+	}
 
 }

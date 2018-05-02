@@ -23,7 +23,8 @@ public class SearchController {
 	@ResponseBody
 	public ArtResult search(@RequestParam("q")String queryString, 
 			@RequestParam(defaultValue="1")Integer page, 
-			@RequestParam(defaultValue="12")Integer rows) {
+			@RequestParam(defaultValue="9")Integer rows) {
+		System.out.println("开始进入查询");
 		//查询条件不能为空
 		if (StringUtils.isBlank(queryString)) {
 			return ArtResult.build(400, "查询条件不能为空");

@@ -38,7 +38,7 @@ $(function(){
         			}
         		});
         	}else{
-        		$.post("/content/category/update",{id:node.id,name:node.text});
+        		$.post("contentcategoryupdate",{id:node.id,name:node.text});
         	}
         }
 	});

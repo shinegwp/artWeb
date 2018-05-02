@@ -13,6 +13,14 @@ public class SearchResult {
 		//当前页
 		private long curPage;
 		
+		private String queryString;
+		
+		public String getQueryString() {
+			return queryString;
+		}
+		public void setQueryString(String queryString) {
+			this.queryString = queryString;
+		}
 		public List<Solr_Item> getItemList() {
 			return itemList;
 		}
