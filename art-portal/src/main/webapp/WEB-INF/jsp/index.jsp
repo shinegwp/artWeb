@@ -39,7 +39,15 @@
 								
 							</ul>
 						</div>						
+<<<<<<< HEAD
+						<div class="shopcar-btn clearfix fl">
+							<a href="cartShow" class="box-s">
+								购物车
+							</a>
+						</div>
+=======
 						
+>>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
 					
 					</div>					
 				</div>
@@ -49,8 +57,10 @@
 					<a href="index.html"></a>
 				</div>
 				<div class="search clearfix fr ra5">
-					<input type="text" class="fl" name="" id="" value="" placeholder="请输入您要搜索的内容" />
-					<input type="button" name="" id="" value="搜索" class="fl box-s" />
+				<form id="form1" name="f1" action="search" method="post">
+					<input type="text" class="fl" name="q" placeholder="请输入您要搜索的内容" />
+					<input type="submit" value="搜索" class="fl box-s" />
+				</form>
 				</div>
 			</div>
 		</div>

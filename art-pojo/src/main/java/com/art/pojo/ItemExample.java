@@ -1,18 +1,12 @@
 package com.art.pojo;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class ItemExample implements Serializable{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	protected String orderByClause;
+public class ItemExample {
+    protected String orderByClause;
 
     protected boolean distinct;
 
@@ -708,66 +702,6 @@ public class ItemExample implements Serializable{
             return (Criteria) this;
         }
 
-        public Criteria andOwnerIdIsNull() {
-            addCriterion("owner_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOwnerIdIsNotNull() {
-            addCriterion("owner_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOwnerIdEqualTo(Integer value) {
-            addCriterion("owner_id =", value, "ownerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOwnerIdNotEqualTo(Integer value) {
-            addCriterion("owner_id <>", value, "ownerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOwnerIdGreaterThan(Integer value) {
-            addCriterion("owner_id >", value, "ownerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOwnerIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("owner_id >=", value, "ownerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOwnerIdLessThan(Integer value) {
-            addCriterion("owner_id <", value, "ownerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOwnerIdLessThanOrEqualTo(Integer value) {
-            addCriterion("owner_id <=", value, "ownerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOwnerIdIn(List<Integer> values) {
-            addCriterion("owner_id in", values, "ownerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOwnerIdNotIn(List<Integer> values) {
-            addCriterion("owner_id not in", values, "ownerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOwnerIdBetween(Integer value1, Integer value2) {
-            addCriterion("owner_id between", value1, value2, "ownerId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOwnerIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("owner_id not between", value1, value2, "ownerId");
-            return (Criteria) this;
-        }
-
         public Criteria andImgAddressIsNull() {
             addCriterion("img_address is null");
             return (Criteria) this;
@@ -905,76 +839,6 @@ public class ItemExample implements Serializable{
 
         public Criteria andDescriptionNotBetween(String value1, String value2) {
             addCriterion("description not between", value1, value2, "description");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowIsNull() {
-            addCriterion("fist_show is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowIsNotNull() {
-            addCriterion("fist_show is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowEqualTo(String value) {
-            addCriterion("fist_show =", value, "fistShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowNotEqualTo(String value) {
-            addCriterion("fist_show <>", value, "fistShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowGreaterThan(String value) {
-            addCriterion("fist_show >", value, "fistShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowGreaterThanOrEqualTo(String value) {
-            addCriterion("fist_show >=", value, "fistShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowLessThan(String value) {
-            addCriterion("fist_show <", value, "fistShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowLessThanOrEqualTo(String value) {
-            addCriterion("fist_show <=", value, "fistShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowLike(String value) {
-            addCriterion("fist_show like", value, "fistShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowNotLike(String value) {
-            addCriterion("fist_show not like", value, "fistShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowIn(List<String> values) {
-            addCriterion("fist_show in", values, "fistShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowNotIn(List<String> values) {
-            addCriterion("fist_show not in", values, "fistShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowBetween(String value1, String value2) {
-            addCriterion("fist_show between", value1, value2, "fistShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andFistShowNotBetween(String value1, String value2) {
-            addCriterion("fist_show not between", value1, value2, "fistShow");
             return (Criteria) this;
         }
 

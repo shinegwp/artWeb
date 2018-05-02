@@ -11,10 +11,8 @@
     <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="created" property="created" jdbcType="DATE" />
     <result column="updated" property="updated" jdbcType="DATE" />
-    <result column="owner_id" property="ownerId" jdbcType="INTEGER" />
     <result column="img_address" property="imgAddress" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="fist_show" property="fistShow" jdbcType="VARCHAR" />
     <result column="like_count" property="likeCount" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -76,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, title, status, cid, pname, sales_volume, price, created, updated, owner_id, img_address, 
-    description, fist_show, like_count
+    id, title, status, cid, pname, sales_volume, price, created, updated, img_address, 
+    description, like_count
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.art.pojo.ItemExample" >
     select
@@ -113,13 +111,13 @@
     insert into item (id, title, status, 
       cid, pname, sales_volume, 
       price, created, updated, 
-      owner_id, img_address, description, 
-      fist_show, like_count)
+      img_address, description, like_count
+      )
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
       #{cid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{salesVolume,jdbcType=VARCHAR}, 
       #{price,jdbcType=DECIMAL}, #{created,jdbcType=DATE}, #{updated,jdbcType=DATE}, 
-      #{ownerId,jdbcType=INTEGER}, #{imgAddress,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{fistShow,jdbcType=VARCHAR}, #{likeCount,jdbcType=INTEGER})
+      #{imgAddress,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{likeCount,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.art.pojo.Item" >
     insert into item
@@ -151,17 +149,11 @@
       <if test="updated != null" >
         updated,
       </if>
-      <if test="ownerId != null" >
-        owner_id,
-      </if>
       <if test="imgAddress != null" >
         img_address,
       </if>
       <if test="description != null" >
         description,
-      </if>
-      <if test="fistShow != null" >
-        fist_show,
       </if>
       <if test="likeCount != null" >
         like_count,
@@ -195,17 +187,11 @@
       <if test="updated != null" >
         #{updated,jdbcType=DATE},
       </if>
-      <if test="ownerId != null" >
-        #{ownerId,jdbcType=INTEGER},
-      </if>
       <if test="imgAddress != null" >
         #{imgAddress,jdbcType=VARCHAR},
       </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="fistShow != null" >
-        #{fistShow,jdbcType=VARCHAR},
       </if>
       <if test="likeCount != null" >
         #{likeCount,jdbcType=INTEGER},
@@ -248,17 +234,11 @@
       <if test="record.updated != null" >
         updated = #{record.updated,jdbcType=DATE},
       </if>
-      <if test="record.ownerId != null" >
-        owner_id = #{record.ownerId,jdbcType=INTEGER},
-      </if>
       <if test="record.imgAddress != null" >
         img_address = #{record.imgAddress,jdbcType=VARCHAR},
       </if>
       <if test="record.description != null" >
         description = #{record.description,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fistShow != null" >
-        fist_show = #{record.fistShow,jdbcType=VARCHAR},
       </if>
       <if test="record.likeCount != null" >
         like_count = #{record.likeCount,jdbcType=INTEGER},
@@ -279,10 +259,8 @@
       price = #{record.price,jdbcType=DECIMAL},
       created = #{record.created,jdbcType=DATE},
       updated = #{record.updated,jdbcType=DATE},
-      owner_id = #{record.ownerId,jdbcType=INTEGER},
       img_address = #{record.imgAddress,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
-      fist_show = #{record.fistShow,jdbcType=VARCHAR},
       like_count = #{record.likeCount,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -315,17 +293,11 @@
       <if test="updated != null" >
         updated = #{updated,jdbcType=DATE},
       </if>
-      <if test="ownerId != null" >
-        owner_id = #{ownerId,jdbcType=INTEGER},
-      </if>
       <if test="imgAddress != null" >
         img_address = #{imgAddress,jdbcType=VARCHAR},
       </if>
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="fistShow != null" >
-        fist_show = #{fistShow,jdbcType=VARCHAR},
       </if>
       <if test="likeCount != null" >
         like_count = #{likeCount,jdbcType=INTEGER},
@@ -343,10 +315,8 @@
       price = #{price,jdbcType=DECIMAL},
       created = #{created,jdbcType=DATE},
       updated = #{updated,jdbcType=DATE},
-      owner_id = #{ownerId,jdbcType=INTEGER},
       img_address = #{imgAddress,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      fist_show = #{fistShow,jdbcType=VARCHAR},
       like_count = #{likeCount,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

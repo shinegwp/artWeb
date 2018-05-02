@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.art.pojo.ArtContentCategory;
 import com.art.service.ContentCategoryService;
 import com.art.util.EUTreeNode;
 import com.art.util.ArtResult;
@@ -41,5 +42,15 @@ public class ContentCategoryController {
 	public ArtResult createContentCategory(Long parentId, String name) {
 		ArtResult result = contentCategoryService.insertContentCategory(parentId, name);
 		return result;
+	}
+	
+	@RequestMapping("contentcategoryupdate")
+	@ResponseBody
+	public String updateContentCategory(Long id, String name) {
+		System.out.println("nb"+id);
+		ArtContentCategory acc = contentCategoryService.selectById(id);
+		acc.setName(name);
+		contentCategoryService.updateNameById(acc);
+		return "content-category";
 	}
 }

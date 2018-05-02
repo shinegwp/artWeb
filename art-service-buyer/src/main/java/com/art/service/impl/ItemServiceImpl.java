@@ -61,33 +61,33 @@ public class ItemServiceImpl implements ItemService {
           
 		return list;
 	}
-	public List<Item> getFirstShowItemsByPage(int pageno,String firstshow) {
-		ItemExample example = new ItemExample();
-		PageHelper.startPage(pageno, 9);
-		Criteria criteria = example.createCriteria();
-		criteria.andFistShowEqualTo(firstshow);
-		List<Item> list = itemMapper.selectByExample(example );
+//	public List<Item> getFirstShowItemsByPage(int pageno,String firstshow) {
+//		ItemExample example = new ItemExample();
+//		PageHelper.startPage(pageno, 9);
+//		Criteria criteria = example.createCriteria();
+//		criteria.andFistShowEqualTo(firstshow);
+//		List<Item> list = itemMapper.selectByExample(example );
+//	
+//		return list;
+//
+//	}
+//	public Integer getFirstShowItemsNumber(String firstshow) {
+//		ItemExample example = new ItemExample();
+//		Criteria criteria = example.createCriteria();
+//		criteria.andFistShowEqualTo(firstshow);
+//		List<Item> list = itemMapper.selectByExample(example );
+//		
+//		return list.size();
+//
+//	}
 	
-		return list;
-
-	}
-	public Integer getFirstShowItemsNumber(String firstshow) {
-		ItemExample example = new ItemExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andFistShowEqualTo(firstshow);
-		List<Item> list = itemMapper.selectByExample(example );
-		
-		return list.size();
-
-	}
-	
-	public List<Item> getFirstShowItemsByFirstShow(String firstshow) {
-		ItemExample example = new ItemExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andFistShowEqualTo(firstshow);
-		List<Item> list = itemMapper.selectByExample(example);
-		return list;
-	}
+//	public List<Item> getFirstShowItemsByFirstShow(String firstshow) {
+//		ItemExample example = new ItemExample();
+//		Criteria criteria = example.createCriteria();
+//		criteria.andFistShowEqualTo(firstshow);
+//		List<Item> list = itemMapper.selectByExample(example);
+//		return list;
+//	}
 	
 	
 	public int InstockItem(Integer id) {
@@ -207,26 +207,25 @@ public EUDataGridResult getItemByParentIdOrderByCreated(Integer parentId, Intege
 	}
 
 
-public EUDataGridResult getItemByOwenId(Integer uid, Integer page, Integer rows) {
-	ItemExample example = new ItemExample();
-	Criteria criteria = example.createCriteria();
-	criteria.andOwnerIdEqualTo(uid);
-	PageHelper.startPage(page, rows); 
-	List<Item> olist = itemMapper.selectByExample(example);//.selectByExample(example);
-	SimpleDateFormat simpledate = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
-	List<String> list = new ArrayList<String>();
-	for(Item of:olist)
-	{
-		list.add(simpledate.format(of.getCreated()));
-	}
-	 PageInfo<Item> p=new PageInfo<Item>(olist);
-	 EUDataGridResult result = new EUDataGridResult();
-	 result.setRows(olist);
-	 result.setPageinfo(p);
-	 result.setTime(list);
-	 System.out.println(result);
-	return result;
-}
+//public EUDataGridResult getItemByOwenId(Integer uid, Integer page, Integer rows) {
+//	ItemExample example = new ItemExample();
+//	Criteria criteria = example.createCriteria();
+//	PageHelper.startPage(page, rows); 
+//	List<Item> olist = itemMapper.selectByExample(example);//.selectByExample(example);
+//	SimpleDateFormat simpledate = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+//	List<String> list = new ArrayList<String>();
+//	for(Item of:olist)
+//	{
+//		list.add(simpledate.format(of.getCreated()));
+//	}
+//	 PageInfo<Item> p=new PageInfo<Item>(olist);
+//	 EUDataGridResult result = new EUDataGridResult();
+//	 result.setRows(olist);
+//	 result.setPageinfo(p);
+//	 result.setTime(list);
+//	 System.out.println(result);
+//	return result;
+//}
 
 //****************************************************************************************************8888
 
@@ -273,5 +272,29 @@ public int ReshelfItem(Integer id) {
 public int deleteItemById(Integer id) {
 	// TODO Auto-generated method stub
 	return 0;
+}
+
+
+public List<Item> getFirstShowItemsByPage(int pageno, String firstshow) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+public Integer getFirstShowItemsNumber(String firstshow) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+public List<Item> getFirstShowItemsByFirstShow(String firstshow) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+public EUDataGridResult getItemByOwenId(Integer uid, Integer page, Integer rows) {
+	// TODO Auto-generated method stub
+	return null;
 }
 }

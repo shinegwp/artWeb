@@ -3,11 +3,14 @@ package com.art.service;
 import java.util.List;
 
 import com.art.util.EUTreeNode;
+import com.art.pojo.ArtContentCategory;
 import com.art.util.ArtResult;
 
 
 public interface ContentCategoryService {
 
-	List<EUTreeNode> getCategoryList(long parentId);
+	ArtContentCategory selectById(long parentId);
+	List<EUTreeNode> getCategoryList(long id);
 	ArtResult insertContentCategory(long parentId, String name);
+	int updateNameById(ArtContentCategory acc);
 }
