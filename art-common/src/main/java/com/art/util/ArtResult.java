@@ -32,7 +32,18 @@ public class ArtResult implements Serializable{
     
     private Object data;
     
-  
+    public String getBirthday() {
+		return birthday;
+	}
+
+
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+
+	private String birthday;
 
     @Override
    	public String toString() {
@@ -50,6 +61,9 @@ public class ArtResult implements Serializable{
 
 	public static ArtResult ok(Object data) {
         return new ArtResult(data);
+    }
+	public static ArtResult ok(Object data, String s) {
+        return new ArtResult(data, s);
     }
 
     public static ArtResult ok() {
@@ -74,6 +88,12 @@ public class ArtResult implements Serializable{
         this.status = 200;
         this.msg = "OK";
         this.data = data;
+    }
+    public ArtResult(Object data, String s) {
+        this.status = 200;
+        this.msg = "OK";
+        this.data = data;
+        this.birthday = s;
     }
 
 
