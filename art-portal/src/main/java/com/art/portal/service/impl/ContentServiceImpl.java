@@ -32,10 +32,10 @@ public class ContentServiceImpl implements ContentService {
 	@Value("${REST_INDEX_AD_URL}")
 	private String REST_INDEX_AD_URL;
 	public String getContentList(int categoryId) {
-		System.out.println("categoryId="+categoryId);
+		System.out.println("categoryId="+REST_BASE_URL + REST_INDEX_AD_URL+categoryId);
 		//调用服务层的服务
 		String result = HttpClientUtil.doGet(REST_BASE_URL + REST_INDEX_AD_URL+categoryId);
-		System.out.println(result );
+		System.out.println(result);
 		//把字符串转换成ArtResult
 		try {
 			ArtResult artResult = ArtResult.formatToList(result, ArtContent.class);
