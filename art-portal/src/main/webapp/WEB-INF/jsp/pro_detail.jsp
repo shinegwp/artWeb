@@ -30,26 +30,12 @@
 			<div class="top clearfix">
 				<div class="topctent clearfix">
 					<div class="left clearfix fl">
-						公告：您好，欢迎登录北京椿龄文化发展有限公司
+						公告：您好，欢迎访问酱油文化艺术品商城
 					</div>
 					<div class="right clearfix fr">
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
-								<li>
-									<span class="fl">欢迎</span>
-									<a href="grxx" class="fl">瑾晨0212</a>
-									<span class="fl">进入商城</span>
-								</li>
-								<li>
-									<a href="register">
-										免费注册
-									</a>
-								</li>
-								<li>
-									<a href="settled">
-										艺术家入驻
-									</a>
-								</li>
+								
 							</ul>
 						</div>
 						<div class="shopcar-btn clearfix fl">
@@ -57,20 +43,7 @@
 								购物车
 							</a>
 						</div>
-						<div class="fenxiang clearfix fl">
-							<span class="fl">分享到：</span>
-							<ul class="clearfix fl">
-								<li>
-									<a href="#"><img src="img/sina.png" /></a>
-								</li>
-								<li>
-									<a href="#"><img src="img/qq.png" /></a>
-								</li>
-								<li>
-									<a href="#"><img src="img/wechat.png" /></a>
-								</li>
-							</ul>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -88,8 +61,7 @@ var id;
 var img;
 var title;
 var price;
-var a = $.cookie("user");
-var user=eval('('+a+')');
+var user;
 $(function()
 		{
 	 $.displayUserName();
@@ -131,6 +103,67 @@ $(function()
    $.alllike();
 });
 
+$.displayUserName = function()//如果登陆了展示退出和欢迎
+{
+	var _ticket = $.cookie("TT_TOKEN");
+	if (!_ticket) {
+		$("#displayName")
+				.html(
+						"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+	}
+	$
+			.ajax({
+				url : "http://sso.jiangyou-art.com/userLogin/token/"
+						+ _ticket,
+
+				dataType : "jsonp",
+				type : "GET",
+				success : function(data) {
+					if (data.status == 200) {
+						user = data.data;
+						var uname = data.data.uname;
+						var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
+								+ uname
+								+ "</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
+						$("#displayName").html(html);
+					}
+				}
+			});
+}
+$.grxx=function()//当点击个人中心时判断是否已登录
+{  
+	
+	 window.location.href="grxx";
+	  
+}
+
+$.outLogin=function()
+{
+	 $.ajax({
+		  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
+		  dataType : "jsonp",
+		  type:"GET",
+		  
+		  success: function(data)
+		  
+		  { if(data.msg=="OK")
+			  {
+			  alert("成功退出！");
+			  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+			  }
+		  else
+			  {
+			  alert("操作有误");
+			  }
+		  },
+		  error:function()
+		  {
+			  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+             
+		  }
+		  
+		});
+}
 $.wdzx=function()
 { var text = $("#zx").val();
 	$.ajax(
@@ -157,43 +190,7 @@ $.wdzx=function()
 			});
 	}
 
-$.displayUserName=function()//如果登陆了展示退出和欢迎
-{
-	if($.cookie("user")!=null)
 
-     {
-		
-		$("#displayName").html("<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+user.uname+
-				"</a>进入商场</li><li><a href='register' >免费注册</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.tuichu()'>退出</a></li>")
-     }
-	else
-	{
-	$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='sign' class='f1'>登陆</a></li><li><a href='register' >免费注册</a></li>")
-	}
-}
-$.tuichu=function()
-{
-	 $.ajax({
-		  url: "tuichu",
-		  type:"post",
-		  success: function(data)
-		  { if(data=="successful")
-			  {
-			  alert("成功退出！");
-			  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='sign' class='f1'>登陆</a></li><li><a href='register' >免费注册</a></li>")
-			  }
-		  else
-			  {
-			  alert("操作有误");
-			  }
-		  },
-		  error:function()
-		  {
-			  alert("error");
-		  }
-		  
-		});
-}
 
 </script>
 <script type="text/javascript">
@@ -272,24 +269,7 @@ else
 	}
 </script>
 		<!--navbar star-->
-		<div class="navbar clearfix">
-			<div class="content clearfix">
-				<ul>
-					<li class="cur">
-						<a href="index">首页</a>
-					</li>
-					<li>
-						<a href="special">专场</a>
-					</li>
-					<li>
-						<a href="mall">商城</a>
-					</li>
-					<li>
-						<a href="artist">艺术家</a>
-					</li>
-				</ul>
-			</div>
-		</div>
+		
 		<!--navbar end-->
 		<!--Main-wrap-->
 		<div class="main-wrap graybgtwo pt40 pb40">
@@ -464,86 +444,9 @@ else
 						</div>
 					</div>
 				</div>
-				<div class="bottom clearfix">
-					<div class="left clearfix fl">
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>新手指南</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="scgmlc.html">商城购买流程</a></li>
-									<li><a href="cjwt.html">常见问题</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>账户管理</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="zhcz.html">账户充值</a></li>
-									<li><a href="zhtx.html">账户提现</a></li>
-									<li><a href="zffs.html">支付方式</a></li>
-								</ul>
-							</div>
-						</div>						
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>服务合作</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="friend-link.html">友情链接</a></li>
-									<li><a href="ysjrz.html">艺术家入驻</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>关于我们</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="gsjj.html">公司简介</a></li>
-									<li><a href="contact.html">联系我们</a></li>
-									<li><a href="jrwm.html">加入我们</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>售后服务</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="wlsm.html">物流说明</a></li>
-									<li><a href="mzsm.html">免责声明</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="middle clearfix fl">
-						<ul>
-							<li><img src="upload/ewm.jpg"/></li>
-							<li><img src="upload/ewm.jpg"/></li>
-						</ul>
-					</div>
-					<div class="right clearfix fr">
-						<p class="bt">免费咨询热线：</p>
-						<p class="tel">400-000-0000</p>
-						<p class="fu-bt">(周一到周五8:00-22:00)</p>
-					</div>
-				</div>
-			</div>
+				
 			<div class="banquan clearfix ta-center">
-				Copyright © 2003-2015 椿龄文化(chunlingwenhua). All Rights Reserved. 
+				Copyright © 2003-2015 酱油文化. All Rights Reserved. 
 			</div>
 		</div>
 		<!--footer end-->
