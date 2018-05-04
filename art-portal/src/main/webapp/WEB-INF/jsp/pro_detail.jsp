@@ -232,7 +232,7 @@ $.gotoprodetail=function(e)
 	 window.location.href ="getDetail?id="+e.val();
 	}
 $.addItem=function()
-{
+{  alert(id);
 	$.ajax({
 		url:"addItemtoCar",
 		data:{
@@ -283,9 +283,6 @@ else
 					</li>
 					<li>
 						<a href="mall">商城</a>
-					</li>
-					<li>
-						<a href="artist">艺术家</a>
 					</li>
 				</ul>
 			</div>
@@ -422,8 +419,6 @@ else
 						</div>
 						<div class="tab-bd">
 							<div class="tab-pal" id="xq">
-						     
-								
 							</div>
 							<div class="tab-pal">
 								<div class="pro-zixun clearfix">

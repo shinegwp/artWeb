@@ -29,8 +29,83 @@
 		<link rel="stylesheet" type="text/css" href="css/common.css" />
 		<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.js"></script>
-   <script>
-  
+		<script type="text/javascript" src="js/jquery.cookie.js"></script>
+   <script type="text/javascript">
+   var uid;
+   $(function()
+			 {
+		 $.displayUserName();
+			 });
+ 
+	$.displayUserName=function()//如果登陆了展示退出和欢迎
+	{  
+		
+		var _ticket = $.cookie("TT_TOKEN");
+		if(!_ticket){
+			$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+		}
+		$.ajax({
+			url : "http://sso.jiangyou-art.com/userLogin/token/" + _ticket,
+			
+			dataType : "jsonp",
+			type : "GET",
+			success : function(data){
+			    uid=data.data.uid;
+				
+				if(data.status == 200){
+					var uname = data.data.uname;
+			
+					var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+uname+
+					"</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
+					$("#displayName").html(html);
+				}
+			}
+		});
+	}
+
+	 $.outLogin=function()
+	 {
+		 $.ajax({
+			  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
+			  dataType : "jsonp",
+			  type:"GET",
+			  
+			  success: function(data)
+			  
+			  { if(data.msg=="OK")
+				  {
+				  alert("成功退出！");
+				  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+				  }
+			  else
+				  {
+				  alert("操作有误");
+				  }
+			  },
+			  error:function()
+			  {
+				  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+                  
+				  alert("error");
+				  alert(data.msg);
+			  }
+			  
+			});
+	 }
+	  $.gotojiesuan=function()
+	   {
+		    if(!$.cookie("TT_TOKEN"))
+		    	{
+		    	alert("请先登陆");
+		    	}
+		    else
+		    	{
+		    	var t = $("#totalPrice").attr("value");
+		    	alert("total"+t);
+		    	window.location.href ="gotojiesuan?uid="+uid+"&totalprice="+t;
+		    	}
+		   
+	   }
    </script>
 <body>
 		<!--header star-->
@@ -122,7 +197,9 @@
         <!-- ************************商品开始********************* -->
         <c:set var="totalPrice" value="0"></c:set>
         <c:forEach items="${cartList}" var="cart">
+       
         	<c:set var="totalPrice"  value="${ totalPrice + (cart.price * cart.num)}"/>
+      
 	        <div id="product_11345721" data-bind="rowid:1" class="item item_selected ">
 		        <div class="item_form clearfix">
 		            <div class="cell p-checkbox"></div>
@@ -155,73 +232,9 @@
         </c:forEach>
         
     </div><!-- product-list结束 -->
-    <!--Main-wrap-->
-		<div class="main-wrap graybg pt40 pb40">
-			<div class="js-box wrapper white-box">
-				<!--收货人信息-->
-				<div class="consignee-info">
-					<div class="title line-bot"><span class="fs18 pl20 ml40 darkgray">收货人地址</span></div>
-					<div class="consignee-box clearfix">
-						<div class="consignee-block check-box check_on  radius5" id="div0">
-							<em></em>
-							<p class="fs14 lh40 clearfix">
-								<span class="fl darkgray" id="sname0"><i class="iconfont fs24">&#xe60e;</i>飞天猪</span>
-								<input id="hsname0" type="hidden" value="">
-								<a id = "bj0" href="javascript:" class="fr green edit alertbox" onclick="$.xiugai($(this));" val=""><i class="iconfont fs24 green ">&#xe60f;</i>编辑</a>
-							</p>
-							<input type="hidden" id="hte0" value="qqq">
-							<input type="hidden" id="hidco0" value="hid">
-							<p class="fs14 darkgray lh40" id="stel0"><i class="iconfont fs24">&#xe60c;</i>18056000000
-								</>
-							
-							
-								<p class="fs14 darkgray lh30 clearfix">
-									<i class="fl iconfont fs24">&#xe610;</i><span class="fl address" id="addressDetail0">合肥市蜀山区长江西路100号拓基城市广场  金座A2002</span>
-								</p>
-						</div>
-						<div class="consignee-block check-box radius5" id="div1">
-							<em></em>
-							<p class="fs14 lh40 clearfix">
-								<span class="fl darkgray" id="sname1"> <i class="iconfont fs24">&#xe60e;</i>飞天猪</span>
-								<input id="hsname1" type="hidden" value="">
-								<a id = "bj1" href="javascript:" class="fr green edit alertbox" onclick="$.xiugai($(this));" val=""><i class="iconfont fs24 green">&#xe60f;</i>编辑</a>
-							</p>
-							<input type="hidden" id="hte1" value="qqq">
-							<input type="hidden" id="hidco1" value="hid">
-							<p class="fs14 darkgray lh40" id="stel1"><i class="iconfont fs24">&#xe60c;</i>18056000000
-								</>
-								
-								
-								<p class="fs14 darkgray lh30 clearfix">
-									<i class="fl iconfont fs24">&#xe610;</i><span class="fl address" id="addressDetail1">合肥市蜀山区长江西路100号拓基城市广场  金座A2002</span>
-								</p>
-						</div>
-						<div class="consignee-block check-box radius5" id="div2">
-							<em></em>
-							<p class="fs14 lh40 clearfix">
-								<span class="fl darkgray" id="sname2"> <i class="iconfont fs24">&#xe60e;</i>飞天猪</span>
-								<input id="hsname2" type="hidden" value="">
-								<a id = "bj2" href="javascript:" class="fr green edit alertbox" onclick="$.xiugai($(this));" val=""><i class="iconfont fs24 green">&#xe60f;</i>编辑</a>
-							</p>
-							<input type="hidden" id="hte2" value="qqq">
-							<input type="hidden" id="hidco2" value="hid">
-							<p class="fs14 darkgray lh40" id="stel2"><i class="iconfont fs24">&#xe60c;</i>18056000000
-								</>
-								
-								
-								<p class="fs14 darkgray lh30 clearfix">
-									<i class="fl iconfont fs24">&#xe610;</i><span class="fl address" id="addressDetail2">合肥市蜀山区长江西路100号拓基城市广场  金座A2002</span>
-								</p>
-						</div>
-						
-					</div>
-				</div>
-				<!--/end-->
+    
           <div class="cart-toolbar clearfix">
-            <div class="total fr">
-                <p><span class="totalSkuPrice">¥<fmt:formatNumber value="${totalPrice}" maxFractionDigits="2" minFractionDigits="2" groupingUsed="true"/></span>总计：</p>
-                
-            </div>
+           
         </div>
         <div class="ui-ceilinglamp-1" style="width: 988px; height: 49px;"><div class="cart-dibu ui-ceilinglamp-current" style="width: 988px; height: 49px;">
           <div class="control fdibu fdibucurrent">
@@ -242,7 +255,7 @@
           <div class="cart-total-2014">
               <div class="cart-button">
                   <span class="check-comm-btns" id="checkout-jd">
-                      <a class="checkout fr orange-but fs20 radius3" href="jiesuan" id="toSettlement">去结算<b></b></a>
+                      <a class="checkout fr orange-but fs20 radius3" href="#" onclick="$.gotojiesuan()"  id="totalPrice" value="${totalPrice}">去结算<b></b></a>
                   </span>
                
               </div> 
@@ -255,6 +268,7 @@
 </div><!-- cart-inner结束 -->
 
 </div>
+
 </div>
 <!--推荐位html修改处-->
 
@@ -265,4 +279,5 @@
 <script type="text/javascript" src="js/cart.js"></script>
 <script type="text/javascript" src="js/jquery.price_format.2.0.min.js"></script>
 
+</body>
 </html>

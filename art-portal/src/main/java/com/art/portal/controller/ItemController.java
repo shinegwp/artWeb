@@ -96,34 +96,34 @@ public class ItemController {
      * @param 
      * @return 
      */
-	@RequestMapping("/gotojiesuan")
-	@ResponseBody
-	public ModelAndView getShippingAddressByUid(String id) 
-	{ 
-		Item item = itemService.getItemById(Integer.parseInt(id));
-		Map<String, Object> map = new HashMap<String, Object>();
-		Car car = new Car();
-		List<Item> list =new ArrayList<Item>();
-		list.add(item);
-		car.setItems(list);
-		map.put("car", list);
-		return new ModelAndView("jiesuan", map);
-	}
+//	@RequestMapping("/gotojiesuan")
+//	@ResponseBody
+//	public ModelAndView getShippingAddressByUid(String id) 
+//	{ 
+//		Item item = itemService.getItemById(Integer.parseInt(id));
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		Car car = new Car();
+//		List<Item> list =new ArrayList<Item>();
+//		list.add(item);
+//		car.setItems(list);
+//		map.put("car", list);
+//		return new ModelAndView("jiesuan", map);
+//	}
 	 /**
      * @describe 去结算（这个还没写完，需要改）
      * @param 
      * @return 
      */
-	@RequestMapping(value ="/gotojs",produces = "text/html;charset=UTF-8" )//�ύ���ﳵ����Ʒ
-	@ResponseBody
-	public ModelAndView gotojiesuan(String Items) 
-	{   //去结算（这个还没写完，需要改）
-		JSONObject job = JSONObject.fromObject(Items);
-	     Car car = (Car) JSONObject.toBean(job, Car.class);
-		Map<String, String> map = new HashMap<String, String>();
-		return new ModelAndView("jiesuan", map);
-
-	}
+//	@RequestMapping(value ="/gotojs",produces = "text/html;charset=UTF-8" )//�ύ���ﳵ����Ʒ
+//	@ResponseBody
+//	public ModelAndView gotojiesuan(String Items) 
+//	{   //去结算（这个还没写完，需要改）
+//		JSONObject job = JSONObject.fromObject(Items);
+//	     Car car = (Car) JSONObject.toBean(job, Car.class);
+//		Map<String, String> map = new HashMap<String, String>();
+//		return new ModelAndView("jiesuan", map);
+//
+//	}
 	
 	/**
 	 * @describe 当在专场细节页面点击按销量排序的时候，请求此方法

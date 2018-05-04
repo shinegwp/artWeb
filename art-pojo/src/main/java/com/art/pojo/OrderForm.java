@@ -3,7 +3,7 @@ package com.art.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class OrderForm implements Serializable{
+public class OrderForm implements Serializable {
     /**
 	 * 
 	 */
@@ -11,25 +11,31 @@ public class OrderForm implements Serializable{
 
 	private Integer id;
 
-    private Integer uid;
+    private Long uid;
 
     private Date time;
 
-    private String money;
+    private long money;
 
-    private Integer unitPrice;
+    private long unitPrice;
 
     private String peopleName;
 
     private String state;
 
-    private String itemImg;
-
-    private String itemTitle;
-
     private String tel;
 
     private String code;
+
+    private String province;
+
+    private String city;
+
+    private String area;
+
+    private long itemId;
+
+    private Integer num;
 
     public Integer getId() {
         return id;
@@ -39,12 +45,12 @@ public class OrderForm implements Serializable{
         this.id = id;
     }
 
-    public Integer getUid() {
+    public Long getUid() {
         return uid;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setUid(Long long1) {
+        this.uid = long1;
     }
 
     public Date getTime() {
@@ -55,20 +61,20 @@ public class OrderForm implements Serializable{
         this.time = time;
     }
 
-    public String getMoney() {
+    public long getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
-        this.money = money == null ? null : money.trim();
+    public void setMoney(long total) {
+        this.money = total ;
     }
 
-    public Integer getUnitPrice() {
+    public long getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(Integer unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setUnitPrice(long l) {
+        this.unitPrice = l;
     }
 
     public String getPeopleName() {
@@ -87,22 +93,6 @@ public class OrderForm implements Serializable{
         this.state = state == null ? null : state.trim();
     }
 
-    public String getItemImg() {
-        return itemImg;
-    }
-
-    public void setItemImg(String itemImg) {
-        this.itemImg = itemImg == null ? null : itemImg.trim();
-    }
-
-    public String getItemTitle() {
-        return itemTitle;
-    }
-
-    public void setItemTitle(String itemTitle) {
-        this.itemTitle = itemTitle == null ? null : itemTitle.trim();
-    }
-
     public String getTel() {
         return tel;
     }
@@ -117,5 +107,45 @@ public class OrderForm implements Serializable{
 
     public void setCode(String code) {
         this.code = code == null ? null : code.trim();
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area == null ? null : area.trim();
+    }
+
+    public long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(long l) {
+        this.itemId = l;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
     }
 }

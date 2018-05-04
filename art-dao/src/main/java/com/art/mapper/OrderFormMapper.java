@@ -13,7 +13,7 @@ public interface OrderFormMapper {
 
     int deleteByPrimaryKey(Integer id);
 
-    int insert(OrderForm orderform);
+    int insert(OrderFormWithBLOBs record);
 
     int insertSelective(OrderFormWithBLOBs record);
 

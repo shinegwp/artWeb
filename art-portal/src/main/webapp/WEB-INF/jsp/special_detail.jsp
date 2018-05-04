@@ -39,16 +39,13 @@
 										注册/登陆
 									</a>
 								</li>
-								
-<<<<<<< HEAD
-=======
+
 								<li>
 									<a href="#" onclick="$.grxx()">
 										个人中心
 									</a>
 								</li>
-								
->>>>>>> 32b19a005045cb3b88786c0df9eb5cff28ab6703
+
 							</ul>
 						</div>						
 						<div class="shopcar-btn clearfix fl">
