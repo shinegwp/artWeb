@@ -54,11 +54,20 @@
 				<div class="logo clearfix">
 					<a href="index.html"></a>
 				</div>
-				
+				<div class="search clearfix fr ra5">
+				    <input type="text" class="fl" name="q" placeholder="请输入您要搜索的内容" id="query"/>
+					<input type="button" value="搜索" class="fl box-s" onclick="$.search()"/>
+				</div>
 			</div>
 		</div>
 		<!--header end-->
-
+		<script type="text/javascript">
+		$.search=function()
+		{
+			var querystr=$("#query").attr("value");
+			 window.location.href="search?q="+querystr;
+		}
+		</script>
 		<!--navbar star-->
 		<div class="navbar clearfix">
 			<div class="content clearfix">
@@ -206,6 +215,10 @@ $.getParentListByPage=function(e)
 				 $("#nexPage").attr("value",artresult.data.nextPage);
 				 $("#lastPage").attr("value",artresult.data.lastPage);
 				 $("#prePage").attr("value",artresult.data.prePage);
+				//------------------------------------------------------------ 
+  				$("#totalpage").html("共"+artresult.data.lastPage+"页");
+  				$("#currentpage").html("当前第"+artresult.data.pageNum+"页");
+  				//------------------------------------------------------------ 
 				
 				 for(var j=0;j<5;j++){//先隐藏所有的专场div
 					 $("#let"+j).hide();
@@ -337,6 +350,11 @@ $.enterSpecial=function(e)
 						<input type="text" name="" id="jid" value=""  size="1"/>
 						<span>页</span>
 						<input type="submit" name="" id="" value="确定" onclick="$.getParentListByPage($(this));"/>
+						<!-- ------------------------------------ -->
+				        <br>
+				        <span id="totalpage"></span>
+				        <span id="currentpage"></span>
+				        <!-- ------------------------------------ -->
 					</div>
 			</div>
 		</div>

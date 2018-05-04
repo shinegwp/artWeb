@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta charset='utf-8'>
 		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<title>加入购物车成功</title>
+		<title>添加成功</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		<meta http-equiv="Cache-Control" content="no-siteapp">
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -19,28 +19,23 @@
 		<link rel="stylesheet" type="text/css" href="css/base.css" />
 		<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.js"></script>
+		<script type="text/javascript" src="js/jquery.cookie.js"></script>		
 	</head>
+	
 	<body>
 		<!--header star-->
+		
 		<div class="header clearfix">			
 			<div class="top clearfix">
 				<div class="topctent clearfix">
 					<div class="left clearfix fl">
-						公告：您好，欢迎登录北京椿龄文化发展有限公司
+						公告：您好，欢迎来到酱油文化艺术品商城
 					</div>
 					<div class="right clearfix fr">
 						<div class="zuo clearfix fl">
-							<ul class="clearfix fl">
-								<li>
-									<span class="fl">欢迎</span>
-									<a href="grxx.html" class="fl">瑾晨0212</a>
-									<span class="fl">进入商城</span>
-								</li>
-								<li>
-									<a href="register.html">
-										免费注册
-									</a>
-								</li>
+							<ul class="clearfix fl" id="displayName">
+								
+								<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>
 								
 							</ul>
 						</div>						
@@ -49,42 +44,162 @@
 								购物车
 							</a>
 						</div>
-						<div class="fenxiang clearfix fl">
-							<span class="fl">分享到：</span>
-							<ul class="clearfix fl">
-								<li><a href="#"><img src="img/sina.png"/></a></li>
-								<li><a href="#"><img src="img/qq.png"/></a></li>
-								<li><a href="#"><img src="img/wechat.png"/></a></li>
-							</ul>
-						</div>
+						
+					
 					</div>					
 				</div>
 			</div>			
 			<div class="bottom clearfix">
 				<div class="logo clearfix">
-					<a href="index.html"></a>
+					
 				</div>
 				<div class="search clearfix fr ra5">
-					<input type="text" class="fl" name="" id="" value="" placeholder="请输入您要搜索的内容" />
-					<input type="button" name="" id="" value="搜索" class="fl box-s" />
+					<input type="text" class="fl" name="q" placeholder="请输入您要搜索的内容" id="query"/>
+					<input type="button" value="搜索" class="fl box-s" onclick="$.search()"/>
 				</div>
 			</div>
 		</div>
 		<!--header end-->
-		
+		<script type="text/javascript">
+		$.search=function()
+		{
+			var querystr=$("#query").attr("value");
+			 window.location.href="search?q="+querystr;
+		}
+		</script>
 		<!--navbar star-->
 		<div class="navbar clearfix">
 			<div class="content clearfix">
 				<ul>
-					<li class="cur"><a href="index.html">首页</a></li>
-					<li><a href="special.html">专场</a></li>
-					<li><a href="mall.html">商城</a></li>
-					
+					<li class="cur"><a href="index">首页</a></li>
+					<li><a href="special">专场</a></li>
+					<li><a  href="mall" >商城</a></li>
+				
 				</ul>
 			</div>
 		</div>
+
 		<!--navbar end-->
-		
+	<!--script -->	
+	<!-- 初始化页面 -->
+	<script type="text/javascript">
+	
+	 $(function()
+			 {
+		 $.displayUserName();
+		 $.getNewItem();
+		 $.JXshow();
+			 });
+	</script>
+	<!-- 今日推荐 -->
+	<script type="text/javascript">
+	$.displayUserName=function()//如果登陆了展示退出和欢迎
+	{
+		var _ticket = $.cookie("TT_TOKEN");
+		if(!_ticket){
+			$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+		}
+		$.ajax({
+			url : "http://sso.jiangyou-art.com/userLogin/token/" + _ticket,
+			
+			dataType : "jsonp",
+			type : "GET",
+			success : function(data){
+			
+				if(data.status == 200){
+					var uname = data.data.uname;
+					var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+uname+
+					"</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
+					$("#displayName").html(html);
+				}
+			}
+		});
+	}
+
+	 $.outLogin=function()
+	 {
+		 $.ajax({
+			  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
+			  dataType : "jsonp",
+			  type:"GET",
+			  
+			  success: function(data)
+			  
+			  { if(data.msg=="OK")
+				  {
+				  alert("成功退出！");
+				  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+				  }
+			  else
+				  {
+				  alert("操作有误");
+				  }
+			  },
+			  error:function()
+			  {
+				  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+                  
+			  }
+			  
+			});
+	 }
+	 $.grxx=function()//当点击个人中心时判断是否已登录
+	 {  
+		 if($.cookie("TT_TOKEN")==null)
+		 {
+		 alert("请先登录！");
+		 }
+	 else
+		 {
+		 window.location.href="grxx";
+		 } 
+	 }
+	 $.getNewItem=function()
+		{
+		 $.ajax({
+			  url: "getContent",
+			  type: "post",
+			  data:{
+				  categoryId:90  
+			  },
+			  success: function(data)
+			  {  
+				  var content=eval('('+data+')');
+				  for(var i=0;i<4;i++)
+					{
+					$("#src"+i).attr("src",content[i].pic);//显示图片
+				 	$("#p"+i).html(content[i].title);
+					$("#span"+i).text(content[i].price);
+					}
+			  },
+			  error:function()
+			  {
+				  alert("error");
+			  }
+			  
+			});
+		}
+	 $.addItem=function(e)
+  	{var itemid = e.attr("value");
+  		$.ajax({
+  			url:"addItemtoCar",
+  			data:{
+  				id:itemid,
+  			},
+  			type:"post",
+  			success:function(jsonresult)
+  			{    if(jsonresult="success")
+  				{
+  				window.location.href ="success";
+  				}
+  				 
+  				
+  			},error:function()
+  			{ alert("操作有误！");
+  			}
+  		});
+  		}
+	</script>
 		<!--settled star-->
 		<div class="homepage clearfix">
 			<div class="content clearfix">

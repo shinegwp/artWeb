@@ -200,6 +200,8 @@ public EUDataGridResult getItemByParentIdOrderByCreated(Integer parentId, Intege
 		PageHelper.startPage(page, rows); 
 		List<Item> plist = itemMapper.selectByExample(example);
 		PageInfo<Item> p=new PageInfo<Item>(plist);
+		System.out.println(plist);
+		System.out.println(p);
 		EUDataGridResult result = new EUDataGridResult();
 		 result.setRows(plist);
 		 result.setPageinfo(p);

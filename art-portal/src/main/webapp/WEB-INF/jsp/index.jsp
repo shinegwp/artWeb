@@ -1,4 +1,4 @@
-or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -54,15 +54,19 @@ or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="
 					
 				</div>
 				<div class="search clearfix fr ra5">
-				<form id="form1" name="f1" action="search" method="post">
-					<input type="text" class="fl" name="q" placeholder="请输入您要搜索的内容" />
-					<input type="button" value="搜索" class="fl box-s" />
-				</form>
+					<input type="text" class="fl" name="q" placeholder="请输入您要搜索的内容" id="query"/>
+					<input type="button" value="搜索" class="fl box-s" onclick="$.search()"/>
 				</div>
 			</div>
 		</div>
 		<!--header end-->
-		
+		<script type="text/javascript">
+		$.search=function()
+		{
+			var querystr=$("#query").attr("value");
+			 window.location.href="search?q="+querystr;
+		}
+		</script>
 		<!--navbar star-->
 		<div class="navbar clearfix">
 			<div class="content clearfix">
@@ -190,6 +194,26 @@ or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="
 			  
 			});
 		}
+	 $.addItem=function(e)
+  	{var itemid = e.attr("value");
+  		$.ajax({
+  			url:"addItemtoCar",
+  			data:{
+  				id:itemid,
+  			},
+  			type:"post",
+  			success:function(jsonresult)
+  			{    if(jsonresult="success")
+  				{
+  				window.location.href ="success";
+  				}
+  				 
+  				
+  			},error:function()
+  			{ alert("操作有误！");
+  			}
+  		});
+  		}
 
 	
 	</script>
@@ -212,6 +236,7 @@ or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="
 				$("#jxsrc"+i).attr("src",content[i].pic);
 			    $("#jxp"+i).html(content[i].title);
 			    $("#price"+i).html(content[i].price);
+			    $("#gwc"+i).attr("value",content[i].id);
 			  }	
 		  },
 		  error:function()
@@ -369,8 +394,8 @@ or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="
 							<div class="nr clearfix">
 								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
 								<ul>
-									<li class="box-s transition">收藏</li>
-									<li class="box-s transition">购物车</li>
+									<li class="box-s transition" id="sc1" onclick="$.addCollection($(this))" value="">收藏</li>
+									<li class="box-s transition" id="gwc1" onclick="$.addItem($(this))" value="">购物车</li>
 								</ul>
 							</div>								
 						</div>
@@ -397,7 +422,7 @@ or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="
 								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
 								<ul>
 									<li class="box-s transition">收藏</li>
-									<li class="box-s transition">购物车</li>
+									<li class="box-s transition"id="gwc2" onclick="$.addItem($(this))" value="">购物车</li>
 								</ul>
 							</div>								
 						</div>
@@ -424,7 +449,7 @@ or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="
 								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
 								<ul>
 									<li class="box-s transition">收藏</li>
-									<li class="box-s transition">购物车</li>
+									<li class="box-s transition" id="gwc3" onclick="$.addItem($(this))" value="">购物车</li>
 								</ul>
 							</div>								
 						</div>
@@ -451,7 +476,7 @@ or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="
 								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
 								<ul>
 									<li class="box-s transition">收藏</li>
-									<li class="box-s transition">购物车</li>
+									<li class="box-s transition" id="gwc4" onclick="$.addItem($(this))" value="">购物车</li>
 								</ul>
 							</div>								
 						</div>
@@ -478,7 +503,7 @@ or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="
 								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
 								<ul>
 									<li class="box-s transition">收藏</li>
-									<li class="box-s transition">购物车</li>
+									<li class="box-s transition" id="gwc5" onclick="$.addItem($(this))" value="">购物车</li>
 								</ul>
 							</div>								
 						</div>
@@ -505,7 +530,7 @@ or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="
 								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
 								<ul>
 									<li class="box-s transition">收藏</li>
-									<li class="box-s transition">购物车</li>
+									<li class="box-s transition" id="gwc6" onclick="$.addItem($(this))" value="">购物车</li>
 								</ul>
 							</div>								
 						</div>
@@ -532,7 +557,7 @@ or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="
 								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
 								<ul>
 									<li class="box-s transition">收藏</li>
-									<li class="box-s transition">购物车</li>
+									<li class="box-s transition" id="gwc7" onclick="$.addItem($(this))" value="">购物车</li>
 								</ul>
 							</div>								
 						</div>
@@ -559,7 +584,7 @@ or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="
 								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
 								<ul>
 									<li class="box-s transition">收藏</li>
-									<li class="box-s transition">购物车</li>
+									<li class="box-s transition" id="gwc8" onclick="$.addItem($(this))" value="">购物车</li>
 								</ul>
 							</div>								
 						</div>
@@ -586,7 +611,7 @@ or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="
 								<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
 								<ul>
 									<li class="box-s transition">收藏</li>
-									<li class="box-s transition">购物车</li>
+									<li class="box-s transition" id="gwc9" onclick="$.addItem($(this))" value="">购物车</li>
 								</ul>
 							</div>								
 						</div>

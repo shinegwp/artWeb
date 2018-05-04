@@ -24,14 +24,14 @@ public class SearchController {
 	public ArtResult search(@RequestParam("q")String queryString, 
 			@RequestParam(defaultValue="1")Integer page, 
 			@RequestParam(defaultValue="9")Integer rows) {
-		System.out.println("开始进入查询");
 		//查询条件不能为空
 		if (StringUtils.isBlank(queryString)) {
 			return ArtResult.build(400, "查询条件不能为空");
 		}
 		SearchResult searchResult = null;
 		try {
-			queryString = new String(queryString.getBytes("iso8859-1"), "utf-8");
+//			queryString = new String(queryString.getBytes("iso8859-1"), "utf-8");
+			System.out.println(queryString);
 			searchResult = searchService.search(queryString, page, rows);
 		} catch (Exception e) {
 			e.printStackTrace();
