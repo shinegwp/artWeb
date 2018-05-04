@@ -120,14 +120,15 @@
 	                     		 },
 	                     		 success:function(data)
 	                     		 { 
-	                     			
 	                     				 var jsondata = eval('('+data+')');
-	                     				 
 	                     				 $("#firstPage").attr("value",jsondata.pageinfo.firstPage);
 	                     				 $("#nexPage").attr("value",jsondata.pageinfo.nextPage);
 	                     				 $("#lastPage").attr("value",jsondata.pageinfo.lastPage);
 	                     				 $("#prePage").attr("value",jsondata.pageinfo.prePage);
-	                     				
+	                     				//------------------------------------------------------------ 
+	                     				$("#totalpage").html("共"+jsondata.pageinfo.lastPage+"页");
+	                     				$("#currentpage").html("当前第"+jsondata.pageinfo.pageNum+"页");
+	                     				//------------------------------------------------------------ 
 	                     				 for(var j=1;j<=12;j++){
 	                     					 $("#divA"+j).hide();
 	                     					 
@@ -155,8 +156,6 @@
 						
 	                     $.gotoprodetail=function(e)
 	                     {  
-	                     	
-	                     	
 	                     	 window.location.href ="getDetail?id="+e.val();
 	                     	}
 	                     
@@ -272,11 +271,20 @@
 				<div class="logo clearfix">
 					<a href="index.html"></a>
 				</div>
-				
+				<div class="search clearfix fr ra5">
+					<input type="text" class="fl" name="q" placeholder="请输入您要搜索的内容" id="query"/>
+					<input type="button" value="搜索" class="fl box-s" onclick="$.search()"/>
+				</div>
 			</div>
 		</div>
 		<!--header end-->
-		
+		<script type="text/javascript">
+		$.search=function()
+		{
+			var querystr=$("#query").attr("value");
+			 window.location.href="search?q="+querystr;
+		}
+		</script>
 		<!--navbar star-->
 		<div class="navbar clearfix">
 			<div class="content clearfix">
@@ -600,6 +608,11 @@
 						<input type="text" name="" id="jid" value=""  size="1"/>
 						<span>页</span>
 						<input type="submit" name="" id="" value="确定" onclick="$.getItemListByPage($(this));"/>
+				       <!-- ------------------------------------ -->
+				        <br>
+				        <span id="totalpage"></span>
+				        <span id="currentpage"></span>
+				        <!-- ------------------------------------ -->
 					</div>
 			</div>
 			<!--sales end-->

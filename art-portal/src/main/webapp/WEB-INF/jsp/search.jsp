@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -72,7 +74,7 @@
 						</div>						
 						<div class="shopcar-btn clearfix fl">
 							<a href="#" class="box-s">
-								购物车（0）
+								购物车
 							</a>
 						</div>
 					
@@ -83,11 +85,20 @@
 				<div class="logo clearfix">
 					<a href="index.html"></a>
 				</div>
-				
+				<div class="search clearfix fr ra5">
+					<input type="text" class="fl" name="q" placeholder="请输入您要搜索的内容" id="query"/>
+					<input type="button" value="搜索" class="fl box-s" onclick="$.search()"/>
+				</div>
 			</div>
 		</div>
 		<!--header end-->
-		
+		<script type="text/javascript">
+		$.search=function()
+		{
+			var querystr=$("#query").attr("value");
+			 window.location.href="search?q="+querystr;
+		}
+		</script>
 		<!--navbar star-->
 		<div class="navbar clearfix">
 			<div class="content clearfix">
@@ -153,9 +164,15 @@
 				
 					<div class="bottom clearfix" id="bodyBox">
 <!-- ------------------第一个画框---------------------------------------------------- -->
+                     <c:set  var="currentPage"  value="${SearchResult.curPage}"></c:set>
+                      <c:set  var="lastPage"  value="${SearchResult.pageCount}"></c:set>
+                     <c:set  var="prePage"  value="${currentPage-1>0?currentPage-1:1}"></c:set>
+                     <c:set  var="nextPage"  value="${currentPage+1>lastPage?lastPage:currentPage+1}"></c:set>
+                     <c:forEach items="${slist}" var="item">
+              
 						<div class="list clearfix transition" id="divA1">
 							<div class="tu clearfix">
-								<img src="upload/2.jpg" id="imgAddress1"/>
+								<img src="${item.imgAddress}"  id="imgAddress1"/>
 								<span></span>
 								
 								<div class="ycang clearfix">
@@ -171,269 +188,34 @@
 							</div>
 							<div class="xia clearfix box-s" id="divB1">
 								<p class="bt over" id="p1">
-									尹藤收藏
+							    ${item.title}
 								</p>
 								<div class="price clearfix">
-									<span class="fl" id="price1">￥1000.00<samp>原价￥2000.00</samp></span>
-									<a href="#" id="id1" onclick="$.gotoprodetail($(this))" class="goumai fr ra3 transition">立即购买</a>
+									<span class="fl" id="price1">${item.price}</span>
+									<a href="getDetail?id=${item.id}" class="goumai fr ra3 transition">立即购买</a>
 								</div>
 							</div>
 						</div>
-	<!-- ------------------第二个画框---------------------------------------------------- -->
-						<div class="list clearfix transition" id="divA2">
-							<div class="tu clearfix">
-								<img src="upload/2.jpg" id="imgAddress2"/>
-								<span></span>
-								
-								<div class="ycang clearfix">
-									<samp class="opa8"></samp>
-									<div class="nr clearfix">
-										<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
-										<ul>
-											<li class="box-s transition" id="sc2" onclick="$.addCollection($(this))" value="">收藏</li>
-											<li class="box-s transition" id="gwc2" onclick="$.addItem($(this))" value="">购物车</li>
-										</ul>
-									</div>								
-								</div>
-							</div>
-							<div class="xia clearfix box-s" id="divB2">
-								<p class="bt over" id="p2">
-									尹藤收藏
-								</p>
-								<div class="price clearfix">
-									<span class="fl" id="price2">￥1000.00<samp>原价￥2000.00</samp></span>
-									<a href="#" id="id2" onclick="$.gotoprodetail($(this))" class="goumai fr ra3 transition">立即购买</a>
-								</div>
-							</div>
-						</div>
-<!-- ------------------第三个画框---------------------------------------------------- -->
-						<div class="list clearfix transition" id="divA3">
-							<div class="tu clearfix">
-								<img src="upload/2.jpg" id="imgAddress3"/>
-								<span></span>
-								
-								<div class="ycang clearfix">
-									<samp class="opa8"></samp>
-									<div class="nr clearfix">
-										<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
-										<ul>
-											<li class="box-s transition" id="sc3" onclick="$.addCollection($(this))" value="">收藏</li>
-											<li class="box-s transition" id="gwc3" onclick="$.addItem($(this))" value="">购物车</li>
-										</ul>
-									</div>								
-								</div>
-							</div>
-							<div class="xia clearfix box-s" id="divB3">
-								<p class="bt over" id="p3">
-									尹藤收藏
-								</p>
-								<div class="price clearfix">
-									<span class="fl" id="price3">￥1000.00<samp>原价￥2000.00</samp></span>
-									<a href="#" id="id3" onclick="$.gotoprodetail($(this))" class="goumai fr ra3 transition">立即购买</a>
-								</div>
-							</div>
-						</div>	
-<!-- ------------------第四个画框---------------------------------------------------- -->
-						<div class="list clearfix transition" id="divA4">
-							<div class="tu clearfix">
-								<img src="upload/2.jpg" id="imgAddress4"/>
-								<span></span>
-								
-								<div class="ycang clearfix">
-									<samp class="opa8"></samp>
-									<div class="nr clearfix">
-										<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
-										<ul>
-											<li class="box-s transition" id="sc4" onclick="$.addCollection($(this))" value="">收藏</li>
-											<li class="box-s transition" id="gwc4" onclick="$.addItem($(this))" value="">购物车</li>
-										</ul>
-									</div>								
-								</div>
-							</div>
-							<div class="xia clearfix box-s" id="divB4">
-								<p class="bt over" id="p4">
-									尹藤收藏
-								</p>
-								<div class="price clearfix">
-									<span class="fl" id="price4">￥1000.00<samp>原价￥2000.00</samp></span>
-									<a href="#" id="id4" onclick="$.gotoprodetail($(this))" class="goumai fr ra3 transition">立即购买</a>
-								</div>
-							</div>
-						</div>						
-<!-- ------------------第五个画框---------------------------------------------------- -->
-						<div class="list clearfix transition" id="divA5">
-							<div class="tu clearfix">
-								<img src="upload/2.jpg" id="imgAddress5"/>
-								<span></span>
-								
-								<div class="ycang clearfix">
-									<samp class="opa8"></samp>
-									<div class="nr clearfix">
-										<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
-										<ul>
-											<li class="box-s transition" id="sc5" onclick="$.addCollection($(this))" value="">收藏</li>
-											<li class="box-s transition" id="gwc5" onclick="$.addItem($(this))" value="">购物车</li>
-										</ul>
-									</div>								
-								</div>
-							</div>
-							<div class="xia clearfix box-s" id="divB5">
-								<p class="bt over" id="p5">
-									尹藤收藏
-								</p>
-								<div class="price clearfix">
-									<span class="fl" id="price5">￥1000.00<samp>原价￥2000.00</samp></span>
-									<a href="#" id="id5" onclick="$.gotoprodetail($(this))" class="goumai fr ra3 transition">立即购买</a>
-								</div>
-							</div>
-						</div>						
-	<!-- ------------------第六个画框---------------------------------------------------- -->
-						<div class="list clearfix transition" id="divA6">
-							<div class="tu clearfix">
-								<img src="upload/2.jpg" id="imgAddress6"/>
-								<span></span>
-								
-								<div class="ycang clearfix">
-									<samp class="opa8"></samp>
-									<div class="nr clearfix">
-										<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
-										<ul>
-											<li class="box-s transition" id="sc6" onclick="$.addCollection($(this))" value="">收藏</li>
-											<li class="box-s transition" id="gwc6" onclick="$.addItem($(this))" value="">购物车</li>
-										</ul>
-									</div>								
-								</div>
-							</div>
-							<div class="xia clearfix box-s" id="divB6">
-								<p class="bt over" id="p6">
-									尹藤收藏
-								</p>
-								<div class="price clearfix">
-									<span class="fl" id="price6">￥1000.00<samp>原价￥2000.00</samp></span>
-									<a href="#" id="id6" onclick="$.gotoprodetail($(this))" class="goumai fr ra3 transition">立即购买</a>
-								</div>
-							</div>
-						</div>
-	<!-- ------------------第七个画框---------------------------------------------------- -->
-						<div class="list clearfix transition" id="divA7">
-							<div class="tu clearfix">
-								<img src="upload/2.jpg" id="imgAddress7"/>
-								<span></span>
-								
-								<div class="ycang clearfix">
-									<samp class="opa8"></samp>
-									<div class="nr clearfix">
-										<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
-										<ul>
-											<li class="box-s transition" id="sc7" onclick="$.addCollection($(this))" value="">收藏</li>
-											<li class="box-s transition" id="gwc7" onclick="$.addItem($(this))" value="">购物车</li>
-										</ul>
-									</div>								
-								</div>
-							</div>
-							<div class="xia clearfix box-s" id="divB7">
-								<p class="bt over" id="p7">
-									尹藤收藏
-								</p>
-								<div class="price clearfix">
-									<span class="fl" id="price7">￥1000.00<samp>原价￥2000.00</samp></span>
-									<a href="#" id="id7" onclick="$.gotoprodetail($(this))" class="goumai fr ra3 transition">立即购买</a>
-								</div>
-							</div>
-						</div>					
-		<!-- ------------------第八个画框---------------------------------------------------- -->
-						<div class="list clearfix transition" id="divA8">
-							<div class="tu clearfix">
-								<img src="upload/2.jpg" id="imgAddress8"/>
-								<span></span>
-								
-								<div class="ycang clearfix">
-									<samp class="opa8"></samp>
-									<div class="nr clearfix">
-										<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
-										<ul>
-											<li class="box-s transition" id="sc8" onclick="$.addCollection($(this))" value="">收藏</li>
-											<li class="box-s transition" id="gwc8" onclick="$.addItem($(this))" value="">购物车</li>
-										</ul>
-									</div>								
-								</div>
-							</div>
-							<div class="xia clearfix box-s" id="divB8">
-								<p class="bt over" id="p8">
-									尹藤收藏
-								</p>
-								<div class="price clearfix">
-									<span class="fl" id="price8">￥1000.00<samp>原价￥2000.00</samp></span>
-									<a href="#" id="id8" onclick="$.gotoprodetail($(this))" class="goumai fr ra3 transition">立即购买</a>
-								</div>
-							</div>
-						</div>
-<!-- ------------------第九个画框---------------------------------------------------- -->
-						<div class="list clearfix transition" id="divA9">
-							<div class="tu clearfix">
-								<img src="upload/2.jpg" id="imgAddress9"/>
-								<span></span>
-								
-								<div class="ycang clearfix">
-									<samp class="opa8"></samp>
-									<div class="nr clearfix">
-										<!--注意：当下方li中添加class名为cur的时候为选中的时候样式-->
-										<ul>
-											<li class="box-s transition" id="sc9" onclick="$.addCollection($(this))" value="">收藏</li>
-											<li class="box-s transition" id="gwc9" onclick="$.addItem($(this))" value="">购物车</li>
-										</ul>
-									</div>								
-								</div>
-							</div>
-							<div class="xia clearfix box-s" id="divB9">
-								<p class="bt over" id="p9">
-									尹藤收藏
-								</p>
-								<div class="price clearfix">
-									<span class="fl" id="price9">￥1000.00<samp>原价￥2000.00</samp></span>
-									<a href="#" id="id9" onclick="$.gotoprodetail($(this))" class="goumai fr ra3 transition">立即购买</a>
-								</div>
-							</div>
-						</div>	
+						</c:forEach>
+	
 				</div>
-				<script type="text/javascript">
-				$.page=function(page)
-				{ alert("sss");
-				  alert(page);
-				  $.ajax(
-                   		{   url:"gotoSolr",
-                   			data:{
-                   				page:page,
-                   				q:SearchResult.queryString
-                   			},
-                   			//url:"http://solr.jiangyou-art.com/query?page="+page+"&q=玉雕",
-                     		 Type:"post",  
-                     		 success:function(data)
-                     		 {   alert(data);
-                     			
-                     			 
-                     		 },error:function()
-                   		 {
-                   			 alert("error");
-                   		 }
-                   			
-                   		});
-					
-				}
 				
-				</script>
 				<!-- ----------------------------------------------------分页-------------------------------------- -->
 				 
 					<div class="tab-pages">
 		               <p id="pid"></p>                                                              
-						<a id="prePage" href="#"  value="" class="tab-prev tab-btn" onclick=$.page(((SearchResult.curPage-1+0)&gt;0)?SearchResult.curPage-1+0:1)>上一页</a>
-						<a id="firstPage" href="#" value="" class="page-btn " onclick=$.page(1)>第一页</a>
-						<a id="lastPage" href="#" value="" class="page-btn" onclick=$.page(SearchResult.pageCount)>最后一页</a>
-						<a id="nexPage" href="#" value="" class="tab-next tab-btn" onclick=$.page(((SearchResult.curPage+1+0)&gt;SearchResult.pageCount)?SearchResult.pageCount:SearchResult.curPage+1+0)>下一页</a>
+						<a id="prePage" href="search?q=${SearchResult.queryString}&page=${prePage}"  value="" class="tab-prev tab-btn"  >上一页</a>
+						<a id="firstPage" href="search?q=${SearchResult.queryString}&page=1" value="" class="page-btn " >第一页</a>
+						<a id="lastPage" href="search?q=${SearchResult.queryString}&page=${lastPage}" value="" class="page-btn" >最后一页</a>
+						<a id="nexPage" href="search?q=${SearchResult.queryString}&page=${nextPage}" value="" class="tab-next tab-btn" >下一页</a>
 						<span class="ml10">到第</span>
 						<input type="text" name="" id="jid" value=""  size="1"/>
 						<span>页</span>
 						<input type="submit" name="" id="" value="确定" onclick="$.getItemListByPage($(this));"/>
+						<br>
+						<span class="ml10">共${lastPage}页</span>
+						<span class="ml10">第${currentPage}页</span>
+						
 					</div>
 			</div>
 			<!--sales end-->
@@ -554,6 +336,10 @@
 				$(this).addClass("cur");
 			});
 		});
+		$.gotoprodetail=function(e)
+        {  
+        	 window.location.href ="getDetail?id="+e.val();
+        }
 	</script>
 	<script src="js/other.js" type="text/javascript" ></script>
 </html>
