@@ -26,13 +26,6 @@ public class SearchController {
 	
 	@RequestMapping("/search")
 	public ModelAndView search(@RequestParam("q")String queryString, @RequestParam(defaultValue="1")Integer page) {
-		if (queryString != null) {
-			try {
-				queryString = new String(queryString.getBytes("iso8859-1"), "utf-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-		}
 		ArtResult artResult = searchService.search(queryString, page);
 		SearchResult result = (SearchResult) artResult.getData();
 		result.setQueryString(queryString);

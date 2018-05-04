@@ -23,6 +23,7 @@ public class SearchDaoImpl implements SearchDao {
 	private SolrServer solrServer;
 
 	public SearchResult search(SolrQuery query) throws Exception {
+		System.out.println(query);
 		//返回值对象
 		SearchResult result = new SearchResult();
 		//根据查询条件查询索引库
