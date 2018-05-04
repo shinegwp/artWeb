@@ -25,22 +25,16 @@
 	<body>
 	<script type="text/javascript">
     var pageinfo;
+    var user;
 	$(function()
 			{
-		$.getTradeLog();
 		$.displayUserName();
-		$.gettradelogListByPage();
-		$("#canuse").html($.cookie("money"));
-		 $("#pid").html("一共"+pageinfo.pages+"页");
+		
 			});
 	$.displayUserName = function()//如果登陆了展示退出和欢迎
 	{
 		var _ticket = $.cookie("TT_TOKEN");
-		if (!_ticket) {
-			$("#displayName")
-					.html(
-							"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
-		}
+		
 		$
 				.ajax({
 					url : "http://sso.jiangyou-art.com/userLogin/token/"
@@ -51,48 +45,54 @@
 					success : function(data) {
 						if (data.status == 200) {
 							var uname = data.data.uname;
+							user = data.data;
+							$("#canuse").html(user.money);
+							$.getTradeLog();
+							$.gettradelogListByPage();
+							
+							 $("#pid").html("一共"+pageinfo.pages+"页");
 							var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
 									+ uname
-									+ "</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
+									+ "</a>进入商场</li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
 							$("#displayName").html(html);
-						}
-					}
-				});
-	}
-
-	$.outLogin = function() {
-		$
-				.ajax({
-					url : "http://sso.jiangyou-art.com/userLogin/outLogin",
-					type : "post",
-					success : function(data) {
-						if (data.msg == "OK") {
-							alert("成功退出！");
-							$("#displayName")
-									.html(
-											"<li ><a href='sso.jiangyou-art.com/page/register'>注册/登陆</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li>")
 						} else {
-							alert("操作有误");
+							alert("登陆已过期，请重新登录");
+							window.location.href = "http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/zhye";
 						}
-					},
-					error : function() {
-						alert("error");
 					}
-
 				});
 	}
-	$.grxx = function()//当点击个人中心时判断是否已登录
+
+	$.outLogin=function()
 	{
-		if ($.cookie("TT_TOKEN") == null) {
-			alert("请先登录！");
-		} else {
-			window.location.href = "grxx";
-		}
-	}		
+		 $.ajax({
+			  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
+			  dataType : "jsonp",
+			  type:"GET",
+			  
+			  success: function(data)
+			  
+			  { if(data.msg=="OK")
+				  {
+				  alert("成功退出！");
+				  window.location.href = "http://www.jiangyou-art.com";
+				  }
+			  else
+				  {
+				  alert("操作有误");
+				  }
+			  },
+			  error:function()
+			  {
+				  window.location.href = "http://www.jiangyou-art.com";	                  
+			  }
+			  
+			});
+	}	
 			
 	$.getTradeLog=function()
 	{   
-		var uid = $.cookie("uid");
+		var uid = user.uid;
 		$.ajax({
 			url:"getTradeLogByUid",
 			async:false,
@@ -111,7 +111,6 @@
 		        		}
 		        	}
 		        $("#haveuse").html(haveUseMoney);
-		        alert(haveUseMoney);
 		      
 			},error:function()
 			{
@@ -138,12 +137,11 @@
 			 data:{
 				 "page":page,
 				 "rows":6,
-				 "uid":$.cookie("uid")
+				 "uid":user.uid,
 			 },
 			 dataType:"json",
 			 success:function(data)
 			 { 
-			 alert(JSON.stringify(data.time));
 			 $("#firstPage").attr("value",data.pageinfo.firstPage);
 			 $("#nexPage").attr("value",data.pageinfo.nextPage);
 			 $("#lastPage").attr("value",data.pageinfo.lastPage);
@@ -175,45 +173,21 @@
 			<div class="top clearfix">
 				<div class="topctent clearfix">
 					<div class="left clearfix fl">
-						公告：您好，欢迎登录北京椿龄文化发展有限公司
+						公告：您好，欢迎来到酱油文化艺术品商城
 					</div>
 					<div class="right clearfix fr">
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
 								
-								<li >
-									<a href="http://sso.jiangyou-art.com/page/register">
-										注册/登陆
-									</a>
-								</li>
-								
-								<li>
-									<a href="#" onclick="$.grxx()">
-										个人中心
-									</a>
-								</li>
 								
 							</ul>
 						</div>
 						<div class="shopcar-btn clearfix fl">
 							<a href="shopping" class="box-s">
-								购物车（0）
+								购物车
 							</a>
 						</div>
-						<div class="fenxiang clearfix fl">
-							<span class="fl">分享到：</span>
-							<ul class="clearfix fl">
-								<li>
-									<a href="#"><img src="img/sina.png" /></a>
-								</li>
-								<li>
-									<a href="#"><img src="img/qq.png" /></a>
-								</li>
-								<li>
-									<a href="#"><img src="img/wechat.png" /></a>
-								</li>
-							</ul>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -242,9 +216,7 @@
 					<li>
 						<a href="mall">商城</a>
 					</li>
-					<li>
-						<a href="artist">艺术家</a>
-					</li>
+					
 				</ul>
 			</div>
 		</div>
@@ -255,7 +227,7 @@
 			<div class="wrapper pt40 pb40 clearfix">
 				<div class="fl slide-nav white-box">
 					<ul>
-						<li class="on">
+						<li >
 							<a href="grxx" class="db fs16">个人信息</a>
 						</li>
 						<li>
@@ -272,7 +244,7 @@
 						<li>
 							<a href="xgmm" class="db fs16">修改密码</a>
 						</li>
-						<li>
+						<li class="on">
 							<a href="zhye" class="db fs16">账户余额</a>
 						</li>
 						<li>
@@ -284,9 +256,7 @@
 						<li>
 							<a href="zixun" class="db fs16">我的咨询</a>
 						</li>
-						<li>
-							<a href="znx" class="db fs16">站内信</a>
-						</li>
+						
 					</ul>
 				</div>
 				<div class="fr slide-show white-box">
@@ -297,7 +267,6 @@
 						<p class="fl">已消费：<span class="fs40 green" id="haveuse">0.00</span>元</p>
 						<p class="fl last">
 							<a href="zxcz" class="cz_but fs16 orange radius3">我要充值</a>
-							<a href="zxtx" class="cz_but fs16 orange radius3">我要提现</a>
 						</p>
 					</div>
 					<div class="ye-detail mt40">
@@ -388,86 +357,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="bottom clearfix">
-					<div class="left clearfix fl">
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>新手指南</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="scgmlc.html">商城购买流程</a></li>
-									<li><a href="cjwt.html">常见问题</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>账户管理</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="zhcz.html">账户充值</a></li>
-									<li><a href="zhtx.html">账户提现</a></li>
-									<li><a href="zffs.html">支付方式</a></li>
-								</ul>
-							</div>
-						</div>						
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>服务合作</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="friend-link.html">友情链接</a></li>
-									<li><a href="ysjrz.html">艺术家入驻</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>关于我们</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="gsjj.html">公司简介</a></li>
-									<li><a href="contact.html">联系我们</a></li>
-									<li><a href="jrwm.html">加入我们</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>售后服务</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="wlsm.html">物流说明</a></li>
-									<li><a href="mzsm.html">免责声明</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="middle clearfix fl">
-						<ul>
-							<li><img src="upload/ewm.jpg"/></li>
-							<li><img src="upload/ewm.jpg"/></li>
-						</ul>
-					</div>
-					<div class="right clearfix fr">
-						<p class="bt">免费咨询热线：</p>
-						<p class="tel">400-000-0000</p>
-						<p class="fu-bt">(周一到周五8:00-22:00)</p>
-					</div>
-				</div>
-			</div>
+				
+								</div>
 			<div class="banquan clearfix ta-center">
-				Copyright © 2003-2015 椿龄文化(chunlingwenhua). All Rights Reserved. 
+				Copyright 酱油文化. All Rights Reserved. 
 			</div>
 		</div>
 		<!--footer end-->
