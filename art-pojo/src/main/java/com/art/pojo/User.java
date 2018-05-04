@@ -4,12 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private Integer uid;
+    private Integer uid;
 
     private Date birthday;
 
@@ -27,16 +22,9 @@ public class User implements Serializable{
 
     private String email;
 
-    private String money;
+    private long money;
 
-    @Override
-	public String toString() {
-		return "User [uid=" + uid + ", birthday=" + birthday + ", sex=" + sex + ", uname=" + uname
-				+ ", uidentification=" + uidentification + ", upassword=" + upassword + ", tel=" + tel + ", qq=" + qq
-				+ ", email=" + email + ", money=" + money + "]";
-	}
-
-	public Integer getUid() {
+    public Integer getUid() {
         return uid;
     }
 
@@ -108,11 +96,11 @@ public class User implements Serializable{
         this.email = email == null ? null : email.trim();
     }
 
-    public String getMoney() {
+    public long getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
-        this.money = money == null ? null : money.trim();
+    public void setMoney(long money) {
+        this.money = money ;
     }
 }

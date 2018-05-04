@@ -2,7 +2,7 @@ package com.art.pojo;
 
 import java.io.Serializable;
 
-public class OrderFormWithBLOBs extends OrderForm implements Serializable{
+public class OrderFormWithBLOBs extends OrderForm  implements Serializable{
     /**
 	 * 
 	 */
@@ -10,7 +10,7 @@ public class OrderFormWithBLOBs extends OrderForm implements Serializable{
 
 	private String formNum;
 
-    private String address;
+    private String addressDetail;
 
     public String getFormNum() {
         return formNum;
@@ -20,11 +20,11 @@ public class OrderFormWithBLOBs extends OrderForm implements Serializable{
         this.formNum = formNum == null ? null : formNum.trim();
     }
 
-    public String getAddress() {
-        return address;
+    public String getAddressDetail() {
+        return addressDetail;
     }
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+    public void setAddressDetail(String addressDetail) {
+        this.addressDetail = addressDetail == null ? null : addressDetail.trim();
     }
 }

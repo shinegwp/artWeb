@@ -61,8 +61,6 @@ public class CarController {
 			@RequestMapping("addItemtoCar")
 			public String addCartItem( Integer id, @RequestParam(defaultValue="1")Integer num, 
 					HttpServletRequest request, HttpServletResponse response) {
-				
-				System.out.println("进来了num="+num);
 				ArtResult result = cartService.addCartItem(id, num, request, response);
 				return "success";
 			}

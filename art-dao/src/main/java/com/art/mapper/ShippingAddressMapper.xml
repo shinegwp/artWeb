@@ -6,9 +6,11 @@
     <result column="uid" property="uid" jdbcType="INTEGER" />
     <result column="sname" property="sname" jdbcType="VARCHAR" />
     <result column="stel" property="stel" jdbcType="VARCHAR" />
-    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
     <result column="address_detail" property="addressDetail" jdbcType="VARCHAR" />
     <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, uid, sname, stel, address, address_detail, code
+    id, uid, sname, stel, city, address_detail, code, province, area
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.art.pojo.ShippingAddressExample" >
     select
@@ -103,11 +105,13 @@
   </delete>
   <insert id="insert" parameterType="com.art.pojo.ShippingAddress" >
     insert into shipping_address (id, uid, sname, 
-      stel, address, address_detail, 
-      code)
+      stel, city, address_detail, 
+      code, province, area
+      )
     values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, 
-      #{stel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, 
-      #{code,jdbcType=VARCHAR})
+      #{stel,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.art.pojo.ShippingAddress" >
     insert into shipping_address
@@ -124,14 +128,20 @@
       <if test="stel != null" >
         stel,
       </if>
-      <if test="address != null" >
-        address,
+      <if test="city != null" >
+        city,
       </if>
       <if test="addressDetail != null" >
         address_detail,
       </if>
       <if test="code != null" >
         code,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="area != null" >
+        area,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -147,14 +157,20 @@
       <if test="stel != null" >
         #{stel,jdbcType=VARCHAR},
       </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
       </if>
       <if test="addressDetail != null" >
         #{addressDetail,jdbcType=VARCHAR},
       </if>
       <if test="code != null" >
         #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -179,14 +195,20 @@
       <if test="record.stel != null" >
         stel = #{record.stel,jdbcType=VARCHAR},
       </if>
-      <if test="record.address != null" >
-        address = #{record.address,jdbcType=VARCHAR},
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
       </if>
       <if test="record.addressDetail != null" >
         address_detail = #{record.addressDetail,jdbcType=VARCHAR},
       </if>
       <if test="record.code != null" >
         code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        area = #{record.area,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -199,9 +221,11 @@
       uid = #{record.uid,jdbcType=INTEGER},
       sname = #{record.sname,jdbcType=VARCHAR},
       stel = #{record.stel,jdbcType=VARCHAR},
-      address = #{record.address,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
       address_detail = #{record.addressDetail,jdbcType=VARCHAR},
-      code = #{record.code,jdbcType=VARCHAR}
+      code = #{record.code,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -218,14 +242,20 @@
       <if test="stel != null" >
         stel = #{stel,jdbcType=VARCHAR},
       </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=VARCHAR},
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
       </if>
       <if test="addressDetail != null" >
         address_detail = #{addressDetail,jdbcType=VARCHAR},
       </if>
       <if test="code != null" >
         code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -235,9 +265,11 @@
     set uid = #{uid,jdbcType=INTEGER},
       sname = #{sname,jdbcType=VARCHAR},
       stel = #{stel,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
       address_detail = #{addressDetail,jdbcType=VARCHAR},
-      code = #{code,jdbcType=VARCHAR}
+      code = #{code,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

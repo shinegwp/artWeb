@@ -1,5 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -21,7 +22,10 @@
 		<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.js"></script>
 			<script type="text/javascript" src="js/jquery.cookie.js"></script>
-			<script type="text/javascript" src="http://www.ijquery.cn/js/cityselect/jquery.cityselect.js"></script> 
+		<!-- 引入城市选择插件 -->
+		
+        <script type="text/javascript" src="js/path/PCASClass.js"></script>
+			
 	</head>
 
 	<body>
@@ -35,19 +39,18 @@
 					<div class="right clearfix fr">
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
-								
-								<li >
-									<a href="http://sso.jiangyou-art.com/page/register">
-										注册/登陆
-									</a>
-								</li>
-								
 								<li>
-									<a href="#" onclick="$.grxx()">
-										个人中心
+									<span class="fl">欢迎</span>
+									<a href="grxx.html" class="fl">瑾晨0212</a>
+									<span class="fl">进入商城</span>
+								</li>
+								<li>
+									<a href="register.html">
+										免费注册
 									</a>
 								</li>
-								
+							
+							
 							</ul>
 						</div>
 						<div class="shopcar-btn clearfix fl">
@@ -83,128 +86,64 @@
 			</div>
 		</div>
 	<script type="text/javascript">
-	 var sa;
-	 var item;
-	 var user;
-	 var singleItemPrice;
-	 var sum = 0;
+	var uid;
+	var umoney;
+	var shoppingAddressid;
 	$(function(){
-		 alert("44");
-		$.getShoppingAddressByUid();
-		$.displayUserName();
-		//$.showItems();
-		$.displayUserName();
 
-		$("#city").citySelect({  
-		      
-		      nodata: "none"  
-		  });
-	
+		new PCAS("province6","city6","area6");
+		$(".check-inline,.check-box").click(function() {
+			$(this).find("input").each(function(){
+				shoppingAddressid=$(this).val();
+                   });
+			$(this).siblings().removeClass("check_on");
+			if($(this).hasClass("check_on")) {
+				$(this).removeClass("check_on");
+			} else {
+				$(this).addClass("check_on");
+			}
+		})
+		 $.displayUserName();
 	});
-	$.displayUserName = function()//如果登陆了展示退出和欢迎
-	{
-		var _ticket = $.cookie("TT_TOKEN");
-		if (!_ticket) {
-			$("#displayName")
-					.html(
-							"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
-		}
-		$
-				.ajax({
-					url : "http://sso.jiangyou-art.com/userLogin/token/"
-							+ _ticket,
 
-					dataType : "jsonp",
-					type : "GET",
-					success : function(data) {
-						if (data.status == 200) {
-							user = data.data;
-							var uname = data.data.uname;
-							var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
-									+ uname
-									+ "</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
-							$("#displayName").html(html);
-						}
-					}
-				});
-	}
-
-	$.outLogin = function() {
-		$
-				.ajax({
-					url : "http://sso.jiangyou-art.com/userLogin/outLogin",
-					type : "post",
-					success : function(data) {
-						if (data.msg == "OK") {
-							alert("成功退出！");
-							$("#displayName")
-									.html(
-											"<li ><a href='sso.jiangyou-art.com/page/register'>注册/登陆</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li>")
-						} else {
-							alert("操作有误");
-						}
-					},
-					error : function() {
-						alert("error");
-					}
-
-				});
-	}
-	$.grxx = function()//当点击个人中心时判断是否已登录
-	{
-		if ($.cookie("TT_TOKEN") == null) {
-			alert("请先登录！");
-		} else {
-			window.location.href = "grxx";
-		}
-	}
-	
 	$.displayUserName=function()//如果登陆了展示退出和欢迎
-	{
-		if($.cookie("user")!=null)
-
-	     {
+	{  
+		
+		var _ticket = $.cookie("TT_TOKEN");
+		if(!_ticket){
+			$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+		}
+		$.ajax({
+			url : "http://sso.jiangyou-art.com/userLogin/token/" + _ticket,
 			
-			$("#displayName").html("<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+user.uname+
-					"</a>进入商场</li><li><a href='register' >免费注册</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.tuichu()'>退出</a></li>")
-	     }
-		else
-		{
-		$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='sign' class='f1'>登陆</a></li><li><a href='register' >免费注册</a></li>")
-		}
+			dataType : "jsonp",
+			type : "GET",
+			success : function(data){
+				alert(data.data.money);
+			    uid=data.data.uid;
+				umoney=data.data.money;
+				
+				if(data.status == 200){
+					var uname = data.data.uname;
+			
+					var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+uname+
+					"</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
+					$("#displayName").html(html);
+				}
+			}
+		});
 	}
-	$.tuichu=function()
+	$.alertBox=function(e)
+	{$("#selpro").find("option").eq(0).prop("selected",true);
+			$("#mask").stop().show();
+		
+	}
+	$.closeMask=function()
 	{
-		 $.ajax({
-			  url: "tuichu",
-			  type:"post",
-			  success: function(data)
-			  { if(data=="successful")
-				  {
-				  alert("成功退出！");
-				  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='sign' class='f1'>登陆</a></li><li><a href='register' >免费注册</a></li>")
-				  }
-			  else
-				  {
-				  alert("操作有误");
-				  }
-			  },
-			  error:function()
-			  {
-				  alert("error");
-			  }
-			  
-			});
+			$("#mask").stop().hide();
+		
 	}
-	//设置地址信息
-	$.setCitySelect=function(address)
-	{   $("#city").citySelect({  
-	      prov: address.split('/')[0],  
-	      city:address.split('/')[1],  
-	      dist:address.split('/')[2],  
-	      nodata: "none"  
-	  });  
-		}
+
 	$.getShoppingAddressByUid=function()//根据用户id的到地址
 	{ 
 		$.ajax({
@@ -240,40 +179,26 @@
 			$("#div"+i).show();
 			}
 	}
-	$.xiugai=function(e)//在弹出窗口里显示地址信息
-	{   var id = e.attr("val");
-		for(var i=0;i<sa.length;i++)
-		{
-		  if(sa[i].id==id)
-			  {$("#mid").attr("value",sa[i].id);
-			  $("#msname").attr("value",sa[i].sname);
-			  $("#mstel").attr("value",sa[i].stel);
-			  $("#maddressDetail").attr("value",sa[i].addressDetail);
-			  $("#mcode").attr("value",sa[i].code);
-			  $.setCitySelect(sa[i].address);
-			  }
-		}
-		
-		
-		
-		
-	}
-	$. pdate=function()//保存收货地址的修改
-	{ 
 
-		$.ajax({
-			url:"save",
+	$.saveUpdate=function()//修改收货地址
+	{
+	    $.ajax({
+			url:"saveshoppingaddress",
+
+			type:"post",
 			data:{
 				
-				uid:user.uid,
-				id:$("#mid").attr("value"),
-				sname:$("#msname").attr("value"),
+				uid:uid,
+				id:$("#mmid").attr("value"),
+				sname: $("#msname").attr("value"),
 				stel:$("#mstel").attr("value"),
 			    addressDetail:$("#maddressDetail").attr("value"),
 			    code: $("#mcode").attr("value"),
-			    address:$("#prov").val()+"/"+$("#cit").val()+"/"+$("#dist").val()
+			    province :$("#selpro option:selected").text(),
+			    city : $("#selcity option:selected").text(),
+			    area : $("#selarea option:selected").text()
+			 
 			},
-			type:"post",
 			dataType:"json",
 			success:function(data)
 			{
@@ -285,12 +210,13 @@
 			{ alert("error");
 			}
 		});
-		
 	}
+
+	
 	$.submitOrder=function()//提交订单   提交的是购物车里的
-	{ var car = ${text};
-	  alert(car);
-	 //var user=eval('('+a+')');
+	{ 
+	window.location.href ="creatOrderForm?sid="+shoppingAddressid+"&uid="+uid;
+			
 	}
 
 	</script>	<!--header end-->
@@ -321,71 +247,79 @@
 			<div class="js-box wrapper white-box">
 				<!--收货人信息-->
 				<div class="consignee-info">
-					<div class="title line-bot"><span class="fs18 pl20 ml40 darkgray">收货人地址</span></div>
-					<div class="consignee-box clearfix">
-						<div class="consignee-block check-box check_on  radius5" id="div0">
-							<em></em>
+					<div class="title line-bot"><span class="fs18 pl20 ml40 darkgray">选择收货地址</span></div>
+					   <div class="consignee-box clearfix" id="list">
+					    
+					       <c:forEach items="${slist}" var="address" varStatus="status">
+					        
+					        <div class="consignee-block check-box  radius5" id="textbox " >
+					        <em></em>
 							<p class="fs14 lh40 clearfix">
-								<span class="fl darkgray" id="sname0"><i class="iconfont fs24">&#xe60e;</i>飞天猪</span>
-								<input id="hsname0" type="hidden" value="">
-								<a id = "bj0" href="javascript:" class="fr green edit alertbox" onclick="$.xiugai($(this));" val=""><i class="iconfont fs24 green ">&#xe60f;</i>编辑</a>
+								<span class="fl darkgray" id="sname0" value="${address.sname}"><i class="iconfont fs24">&#xe60e;</i>${address.sname }</span>
+								<input id="said" type="hidden" value="${address.id}">
+								<a id = "alertbox" href="javascript:" class="fr green edit alertbox" onclick="$.alertBox($(this));" value='${address}'><i class="iconfont fs24 green ">&#xe60f;</i>编辑</a>
 							</p>
-							<input type="hidden" id="hte0" value="qqq">
-							<input type="hidden" id="hidco0" value="hid">
-							<p class="fs14 darkgray lh40" id="stel0"><i class="iconfont fs24">&#xe60c;</i>18056000000
+							<input type="hidden" id="hid" value="${address.id}">
+							<p class="fs14 darkgray lh40" id="stel0"><i class="iconfont fs24">&#xe60c;</i>${address.stel }
 								</>
-							
-							
 								<p class="fs14 darkgray lh30 clearfix">
-									<i class="fl iconfont fs24">&#xe610;</i><span class="fl address" id="addressDetail0">合肥市蜀山区长江西路100号拓基城市广场  金座A2002</span>
+									<i class="fl iconfont fs24">&#xe610;</i><span class="fl address" id="addressDetail0">${address.addressDetail }</span>
 								</p>
-						</div>
-						<div class="consignee-block check-box radius5" id="div1">
-							<em></em>
-							<p class="fs14 lh40 clearfix">
-								<span class="fl darkgray" id="sname1"> <i class="iconfont fs24">&#xe60e;</i>飞天猪</span>
-								<input id="hsname1" type="hidden" value="">
-								<a id = "bj1" href="javascript:" class="fr green edit alertbox" onclick="$.xiugai($(this));" val=""><i class="iconfont fs24 green">&#xe60f;</i>编辑</a>
-							</p>
-							<input type="hidden" id="hte1" value="qqq">
-							<input type="hidden" id="hidco1" value="hid">
-							<p class="fs14 darkgray lh40" id="stel1"><i class="iconfont fs24">&#xe60c;</i>18056000000
-								</>
-								
-								
-								<p class="fs14 darkgray lh30 clearfix">
-									<i class="fl iconfont fs24">&#xe610;</i><span class="fl address" id="addressDetail1">合肥市蜀山区长江西路100号拓基城市广场  金座A2002</span>
-								</p>
-						</div>
-						<div class="consignee-block check-box radius5" id="div2">
-							<em></em>
-							<p class="fs14 lh40 clearfix">
-								<span class="fl darkgray" id="sname2"> <i class="iconfont fs24">&#xe60e;</i>飞天猪</span>
-								<input id="hsname2" type="hidden" value="">
-								<a id = "bj2" href="javascript:" class="fr green edit alertbox" onclick="$.xiugai($(this));" val=""><i class="iconfont fs24 green">&#xe60f;</i>编辑</a>
-							</p>
-							<input type="hidden" id="hte2" value="qqq">
-							<input type="hidden" id="hidco2" value="hid">
-							<p class="fs14 darkgray lh40" id="stel2"><i class="iconfont fs24">&#xe60c;</i>18056000000
-								</>
-								
-								
-								<p class="fs14 darkgray lh30 clearfix">
-									<i class="fl iconfont fs24">&#xe610;</i><span class="fl address" id="addressDetail2">合肥市蜀山区长江西路100号拓基城市广场  金座A2002</span>
-								</p>
-						</div>
-						
+					      </div>
+					    
+		<div id="mask">
+			<div class="alert-box radius8">
+				<h3 class="fs20">修改收货地址 <span class="close" onclick="$.closeMask()"></span></h3>
+				<div class="address-form box-s" id="mid">
+					<form action="" id="seriform">
+					<p id="mmid" type="hidden" value="${address.id}" ></p>
+					    <input type="hidden" value=>
+						<p class="mb20 clearfix">
+							<label class="fl">收货人：</label>
+							<input id="msname" type="text" placeholder="姓名" value="${address.sname }" placeholder="姓名" class="fl ml5">
+							<em class="fl red lh40 ml10">*</em>
+						</p>
+						<p class="mb20 clearfix">
+							<label class="fl">手机：</label>
+							<input id="mstel" type="text" placeholder="手机" value="${address.stel }" placeholder="手机" class="fl ml5">
+							<em class="fl red lh40 ml10">*</em>
+						</p>
+					
+						<p id="city" class="mb20 clearfix" align="Left">
+					        <label class="fl"><em class="red">*</em>地址：</label>			
+                           <select id="selpro"  name="province6" style="width:100px;" ></select>
+                           <select  id="selcity" name="city6" style="width:100px;" ></select>
+                           <select  id="selarea" name="area6" style="width:100px;" ></select>
+		 
+					   </p>
+						<p class="mb20 clearfix">
+							<label class="fl"><em class="red">*</em>详细地址：</label>
+							<input id="maddressDetail" type="text" value="${address.addressDetail }" placeholder="详细地址" class="fl ml5">
+							<em class="fl red lh40 ml10">*</em>
+						</p>
+						<p class="mb20 clearfix">
+							<label class="fl">邮政编码：</label>
+							<input id="mcode" type="text" placeholder="邮政编码" value="" class="fl ml5" value="${address.addressDetail}">
+						</p>
+						<p class="mb20 clearfix">
+							<label class="fl"></label>
+							<input type="button" value="保存" class="fl orange-but radius3 ml5" onclick="$.saveUpdate()">
+							<input type="button" value="取消" class="fl gray-but radius3 ml10">
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+					    </c:forEach>
 					</div>
 				</div>
 				<!--/end-->
 
-		   	<div class="sale-info pt10 pb10 clearfix">
+		   	          <div class="sale-info pt10 pb10 clearfix">
 						<div class="fr total-amount mb30">
-							<p class="mt20 fr">
-								<span class="fs16 darkgray clearfix">商品总价：<em class="fr orange fs24 f-arial" id="sumPrice">¥ 999.00</em></span>
-							</p>
+							
 							<p class="mt10 fr">
-								<a href="#" onclick="$.submitOrder()" class="fr orange-but fs20 radius3">下单</a>
+								<a href="#" onclick="$.submitOrder()" class="fr orange-but fs20 radius3">支付</a>
 							</p>
 						</div>
 
@@ -496,46 +430,6 @@
 		</div>
 		<!--footer end-->
 
-		<div id="mask">
-			<div class="alert-box radius8">
-				<h3 class="fs20">修改收货地址 <span class="close"></span></h3>
-				<div class="address-form box-s" id="mid">
-					<form action="" id="seriform">
-					<p id="mid" type="hidden" value=""></p>
-						<p class="mb20 clearfix">
-							<label class="fl">收货人：</label>
-							<input id="msname" type="text" placeholder="姓名" value="" placeholder="姓名" class="fl ml5">
-							<em class="fl red lh40 ml10">*</em>
-						</p>
-						<p class="mb20 clearfix">
-							<label class="fl">手机：</label>
-							<input id="mstel" type="text" placeholder="手机" value="" placeholder="手机" class="fl ml5">
-							<em class="fl red lh40 ml10">*</em>
-						</p>
-						<p id="city" class="mb20 clearfix" align="Left">
-					        <label class="fl"><em class="red">*</em>地址：</label>			
-                            <select class="prov" id="prov"></select>    
-                            <select class="city" id="cit" disabled="disabled"></select>   
-                            <select class="dist" id="dist" disabled="disabled"></select>   
-					   </p>
-						<p class="mb20 clearfix">
-							<label class="fl"></label>
-							<input id="maddressDetail" type="text" value="" placeholder="详细地址" class="fl ml5">
-							<em class="fl red lh40 ml10">*</em>
-						</p>
-						<p class="mb20 clearfix">
-							<label class="fl">邮政编码：</label>
-							<input id="mcode" type="text" placeholder="邮政编码" value="" class="fl ml5">
-						</p>
-						<p class="mb20 clearfix">
-							<label class="fl"></label>
-							<input type="button" value="保存" class="fl orange-but radius3 ml5" onclick="$.saveUpdate()">
-							<input type="button" value="取消" class="fl gray-but radius3 ml10">
-						</p>
-					</form>
-				</div>
-			</div>
-		</div>
 	</body>
 
 </html>

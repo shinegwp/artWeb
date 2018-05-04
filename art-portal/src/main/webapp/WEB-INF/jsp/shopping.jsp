@@ -31,14 +31,21 @@
 		<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.js"></script>
 		<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<<<<<<< HEAD
+   <script type="text/javascript">
+=======
 	</head>
    <script type="text/javascript">
    
+>>>>>>> 04dce5e5795b03ff5c7aadb388008ec38488a372
    var uid;
    $(function()
 			 {
 		 $.displayUserName();
 			 });
+<<<<<<< HEAD
+ 
+=======
    $.gotojiesuan=function()
    {
 	    if(!$.cookie("TT_TOKEN"))
@@ -52,6 +59,7 @@
 	    	}
 	   
    }
+>>>>>>> 04dce5e5795b03ff5c7aadb388008ec38488a372
 	$.displayUserName=function()//如果登陆了展示退出和欢迎
 	{  
 		
@@ -107,6 +115,23 @@
 			  
 			});
 	 }
+<<<<<<< HEAD
+	  $.gotojiesuan=function()
+	   {
+		    if(!$.cookie("TT_TOKEN"))
+		    	{
+		    	alert("请先登陆");
+		    	}
+		    else
+		    	{
+		    	var t = $("#totalPrice").attr("value");
+		    	alert("total"+t);
+		    	window.location.href ="gotojiesuan?uid="+uid+"&totalprice="+t;
+		    	}
+		   
+	   }
+=======
+>>>>>>> 04dce5e5795b03ff5c7aadb388008ec38488a372
    </script>
 <body>
 		<!--header star-->
@@ -303,7 +328,9 @@
         <!-- ************************商品开始********************* -->
         <c:set var="totalPrice" value="0"></c:set>
         <c:forEach items="${cartList}" var="cart">
+       
         	<c:set var="totalPrice"  value="${ totalPrice + (cart.price * cart.num)}"/>
+      
 	        <div id="product_11345721" data-bind="rowid:1" class="item item_selected ">
 		        <div class="item_form clearfix">
 		            <div class="cell p-checkbox"></div>
@@ -359,7 +386,11 @@
           <div class="cart-total-2014">
               <div class="cart-button">
                   <span class="check-comm-btns" id="checkout-jd">
+<<<<<<< HEAD
+                      <a class="checkout fr orange-but fs20 radius3" href="#" onclick="$.gotojiesuan()"  id="totalPrice" value="${totalPrice}">去结算<b></b></a>
+=======
                       <a class="checkout fr orange-but fs20 radius3" href="#" onclick="$.gotojiesuan()"  id="">去结算<b></b></a>
+>>>>>>> 04dce5e5795b03ff5c7aadb388008ec38488a372
                   </span>
                
               </div> 

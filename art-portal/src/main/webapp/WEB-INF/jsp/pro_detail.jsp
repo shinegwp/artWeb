@@ -255,7 +255,7 @@ $.gotoprodetail=function(e)
 	 window.location.href ="getDetail?id="+e.val();
 	}
 $.addItem=function()
-{
+{  alert(id);
 	$.ajax({
 		url:"addItemtoCar",
 		data:{
@@ -435,8 +435,6 @@ else
 						</div>
 						<div class="tab-bd">
 							<div class="tab-pal" id="xq">
-						     
-								
 							</div>
 							<div class="tab-pal">
 								<div class="pro-zixun clearfix">
