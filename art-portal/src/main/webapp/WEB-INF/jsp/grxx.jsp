@@ -95,8 +95,6 @@
 						success : function(data) {
 							if (data.status == 200) {
 								user = data.data;
-								
-								alert(data.birthday+"aaa");
 								var uname = data.data.uname;
 								var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
 										+ uname
@@ -143,7 +141,6 @@
         
 		//保存修改
 		$.saveUpdate = function() {
-			alert(1);
 			alert(user.uid+"jjjj");
 			$.ajax({
 				url : "restuserupdatefront",
