@@ -26,6 +26,7 @@ public class SolrTest {
 	public void deleteDocument() throws Exception {
 		//创建一连接
 		SolrServer solrServer = new HttpSolrServer("http://192.168.200.128:8080/solr");
+		//solrServer.deleteById("test001");
 		solrServer.deleteByQuery("*:*");
 		solrServer.commit();
 	}

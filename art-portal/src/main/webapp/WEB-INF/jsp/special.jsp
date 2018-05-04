@@ -36,17 +36,7 @@
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
 								
-								<li >
-									<a href="http://sso.jiangyou-art.com/page/register">
-										注册/登陆
-									</a>
-								</li>
-								
-								<li>
-									<a href="#" onclick="$.grxx()">
-										个人中心
-									</a>
-								</li>
+								<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/special' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>
 								
 							</ul>
 						</div>						
@@ -64,11 +54,20 @@
 				<div class="logo clearfix">
 					<a href="index.html"></a>
 				</div>
-				
+				<div class="search clearfix fr ra5">
+				    <input type="text" class="fl" name="q" placeholder="请输入您要搜索的内容" id="query"/>
+					<input type="button" value="搜索" class="fl box-s" onclick="$.search()"/>
+				</div>
 			</div>
 		</div>
 		<!--header end-->
-
+		<script type="text/javascript">
+		$.search=function()
+		{
+			var querystr=$("#query").attr("value");
+			 window.location.href="search?q="+querystr;
+		}
+		</script>
 		<!--navbar star-->
 		<div class="navbar clearfix">
 			<div class="content clearfix">
@@ -123,13 +122,14 @@ $(function()
 $(function() {
 	$.displayUserName();
 });
+
 $.displayUserName = function()//如果登陆了展示退出和欢迎
 {
 	var _ticket = $.cookie("TT_TOKEN");
 	if (!_ticket) {
 		$("#displayName")
 				.html(
-						"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+						"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/special' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
 	}
 	$
 			.ajax({
@@ -149,36 +149,41 @@ $.displayUserName = function()//如果登陆了展示退出和欢迎
 				}
 			});
 }
-
-$.outLogin = function() {
-	$
-			.ajax({
-				url : "http://sso.jiangyou-art.com/userLogin/outLogin",
-				type : "post",
-				success : function(data) {
-					if (data.msg == "OK") {
-						alert("成功退出！");
-						$("#displayName")
-								.html(
-										"<li ><a href='sso.jiangyou-art.com/page/register'>注册/登陆</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li>")
-					} else {
-						alert("操作有误");
-					}
-				},
-				error : function() {
-					alert("error");
-				}
-
-			});
+$.grxx=function()//当点击个人中心时判断是否已登录
+{  
+	
+	 window.location.href="grxx";
+	  
 }
-$.grxx = function()//当点击个人中心时判断是否已登录
+
+$.outLogin=function()
 {
-	if ($.cookie("TT_TOKEN") == null) {
-		alert("请先登录！");
-	} else {
-		window.location.href = "grxx";
-	}
+	 $.ajax({
+		  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
+		  dataType : "jsonp",
+		  type:"GET",
+		  
+		  success: function(data)
+		  
+		  { if(data.msg=="OK")
+			  {
+			  alert("成功退出！");
+			  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/special' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+			  }
+		  else
+			  {
+			  alert("操作有误");
+			  }
+		  },
+		  error:function()
+		  {
+			  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/special' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+             
+		  }
+		  
+		});
 }
+
 		
 		
 
@@ -210,6 +215,10 @@ $.getParentListByPage=function(e)
 				 $("#nexPage").attr("value",artresult.data.nextPage);
 				 $("#lastPage").attr("value",artresult.data.lastPage);
 				 $("#prePage").attr("value",artresult.data.prePage);
+				//------------------------------------------------------------ 
+  				$("#totalpage").html("共"+artresult.data.lastPage+"页");
+  				$("#currentpage").html("当前第"+artresult.data.pageNum+"页");
+  				//------------------------------------------------------------ 
 				
 				 for(var j=0;j<5;j++){//先隐藏所有的专场div
 					 $("#let"+j).hide();
@@ -227,7 +236,6 @@ $.getParentListByPage=function(e)
 					 }
 		 },error:function()
 		 {
-			 alert("error");
 		 }
 			
 		});
@@ -342,6 +350,11 @@ $.enterSpecial=function(e)
 						<input type="text" name="" id="jid" value=""  size="1"/>
 						<span>页</span>
 						<input type="submit" name="" id="" value="确定" onclick="$.getParentListByPage($(this));"/>
+						<!-- ------------------------------------ -->
+				        <br>
+				        <span id="totalpage"></span>
+				        <span id="currentpage"></span>
+				        <!-- ------------------------------------ -->
 					</div>
 			</div>
 		</div>

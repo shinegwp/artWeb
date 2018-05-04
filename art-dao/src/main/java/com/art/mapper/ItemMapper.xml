@@ -204,6 +204,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  
   <update id="updateByExampleSelective" parameterType="map" >
     update item
     <set >
@@ -320,4 +321,5 @@
       like_count = #{likeCount,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
 </mapper>

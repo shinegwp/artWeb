@@ -30,28 +30,16 @@
 			<div class="top clearfix">
 				<div class="topctent clearfix">
 					<div class="left clearfix fl">
-						公告：您好，欢迎登录北京椿龄文化发展有限公司
+						公告：您好，欢迎来到酱油文化艺术品商城
 					</div>
 					<div class="right clearfix fr">
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
-								<li>
-									<span class="fl">欢迎</span>
-									<a href="grxx" class="fl">瑾晨0212</a>
-									<span class="fl">进入商城</span>
-								</li>
-								<li>
-									<a href="register">
-										免费注册
-									</a>
-								</li>
-								<li>
-									<a href="settled">
-										艺术家入驻
-									</a>
-								</li>
+								
+								<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>
+								
 							</ul>
-						</div>
+						</div>					
 						<div class="shopcar-btn clearfix fl">
 							<a href="cartShow" class="box-s">
 								购物车
@@ -159,28 +147,40 @@ $.wdzx=function()
 
 $.displayUserName=function()//如果登陆了展示退出和欢迎
 {
-	if($.cookie("user")!=null)
-
-     {
-		
-		$("#displayName").html("<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+user.uname+
-				"</a>进入商场</li><li><a href='register' >免费注册</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.tuichu()'>退出</a></li>")
-     }
-	else
-	{
-	$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='sign' class='f1'>登陆</a></li><li><a href='register' >免费注册</a></li>")
+	var _ticket = $.cookie("TT_TOKEN");
+	if(!_ticket){
+		$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
 	}
+	$.ajax({
+		url : "http://sso.jiangyou-art.com/userLogin/token/" + _ticket,
+		
+		dataType : "jsonp",
+		type : "GET",
+		success : function(data){
+		
+			if(data.status == 200){
+				var uname = data.data.uname;
+				var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+uname+
+				"</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
+				$("#displayName").html(html);
+			}
+		}
+	});
 }
-$.tuichu=function()
-{
+
+ $.outLogin=function()
+ {
 	 $.ajax({
-		  url: "tuichu",
-		  type:"post",
+		  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
+		  dataType : "jsonp",
+		  type:"GET",
+		  
 		  success: function(data)
-		  { if(data=="successful")
+		  
+		  { if(data.msg=="OK")
 			  {
 			  alert("成功退出！");
-			  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='sign' class='f1'>登陆</a></li><li><a href='register' >免费注册</a></li>")
+			  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
 			  }
 		  else
 			  {
@@ -189,12 +189,48 @@ $.tuichu=function()
 		  },
 		  error:function()
 		  {
+			  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+              
+		  }
+		  
+		});
+ }
+ $.grxx=function()//当点击个人中心时判断是否已登录
+ {  
+	 if($.cookie("TT_TOKEN")==null)
+	 {
+	 alert("请先登录！");
+	 }
+ else
+	 {
+	 window.location.href="grxx";
+	 } 
+ }
+ $.getNewItem=function()
+	{
+	 $.ajax({
+		  url: "getContent",
+		  type: "post",
+		  data:{
+			  categoryId:90  
+		  },
+		  success: function(data)
+		  {  
+			  var content=eval('('+data+')');
+			  for(var i=0;i<4;i++)
+				{
+				$("#src"+i).attr("src",content[i].pic);//显示图片
+			 	$("#p"+i).html(content[i].title);
+				$("#span"+i).text(content[i].price);
+				}
+		  },
+		  error:function()
+		  {
 			  alert("error");
 		  }
 		  
 		});
-}
-
+	}
 </script>
 <script type="text/javascript">
 $.alllike=function()
@@ -320,17 +356,10 @@ else
 							
 						</div>
 						<div class="pt10">
-							<div class="p-count fs14 mt20 clearfix">
-								<label class="fl lh40 darkblack">数量：</label>
-								<p class="fl count ml10 clearfix">
-									<a href="javascript:" class="fl fs30 reduction">-</a>
-									<input type="text" value="" class="fl fs16" placeholder="1">
-									<a href="javascript:" class="fl fs30 add">+</a>
-								</p>
-							</div>
+						</br></br></br></br></br></br></br>
 							<div class="but-box mt30">
-								<input type="button" class="fl orange-but radius3" onclick="$.gotojiesuan($(this))" value="立即购买" id="bid" iteid="">
-								<input type="button" class="fl ml20 orange-but gray-but radius3" value="加入购物车" id="sid" iteid="" onclick="$.addItem()">
+							
+								<input type="button" class="fl orange-but radius3" value="加入购物车" id="sid" iteid="" onclick="$.addItem()">
 							</div>
 						</div>
 					</div>

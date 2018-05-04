@@ -47,7 +47,6 @@
 		<!-- 连接耗尽时是否阻塞, false报异常,ture阻塞直到超时, 默认true -->
 		<property name="blockWhenExhausted" value="false" />
 	</bean>
-	
 	<!-- redis单机 通过连接池 -->
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="close">
 		<constructor-arg index="0" ref="jedisPoolConfig"></constructor-arg>
