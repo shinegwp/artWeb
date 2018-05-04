@@ -36,17 +36,7 @@
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
 								
-								<li >
-									<a href="http://sso.jiangyou-art.com/page/register">
-										注册/登陆
-									</a>
-								</li>
-								
-								<li>
-									<a href="#" onclick="$.grxx()">
-										个人中心
-									</a>
-								</li>
+								<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/special' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>
 								
 							</ul>
 						</div>						
@@ -123,13 +113,14 @@ $(function()
 $(function() {
 	$.displayUserName();
 });
+
 $.displayUserName = function()//如果登陆了展示退出和欢迎
 {
 	var _ticket = $.cookie("TT_TOKEN");
 	if (!_ticket) {
 		$("#displayName")
 				.html(
-						"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+						"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/special' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
 	}
 	$
 			.ajax({
@@ -149,36 +140,41 @@ $.displayUserName = function()//如果登陆了展示退出和欢迎
 				}
 			});
 }
-
-$.outLogin = function() {
-	$
-			.ajax({
-				url : "http://sso.jiangyou-art.com/userLogin/outLogin",
-				type : "post",
-				success : function(data) {
-					if (data.msg == "OK") {
-						alert("成功退出！");
-						$("#displayName")
-								.html(
-										"<li ><a href='sso.jiangyou-art.com/page/register'>注册/登陆</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li>")
-					} else {
-						alert("操作有误");
-					}
-				},
-				error : function() {
-					alert("error");
-				}
-
-			});
+$.grxx=function()//当点击个人中心时判断是否已登录
+{  
+	
+	 window.location.href="grxx";
+	  
 }
-$.grxx = function()//当点击个人中心时判断是否已登录
+
+$.outLogin=function()
 {
-	if ($.cookie("TT_TOKEN") == null) {
-		alert("请先登录！");
-	} else {
-		window.location.href = "grxx";
-	}
+	 $.ajax({
+		  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
+		  dataType : "jsonp",
+		  type:"GET",
+		  
+		  success: function(data)
+		  
+		  { if(data.msg=="OK")
+			  {
+			  alert("成功退出！");
+			  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/special' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+			  }
+		  else
+			  {
+			  alert("操作有误");
+			  }
+		  },
+		  error:function()
+		  {
+			  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/special' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+             
+		  }
+		  
+		});
 }
+
 		
 		
 
@@ -227,7 +223,6 @@ $.getParentListByPage=function(e)
 					 }
 		 },error:function()
 		 {
-			 alert("error");
 		 }
 			
 		});

@@ -23,8 +23,11 @@
 	<!-- Dubbo消费方 -->
 	<!-- 名称  计算机 区别 唯一 -->
 	<dubbo:application name="art-portal"/>
+<<<<<<< HEAD
     <!-- 直连+不检查 -->
     <dubbo:registry address="N/A" check="false"/>
+=======
+>>>>>>> f4646c6ec18778c7f1167acccf09c88ad5c53fce
 	<!-- 调用此接口对应的实现类-->
 	<!-- 2：设置注册中心  地址  zookeeper在哪里  redis ... -->
     	<!-- <dubbo:registry address="192.168.200.128:2181,192.168.200.129:2181,192.168.200.130:2181" protocol="zookeeper"/> -->

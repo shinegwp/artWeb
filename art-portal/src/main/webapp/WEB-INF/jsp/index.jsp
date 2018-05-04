@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+or<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -51,7 +51,7 @@
 			</div>			
 			<div class="bottom clearfix">
 				<div class="logo clearfix">
-					<a href="index.html"></a>
+					
 				</div>
 				<div class="search clearfix fr ra5">
 				<form id="form1" name="f1" action="search" method="post">
@@ -150,8 +150,6 @@
 			  {
 				  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
                   
-				  alert("error");
-				  alert(data.msg);
 			  }
 			  
 			});
