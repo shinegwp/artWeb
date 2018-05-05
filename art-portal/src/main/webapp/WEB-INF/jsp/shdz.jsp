@@ -36,7 +36,6 @@
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
 								
-								<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>
 								
 							</ul>
 						</div>
@@ -51,7 +50,7 @@
 			</div>
 			<div class="bottom clearfix">
 				<div class="logo clearfix">
-					<a href="index.html"></a>
+					<a href="index"></a>
 				</div>
 				<div class="search clearfix fr ra5">
 					<input type="text" class="fl" name="" id="" value="" placeholder="请输入您要搜索的内容" />
@@ -68,31 +67,11 @@ var id;
 $(function()
 		{
 	$.displayUserName();
-	alert("shdz");
-	
-	  uid = $.cookie("uid");
-	 list = $.getShippingAddress(uid);
-	 for(var i = 1; i <=3; i++){ //tr_len是要控制的tr个数 
-		 $("#tr"+i).hide(); 
-		 }
-	for(var j=0;j<list.length;j++)
-		{
-		$("#tr"+j).show();
-		}
-	 $("#city").citySelect({  
-	        
-	      nodata: "none"  
-	  }); 
- 
 		});
 $.displayUserName = function()//如果登陆了展示退出和欢迎
 {
 	var _ticket = $.cookie("TT_TOKEN");
-	if (!_ticket) {
-		$("#displayName")
-				.html(
-						"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
-	}
+	
 	$
 			.ajax({
 				url : "http://sso.jiangyou-art.com/userLogin/token/"
@@ -103,43 +82,57 @@ $.displayUserName = function()//如果登陆了展示退出和欢迎
 				success : function(data) {
 					if (data.status == 200) {
 						var uname = data.data.uname;
+						uid = data.data.uid;
+						list = $.getShippingAddress(uid);
+						for(var i = 0; i <=2; i++){ //tr_len是要控制的tr个数 
+							 $("#tr"+i).hide(); 
+							 }
+						for(var j=0;j<list.length;j++)
+							{
+							$("#tr"+j).show();
+							}
+						 $("#city").citySelect({  
+						        
+						      nodata: "none"  
+						  }); 
 						var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
 								+ uname
-								+ "</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
+								+ "</a>进入商场</li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
 						$("#displayName").html(html);
-					}
-				}
-			});
-}
-
-$.outLogin = function() {
-	$
-			.ajax({
-				url : "http://sso.jiangyou-art.com/userLogin/outLogin",
-				type : "post",
-				success : function(data) {
-					if (data.msg == "OK") {
-						alert("成功退出！");
-						$("#displayName")
-								.html(
-										"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
 					} else {
-						alert("操作有误");
+						alert("登陆已过期，请重新登录");
+						window.location.href = "http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/shdz";
 					}
-				},
-				error : function() {
-					alert("error");
+					
 				}
-
 			});
 }
-$.grxx = function()//当点击个人中心时判断是否已登录
+
+$.outLogin=function()
 {
-	if ($.cookie("TT_TOKEN") == null) {
-		alert("请先登录！");
-	} else {
-		window.location.href = "grxx";
-	}
+	 $.ajax({
+		  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
+		  dataType : "jsonp",
+		  type:"GET",
+		  
+		  success: function(data)
+		  
+		  { if(data.msg=="OK")
+			  {
+			  alert("成功退出！");
+			  window.location.href = "http://www.jiangyou-art.com";
+			  }
+		  else
+			  {
+			  alert("操作有误");
+			  }
+		  },
+		  error:function()
+		  {
+			  window.location.href = "http://www.jiangyou-art.com";	                  
+		  }
+		  
+		});
 }
 		
 //删除
@@ -176,7 +169,6 @@ $.setCitySelect=function(address)
 //确认保存
 $.saveShippingAddress=function(e)
 {var id = e.attr("saveid");
-alert($("#cit").val());
 if(list.length>=3)
 	{
 	alert("个人收货地址最多三个");
@@ -192,7 +184,7 @@ $.ajax({
 			"uid":uid,
 			"address":$("#prov").val()+"/"+$("#cit").val()+"/"+$("#dist").val(),
 			"sname":$("#sname").attr("value"),
-			"stel":$("#tel").attr("value"),
+			"stel":$("#stel").attr("value"),
 			"addressDetail":$("#addressDetail").attr("value"),
 			"code":$("#code").attr("value"),
 		},
@@ -215,7 +207,6 @@ $.ajax({
 //$.updata()
 $.updata=function(e)
 {var id=e.attr("value");
- alert(id);
  $.ajax({
 		url:"getShippAddressById",
 		type:"post",
@@ -252,7 +243,6 @@ $.updata=function(e)
 //通过id得到收货地址
 $.getShippingAddress=function(uid)
 {var salist;
-alert(uid);
 $.ajax({
 	  url: "getShippingAddress",
 	  data:{
@@ -269,7 +259,7 @@ $.ajax({
 		  $("#sc"+i).attr("value",jsondata[i].id);
 		  $("#tdname"+i).html(jsondata[i].sname);
 		  $("#address"+i).html(jsondata[i].addressDetail);
-		  $("#tel"+i).html(jsondata[i].tel);
+		  $("#stel"+i).html(jsondata[i].stel);
 	
 		  }
 	  salist=jsondata;
@@ -285,7 +275,7 @@ return salist;
 	}
 
 $.reset=function()
-{alert(list.length)
+{
 	if(list.length>=3)
 	{
 	alert("最多三个收货地址！");
@@ -356,9 +346,7 @@ $.reset=function()
 						<li>
 							<a href="zixun" class="db fs16">我的咨询</a>
 						</li>
-						<li>
-							<a href="znx" class="db fs16">站内信</a>
-						</li>
+						
 					</ul>
 				</div>
 				<div class="fr slide-show white-box">
@@ -468,7 +456,7 @@ $.reset=function()
 				</div>
 				
 			<div class="banquan clearfix ta-center">
-				Copyright © 2003-2015 酱油文化. All Rights Reserved. 
+				Copyright 酱油文化. All Rights Reserved. 
 			</div>
 		</div>
 		<!--footer end-->

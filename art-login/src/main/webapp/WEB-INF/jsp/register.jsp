@@ -363,7 +363,7 @@
 			</script>
 		</div>
 		<div class="xia clearfix">
-			<p>Copyright © 2003-2015 酱油文化. All Rights
+			<p>Copyright 酱油文化. All Rights
 				Reserved.</p>
 		</div>
 	</div>

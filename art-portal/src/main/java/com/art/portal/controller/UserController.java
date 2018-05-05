@@ -22,6 +22,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -175,7 +176,7 @@ public class UserController {
 	    DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");	  
 		User u = new User();
 		u.setUid(uid);
-	    u.setUpassword(upassword);
+	    u.setUpassword(DigestUtils.md5DigestAsHex(upassword.getBytes()));
 	    if(birthday!=null)
 	    {
 	    	u.setBirthday(fmt.parse(birthday));

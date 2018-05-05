@@ -35,7 +35,6 @@
 					<div class="zuo clearfix fl">
 						<ul class="clearfix fl" id="displayName">
 								
-								<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>
 								
 							</ul>
 					</div>
@@ -84,7 +83,7 @@
 		{
 			if (!_ticket) {
 				alert("请先登录！");
-				window.location.href = "http://sso.jiangyou-art.com/page/login?";
+				window.location.href = "http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/grxx";
 			}
 			$.ajax({
 						url : "http://sso.jiangyou-art.com/userLogin/token/"
@@ -98,7 +97,7 @@
 								var uname = data.data.uname;
 								var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
 										+ uname
-										+ "</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
+										+ "</a>进入商场</li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
 								$("#displayName").html(html);
 								$("#uname").attr("value", user.uname);
 								$("#birthday").attr("value", data.birthday);
@@ -112,32 +111,40 @@
 								$("#tel").attr("value", user.tel);
 								$("#uqq").attr("value", user.qq);
 								$("#email").attr("value", user.email);
-							}
-						}
-					});
-		}
-
-		$.outLogin = function() {
-			$
-					.ajax({
-						url : "http://sso.jiangyou-art.com/userLogin/outLogin",
-						type : "post",
-						success : function(data) {
-							if (data.msg == "OK") {
-								alert("成功退出！");
-								$("#displayName")
-										.html(
-												"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
 							} else {
-								alert("操作有误");
+								alert("登陆已过期，请重新登录");
+								window.location.href = "http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/grxx";
 							}
-						},
-						error : function() {
-							alert("error");
 						}
-
 					});
 		}
+
+		$.outLogin=function()
+		 {
+			 $.ajax({
+				  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
+				  dataType : "jsonp",
+				  type:"GET",
+				  
+				  success: function(data)
+				  
+				  { if(data.msg=="OK")
+					  {
+					  alert("成功退出！");
+					  window.location.href = "http://www.jiangyou-art.com";
+					  }
+				  else
+					  {
+					  alert("操作有误");
+					  }
+				  },
+				  error:function()
+				  {
+					  window.location.href = "http://www.jiangyou-art.com";	                  
+				  }
+				  
+				});
+		 }
         
 		//保存修改
 		$.saveUpdate = function() {
@@ -170,7 +177,6 @@
 				<ul>
 					<li class="on"><a href="grxx" class="db fs16">个人信息</a></li>
 					<li><a href="wddd" class="db fs16">我的订单</a></li>
-					<li><a href="wdjm " class="db fs16">我的寄卖</a></li>
 					<li><a href="shdz" class="db fs16">收货地址</a></li>
 					<li><a href="wdsc" class="db fs16">我的收藏</a></li>
 
@@ -179,7 +185,6 @@
 					<li><a href="zxcz" class="db fs16">在线充值</a></li>
 					<li><a href="lljl" class="db fs16">退货记录</a></li>
 					<li><a href="zixun" class="db fs16">我的咨询</a></li>
-					<li><a href="znx" class="db fs16">站内信</a></li>
 				</ul>
 			</div>
 			<div class="fr slide-show white-box">
@@ -251,7 +256,7 @@
 			</div>
 			
 		</div>
-		<div class="banquan clearfix ta-center">Copyright © 2003-2015
+		<div class="banquan clearfix ta-center">Copyright
 			酱油文化. All Rights Reserved.</div>
 	</div>
 	<!--footer end-->
