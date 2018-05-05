@@ -31,7 +31,6 @@
 	</form>
 	<div style="padding:5px">
 	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">提交</a>
-	    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -44,7 +43,7 @@
 		}
 
 
-		$.post("usersave",$("#userAddForm").serialize(), function(data){
+		$.post("usersaveback",$("#userAddForm").serialize(), function(data){
 			if(data == 1){
 				$.messager.alert('提示','新增用户成功!');
 				$("#userList").datagrid("reload");

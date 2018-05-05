@@ -34,7 +34,8 @@ public class UserControllerBack {
 	public String showpage(@PathVariable String page) {
 		return page;
 	}
-	@RequestMapping(value ="restUserDelete",produces = "text/html;charset=UTF-8")//��̨
+	
+	@RequestMapping(value ="restUserDelete")
 	@ResponseBody
 	public int deleteUsers(Integer[] ids)
 	{	
@@ -67,7 +68,6 @@ public class UserControllerBack {
 		u.setQq(qq);
 		u.setEmail(email);
 		u.setMoney(money);
-		System.out.println("updata"+u);
 		userServiceBack.update(u);
 		return u;
 	}
