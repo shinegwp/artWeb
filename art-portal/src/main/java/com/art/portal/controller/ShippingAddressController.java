@@ -83,9 +83,8 @@ public String deleteShippingAddressById(Integer id)
 	//把收货地址带到结算页面
 		@RequestMapping("gotojiesuan")
 		@ResponseBody
-		public ModelAndView trasShippingAddressByUid(String uid,String totalprice) 
-		{    System.out.println("总价============"+totalprice);
-		
+		public ModelAndView trasShippingAddressByUid(String uid) 
+		{   
 			 List<ShippingAddress> slist = shippingAddressService.getShippingAddressByUid(Integer.parseInt(uid));
 			 Map<String,Object> map = new HashMap<String,Object>();
 			 map.put("slist",slist);

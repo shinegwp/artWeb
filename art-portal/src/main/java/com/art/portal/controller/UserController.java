@@ -71,89 +71,89 @@ public class UserController {
 	 * @describe 付款的时候减钱
 	 * 待完善
 	 */
-	@RequestMapping("payOne")
-	@ResponseBody
-	public String reduceOneMoney(HttpServletResponse response,HttpServletRequest request,String money,String uid) throws JsonParseException, JsonMappingException, UnsupportedEncodingException, IOException
-	{   User u = userService.getUserById(Integer.parseInt(uid));
-	    u.setMoney(String.valueOf(Integer.parseInt(u.getMoney())-Integer.parseInt(money)));
-		int i = userService.reduceMoney(u);
-		if(i==1)
-		{List<Item> list = new ArrayList<Item>();
-			Cookie[] cookies = request.getCookies();
-			 ObjectMapper om = new ObjectMapper();     
-		       Car buyerCart = null;
-		       if (null != cookies && cookies.length > 0) {
-		            for (Cookie cookie : cookies) {
-		                //
-		                if ("car".equals(cookie.getName())) {
-		                    		                	
-		                    buyerCart = om.readValue(URLDecoder.decode(cookie.getValue(), "utf-8"), Car.class);
-		                    list = buyerCart.getItems();
-		                   
-		                    break;
-		                }
-		            }
-		        }
-		       for(Item item:list)
-		       {
-		    	   int j = itemservice.InstockItem(item.getId());
-		    	   buyerCart.setItems(new ArrayList<Item>());
-		    	   Writer w = new StringWriter();
-				   om.writeValue(w, buyerCart);
-				   Cookie cookie = new Cookie("car", URLEncoder.encode(w.toString(), "utf-8"));
-		       }
-		}
-		ArtResult result = new ArtResult();
-		result.setStatus(i);;
-		result.setMsg(u.getMoney());
-			JSONObject json = JSONObject.fromObject(result);
-		
-		return json.toString() ;
-	}
+//	@RequestMapping("payOne")
+//	@ResponseBody
+//	public String reduceOneMoney(HttpServletResponse response,HttpServletRequest request,String money,String uid) throws JsonParseException, JsonMappingException, UnsupportedEncodingException, IOException
+//	{   User u = userService.getUserById(Integer.parseInt(uid));
+//	    u.setMoney(String.valueOf(Integer.parseInt(u.getMoney())-Integer.parseInt(money)));
+//		int i = userService.reduceMoney(u);
+//		if(i==1)
+//		{List<Item> list = new ArrayList<Item>();
+//			Cookie[] cookies = request.getCookies();
+//			 ObjectMapper om = new ObjectMapper();     
+//		       Car buyerCart = null;
+//		       if (null != cookies && cookies.length > 0) {
+//		            for (Cookie cookie : cookies) {
+//		                //
+//		                if ("car".equals(cookie.getName())) {
+//		                    		                	
+//		                    buyerCart = om.readValue(URLDecoder.decode(cookie.getValue(), "utf-8"), Car.class);
+//		                    list = buyerCart.getItems();
+//		                   
+//		                    break;
+//		                }
+//		            }
+//		        }
+//		       for(Item item:list)
+//		       {
+//		    	   int j = itemservice.InstockItem(item.getId());
+//		    	   buyerCart.setItems(new ArrayList<Item>());
+//		    	   Writer w = new StringWriter();
+//				   om.writeValue(w, buyerCart);
+//				   Cookie cookie = new Cookie("car", URLEncoder.encode(w.toString(), "utf-8"));
+//		       }
+//		}
+//		ArtResult result = new ArtResult();
+//		result.setStatus(i);;
+//		result.setMsg(u.getMoney());
+//			JSONObject json = JSONObject.fromObject(result);
+//		
+//		return json.toString() ;
+//	}
 	/**
 	 * @describe 付款的时候减钱
 	 * 待完善
 	 */
-	@RequestMapping("pay")
-	@ResponseBody
-	public String reduceMoney(HttpServletResponse response,HttpServletRequest request,String money,String uid) throws JsonParseException, JsonMappingException, UnsupportedEncodingException, IOException
-	{   User u = userService.getUserById(Integer.parseInt(uid));
-	    u.setMoney(String.valueOf(Integer.parseInt(u.getMoney())-Integer.parseInt(money)));
-		int i = userService.reduceMoney(u);
-		if(i==1)
-		{List<Item> list = new ArrayList<Item>();
-			Cookie[] cookies = request.getCookies();
-			 ObjectMapper om = new ObjectMapper();     
-		       Car buyerCart = null;
-		       if (null != cookies && cookies.length > 0) {
-		            for (Cookie cookie : cookies) {
-		                //
-		                if ("car".equals(cookie.getName())) {
-		                    		                	
-		                    buyerCart = om.readValue(URLDecoder.decode(cookie.getValue(), "utf-8"), Car.class);
-		                    list = buyerCart.getItems();
-		                   
-		                    break;
-		                }
-		            }
-		        }
-		       for(Item item:list)
-		       {
-		    	   int j = itemservice.InstockItem(item.getId());
-		    	 
-		    	   buyerCart.setItems(new ArrayList<Item>());
-		    	    Writer w = new StringWriter();
-					 om.writeValue(w, buyerCart);
-					 Cookie cookie = new Cookie("car", URLEncoder.encode(w.toString(), "utf-8"));
-		       }
-		}
-		ArtResult result = new ArtResult();
-		result.setStatus(i);;
-		result.setMsg(u.getMoney());
-			JSONObject json = JSONObject.fromObject(result);
-		
-		return json.toString() ;
-	}
+//	@RequestMapping("pay")
+//	@ResponseBody
+//	public String reduceMoney(HttpServletResponse response,HttpServletRequest request,String money,String uid) throws JsonParseException, JsonMappingException, UnsupportedEncodingException, IOException
+//	{   User u = userService.getUserById(Integer.parseInt(uid));
+//	    u.setMoney(String.valueOf(Integer.parseInt(u.getMoney())-Integer.parseInt(money)));
+//		int i = userService.reduceMoney(u);
+//		if(i==1)
+//		{List<Item> list = new ArrayList<Item>();
+//			Cookie[] cookies = request.getCookies();
+//			 ObjectMapper om = new ObjectMapper();     
+//		       Car buyerCart = null;
+//		       if (null != cookies && cookies.length > 0) {
+//		            for (Cookie cookie : cookies) {
+//		                //
+//		                if ("car".equals(cookie.getName())) {
+//		                    		                	
+//		                    buyerCart = om.readValue(URLDecoder.decode(cookie.getValue(), "utf-8"), Car.class);
+//		                    list = buyerCart.getItems();
+//		                   
+//		                    break;
+//		                }
+//		            }
+//		        }
+//		       for(Item item:list)
+//		       {
+//		    	   int j = itemservice.InstockItem(item.getId());
+//		    	 
+//		    	   buyerCart.setItems(new ArrayList<Item>());
+//		    	    Writer w = new StringWriter();
+//					 om.writeValue(w, buyerCart);
+//					 Cookie cookie = new Cookie("car", URLEncoder.encode(w.toString(), "utf-8"));
+//		       }
+//		}
+//		ArtResult result = new ArtResult();
+//		result.setStatus(i);;
+//		result.setMsg(u.getMoney());
+//			JSONObject json = JSONObject.fromObject(result);
+//		
+//		return json.toString() ;
+//	}
 //********************************************************************************************************************************
 	/**
 	 * @describe 保存用户
@@ -170,7 +170,7 @@ public class UserController {
 	
 	@RequestMapping(value ="restuserupdatefront")
 	@ResponseBody
-	public User updata(String money,String upassword,Integer uid,String uname,String birthday,String sex,String tel,String qq,String email) throws ParseException
+	public User updata(long money,String upassword,Integer uid,String uname,String birthday,String sex,String tel,String qq,String email) throws ParseException
 	{  System.out.println(money);
 	    DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");	  
 		User u = new User();
