@@ -31,82 +31,22 @@
 		<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.js"></script>
 		<script type="text/javascript" src="js/jquery.cookie.js"></script>
-	</head>
-   <script type="text/javascript">
-   
-   var uid;
-   $(function()
-			 {
-		 $.displayUserName();
-			 });
-   $.gotojiesuan=function()
-   {
-	    if(!$.cookie("TT_TOKEN"))
-	    	{
-	    	alert("请先登陆");
-	    	}
-	    else
-	    	{
-	    	alert("开始跳转"+uid)
-	    	window.location.href ="gotojiesuan?uid="+uid;
-	    	}
-	   
-   }
-	$.displayUserName=function()//如果登陆了展示退出和欢迎
-	{  
+		</head>
 		
-		var _ticket = $.cookie("TT_TOKEN");
-		if(!_ticket){
-			$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
-		}
-		$.ajax({
-			url : "http://sso.jiangyou-art.com/userLogin/token/" + _ticket,
-			
-			dataType : "jsonp",
-			type : "GET",
-			success : function(data){
-			    uid=data.data.uid;
-				
-				if(data.status == 200){
-					var uname = data.data.uname;
-			
-					var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+uname+
-					"</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
-					$("#displayName").html(html);
-				}
-			}
-		});
-	}
-
-	 $.outLogin=function()
-	 {
-		 $.ajax({
-			  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
-			  dataType : "jsonp",
-			  type:"GET",
-			  
-			  success: function(data)
-			  
-			  { if(data.msg=="OK")
-				  {
-				  alert("成功退出！");
-				  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
-				  }
-			  else
-				  {
-				  alert("操作有误");
-				  }
-			  },
-			  error:function()
-			  {
-				  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
-                  
-				  alert("error");
-				  alert(data.msg);
-			  }
-			  
-			});
-	 }
+   <script type="text/javascript">
+   var uid;
+	  $.gotojiesuan=function()
+	   {
+		    if(!$.cookie("TT_TOKEN"))
+		    	{
+		    	alert("请先登陆");
+		    	}
+		    else
+		    	{
+		    	var t = $("#totalPrice").attr("value");
+		    	window.location.href ="gotojiesuan?uid="+uid+"&totalprice="+t;
+		    	}
+	   }
    </script>
 <body>
 		<!--header star-->
@@ -178,7 +118,6 @@
 			 {
 		 $.displayUserName();
 		 $.getNewItem();
-		 $.JXshow();
 			 });
 	</script>
 	<!-- 今日推荐 -->
@@ -191,13 +130,13 @@
 		}
 		$.ajax({
 			url : "http://sso.jiangyou-art.com/userLogin/token/" + _ticket,
-			
 			dataType : "jsonp",
 			type : "GET",
 			success : function(data){
 			
 				if(data.status == 200){
 					var uname = data.data.uname;
+					uid = data.data.uid;
 					var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+uname+
 					"</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
 					$("#displayName").html(html);
@@ -212,9 +151,7 @@
 			  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
 			  dataType : "jsonp",
 			  type:"GET",
-			  
 			  success: function(data)
-			  
 			  { if(data.msg=="OK")
 				  {
 				  alert("成功退出！");
@@ -303,7 +240,9 @@
         <!-- ************************商品开始********************* -->
         <c:set var="totalPrice" value="0"></c:set>
         <c:forEach items="${cartList}" var="cart">
+       
         	<c:set var="totalPrice"  value="${ totalPrice + (cart.price * cart.num)}"/>
+      
 	        <div id="product_11345721" data-bind="rowid:1" class="item item_selected ">
 		        <div class="item_form clearfix">
 		            <div class="cell p-checkbox"></div>
@@ -359,7 +298,7 @@
           <div class="cart-total-2014">
               <div class="cart-button">
                   <span class="check-comm-btns" id="checkout-jd">
-                      <a class="checkout fr orange-but fs20 radius3" href="#" onclick="$.gotojiesuan()"  id="">去结算<b></b></a>
+                      <a class="checkout fr orange-but fs20 radius3" href="#" onclick="$.gotojiesuan()"  id="totalPrice" value="${totalPrice}">去结算<b></b></a>
                   </span>
                
               </div> 

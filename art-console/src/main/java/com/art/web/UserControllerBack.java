@@ -52,7 +52,7 @@ public class UserControllerBack {
 	}
 	@RequestMapping(value ="restuserupdate")
 	@ResponseBody
-	public User updata(String money,String upassword,Integer uid,String uname,String birthday,String sex,String tel,String qq,String email) throws ParseException
+	public User updata(long money,String upassword,Integer uid,String uname,String birthday,String sex,String tel,String qq,String email) throws ParseException
 	{  System.out.println(money);
 	    DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");	  
 		User u = new User();

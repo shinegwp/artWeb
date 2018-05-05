@@ -57,6 +57,8 @@ public class ItemServiceImpl implements ItemService {
 
 	public List<Item> getItems() {
 		ItemExample example = new ItemExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andStatusEqualTo(1);
 		 List<Item> list = itemMapper.selectByExample(example);
           
 		return list;
@@ -104,13 +106,16 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> getnewItems() {
 		ItemExample example = new ItemExample();
 		example.setOrderByClause("created");
+		Criteria criteria = example.createCriteria();
+		criteria.andStatusEqualTo(1);
 		// TODO Auto-generated method stub
 		return itemMapper.selectByExample(example);
 	}
 
 	public List<Item> getlikeCount() {
 		ItemExample example = new ItemExample();
-		
+		Criteria criteria = example.createCriteria();
+		criteria.andStatusEqualTo(1);
 		example.setOrderByClause("like_count desc");//降序排序  asc升序
 		
 		return itemMapper.selectByExample(example);
@@ -123,6 +128,7 @@ public class ItemServiceImpl implements ItemService {
 		
 		Criteria criteria = example.createCriteria();
 		criteria.andCidEqualTo(parentId);
+		criteria.andStatusEqualTo(1);
 		example.setOrderByClause("like_count desc");
 		List<Item> plist = itemMapper.selectByExample(example);
 		PageInfo<Item> p=new PageInfo<Item>(plist);
@@ -140,6 +146,7 @@ public EUDataGridResult getItemByParentIdOrderBySale(Integer parentId, Integer p
 		
 		Criteria criteria = example.createCriteria();
 		criteria.andCidEqualTo(parentId);
+		criteria.andStatusEqualTo(1);
 		example.setOrderByClause("sales_volume desc");
 		List<Item> plist = itemMapper.selectByExample(example);
 		PageInfo<Item> p=new PageInfo<Item>(plist);
@@ -156,6 +163,7 @@ public EUDataGridResult getItemByParentIdOrderByCreated(Integer parentId, Intege
 		
 		Criteria criteria = example.createCriteria();
 		criteria.andCidEqualTo(parentId);
+		criteria.andStatusEqualTo(1);
 		example.setOrderByClause("created desc");
 		List<Item> plist = itemMapper.selectByExample(example);
 		PageInfo<Item> p=new PageInfo<Item>(plist);
@@ -167,7 +175,8 @@ public EUDataGridResult getItemByParentIdOrderByCreated(Integer parentId, Intege
 
 	public EUDataGridResult getSaleCountOrder(Integer page,Integer rows) {
 		 ItemExample example = new ItemExample();
-			
+		 Criteria criteria = example.createCriteria();
+			criteria.andStatusEqualTo(1);
 			example.setOrderByClause("sales_volume desc");//降序排序  asc升序
 			PageHelper.startPage(page, rows); 
 			List<Item> plist = itemMapper.selectByExample(example);
@@ -181,7 +190,8 @@ public EUDataGridResult getItemByParentIdOrderByCreated(Integer parentId, Intege
 //按上市时间分页降序查询
 	public EUDataGridResult getItemTimeOrder(Integer page,Integer rows) {
 		ItemExample example = new ItemExample();
-		
+		Criteria criteria = example.createCriteria();
+		criteria.andStatusEqualTo(1);
 		example.setOrderByClause("created desc");//降序排序  asc升序
 		PageHelper.startPage(page, rows); 
 		List<Item> plist = itemMapper.selectByExample(example);
@@ -195,7 +205,8 @@ public EUDataGridResult getItemByParentIdOrderByCreated(Integer parentId, Intege
 //按喜欢的人数分页降序查询
 	public EUDataGridResult getItemBylikenumOrder(int page, int rows) {
 	 ItemExample example = new ItemExample();
-		
+ 	 Criteria criteria = example.createCriteria();
+		criteria.andStatusEqualTo(1);
 		example.setOrderByClause("like_count desc");//降序排序  asc升序
 		PageHelper.startPage(page, rows); 
 		List<Item> plist = itemMapper.selectByExample(example);
@@ -246,6 +257,8 @@ public int insertItem(Item item) {//前后台都有
 }
 public EUDataGridResult getItemList(int page, int rows) {//前后台都有
 	ItemExample example = new ItemExample();
+	Criteria criteria = example.createCriteria();
+	criteria.andStatusEqualTo(1);
 	//鍒嗛〉澶勭悊
 	PageHelper.startPage(page, rows);
 	List<Item> list = itemMapper.selectByExample(example);

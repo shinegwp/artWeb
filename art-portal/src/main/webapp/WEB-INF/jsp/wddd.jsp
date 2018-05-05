@@ -34,11 +34,7 @@
 		$.displayUserName = function()//如果登陆了展示退出和欢迎
 		{
 			var _ticket = $.cookie("TT_TOKEN");
-			if (!_ticket) {
-				$("#displayName")
-						.html(
-								"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
-			}
+			
 			$
 					.ajax({
 						url : "http://sso.jiangyou-art.com/userLogin/token/"
@@ -52,42 +48,42 @@
 								var uname = data.data.uname;
 								var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
 										+ uname
-										+ "</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
+										+ "</a>进入商场</li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
 								$("#displayName").html(html);
-							}
-						}
-					});
-		}
-
-		$.outLogin = function() {
-			$
-					.ajax({
-						url : "http://sso.jiangyou-art.com/userLogin/outLogin",
-						type : "post",
-						success : function(data) {
-							if (data.msg == "OK") {
-								alert("成功退出！");
-								$("#displayName")
-										.html(
-												"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
 							} else {
-								alert("操作有误");
+								alert("登陆已过期，请重新登录");
+								window.location.href = "http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/wddd";
 							}
-						},
-						error : function() {
-							alert("error");
 						}
-
 					});
 		}
-		$.grxx = function()//当点击个人中心时判断是否已登录
-		{
-			if ($.cookie("TT_TOKEN") == null) {
-				alert("请先登录！");
-			} else {
-				window.location.href = "grxx";
-			}
-		}
+
+		$.outLogin=function()
+		 {
+			 $.ajax({
+				  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
+				  dataType : "jsonp",
+				  type:"GET",
+				  
+				  success: function(data)
+				  
+				  { if(data.msg=="OK")
+					  {
+					  alert("成功退出！");
+					  window.location.href = "http://www.jiangyou-art.com";
+					  }
+				  else
+					  {
+					  alert("操作有误");
+					  }
+				  },
+				  error:function()
+				  {
+					  window.location.href = "http://www.jiangyou-art.com";	                  
+				  }
+				  
+				});
+		 }
 		
 		$.getOrderFormListByPage=function(e)
 		{  var page=1;
@@ -172,7 +168,6 @@
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
 								
-								<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>
 								
 							</ul>
 						</div>
@@ -250,9 +245,7 @@
 						<li>
 							<a href="zixun" class="db fs16">我的咨询</a>
 						</li>
-						<li>
-							<a href="znx" class="db fs16">站内信</a>
-						</li>
+						
 					</ul>
 				</div>
 				<div class="fr slide-show white-box">
@@ -420,7 +413,7 @@
 				</div>
 				
 			<div class="banquan clearfix ta-center">
-				Copyright © 2003-2015 酱油文化. All Rights Reserved. 
+				Copyright 酱油文化. All Rights Reserved. 
 			</div>
 		</div>
 		<!--footer end-->

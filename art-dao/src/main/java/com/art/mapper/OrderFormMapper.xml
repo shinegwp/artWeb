@@ -9,14 +9,17 @@
     <result column="unit_price" property="unitPrice" jdbcType="INTEGER" />
     <result column="people_name" property="peopleName" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="VARCHAR" />
-    <result column="item_img" property="itemImg" jdbcType="VARCHAR" />
-    <result column="item_title" property="itemTitle" jdbcType="VARCHAR" />
     <result column="tel" property="tel" jdbcType="VARCHAR" />
     <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="item_id" property="itemId" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.art.pojo.OrderFormWithBLOBs" extends="BaseResultMap" >
     <result column="form_num" property="formNum" jdbcType="LONGVARCHAR" />
-    <result column="address" property="address" jdbcType="LONGVARCHAR" />
+    <result column="address_detail" property="addressDetail" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -77,11 +80,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, uid, time, money, unit_price, people_name, state, item_img, item_title, tel, 
-    code
+    id, uid, time, money, unit_price, people_name, state, tel, code, province, city, 
+    area, item_id, num
   </sql>
   <sql id="Blob_Column_List" >
-    form_num, address
+    form_num, address_detail
   </sql>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.art.pojo.OrderFormExample" >
     select
@@ -134,14 +137,16 @@
   <insert id="insert" parameterType="com.art.pojo.OrderFormWithBLOBs" >
     insert into order_form (id, uid, time, 
       money, unit_price, people_name, 
-      state, item_img, item_title, 
-      tel, code, form_num, 
-      address)
+      state, tel, code, province, 
+      city, area, item_id, 
+      num, form_num, address_detail
+      )
     values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
       #{money,jdbcType=VARCHAR}, #{unitPrice,jdbcType=INTEGER}, #{peopleName,jdbcType=VARCHAR}, 
-      #{state,jdbcType=VARCHAR}, #{itemImg,jdbcType=VARCHAR}, #{itemTitle,jdbcType=VARCHAR}, 
-      #{tel,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{formNum,jdbcType=LONGVARCHAR}, 
-      #{address,jdbcType=LONGVARCHAR})
+      #{state,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{itemId,jdbcType=INTEGER}, 
+      #{num,jdbcType=INTEGER}, #{formNum,jdbcType=LONGVARCHAR}, #{addressDetail,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.art.pojo.OrderFormWithBLOBs" >
     insert into order_form
@@ -167,23 +172,32 @@
       <if test="state != null" >
         state,
       </if>
-      <if test="itemImg != null" >
-        item_img,
-      </if>
-      <if test="itemTitle != null" >
-        item_title,
-      </if>
       <if test="tel != null" >
         tel,
       </if>
       <if test="code != null" >
         code,
       </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
       <if test="formNum != null" >
         form_num,
       </if>
-      <if test="address != null" >
-        address,
+      <if test="addressDetail != null" >
+        address_detail,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -208,23 +222,32 @@
       <if test="state != null" >
         #{state,jdbcType=VARCHAR},
       </if>
-      <if test="itemImg != null" >
-        #{itemImg,jdbcType=VARCHAR},
-      </if>
-      <if test="itemTitle != null" >
-        #{itemTitle,jdbcType=VARCHAR},
-      </if>
       <if test="tel != null" >
         #{tel,jdbcType=VARCHAR},
       </if>
       <if test="code != null" >
         #{code,jdbcType=VARCHAR},
       </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
       <if test="formNum != null" >
         #{formNum,jdbcType=LONGVARCHAR},
       </if>
-      <if test="address != null" >
-        #{address,jdbcType=LONGVARCHAR},
+      <if test="addressDetail != null" >
+        #{addressDetail,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -258,23 +281,32 @@
       <if test="record.state != null" >
         state = #{record.state,jdbcType=VARCHAR},
       </if>
-      <if test="record.itemImg != null" >
-        item_img = #{record.itemImg,jdbcType=VARCHAR},
-      </if>
-      <if test="record.itemTitle != null" >
-        item_title = #{record.itemTitle,jdbcType=VARCHAR},
-      </if>
       <if test="record.tel != null" >
         tel = #{record.tel,jdbcType=VARCHAR},
       </if>
       <if test="record.code != null" >
         code = #{record.code,jdbcType=VARCHAR},
       </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null" >
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemId != null" >
+        item_id = #{record.itemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
       <if test="record.formNum != null" >
         form_num = #{record.formNum,jdbcType=LONGVARCHAR},
       </if>
-      <if test="record.address != null" >
-        address = #{record.address,jdbcType=LONGVARCHAR},
+      <if test="record.addressDetail != null" >
+        address_detail = #{record.addressDetail,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -290,12 +322,15 @@
       unit_price = #{record.unitPrice,jdbcType=INTEGER},
       people_name = #{record.peopleName,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=VARCHAR},
-      item_img = #{record.itemImg,jdbcType=VARCHAR},
-      item_title = #{record.itemTitle,jdbcType=VARCHAR},
       tel = #{record.tel,jdbcType=VARCHAR},
       code = #{record.code,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      item_id = #{record.itemId,jdbcType=INTEGER},
+      num = #{record.num,jdbcType=INTEGER},
       form_num = #{record.formNum,jdbcType=LONGVARCHAR},
-      address = #{record.address,jdbcType=LONGVARCHAR}
+      address_detail = #{record.addressDetail,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -309,10 +344,13 @@
       unit_price = #{record.unitPrice,jdbcType=INTEGER},
       people_name = #{record.peopleName,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=VARCHAR},
-      item_img = #{record.itemImg,jdbcType=VARCHAR},
-      item_title = #{record.itemTitle,jdbcType=VARCHAR},
       tel = #{record.tel,jdbcType=VARCHAR},
-      code = #{record.code,jdbcType=VARCHAR}
+      code = #{record.code,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      item_id = #{record.itemId,jdbcType=INTEGER},
+      num = #{record.num,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -338,23 +376,32 @@
       <if test="state != null" >
         state = #{state,jdbcType=VARCHAR},
       </if>
-      <if test="itemImg != null" >
-        item_img = #{itemImg,jdbcType=VARCHAR},
-      </if>
-      <if test="itemTitle != null" >
-        item_title = #{itemTitle,jdbcType=VARCHAR},
-      </if>
       <if test="tel != null" >
         tel = #{tel,jdbcType=VARCHAR},
       </if>
       <if test="code != null" >
         code = #{code,jdbcType=VARCHAR},
       </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
       <if test="formNum != null" >
         form_num = #{formNum,jdbcType=LONGVARCHAR},
       </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=LONGVARCHAR},
+      <if test="addressDetail != null" >
+        address_detail = #{addressDetail,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -367,12 +414,15 @@
       unit_price = #{unitPrice,jdbcType=INTEGER},
       people_name = #{peopleName,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
-      item_img = #{itemImg,jdbcType=VARCHAR},
-      item_title = #{itemTitle,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
       form_num = #{formNum,jdbcType=LONGVARCHAR},
-      address = #{address,jdbcType=LONGVARCHAR}
+      address_detail = #{addressDetail,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.art.pojo.OrderForm" >
@@ -383,10 +433,13 @@
       unit_price = #{unitPrice,jdbcType=INTEGER},
       people_name = #{peopleName,jdbcType=VARCHAR},
       state = #{state,jdbcType=VARCHAR},
-      item_img = #{itemImg,jdbcType=VARCHAR},
-      item_title = #{itemTitle,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=VARCHAR},
-      code = #{code,jdbcType=VARCHAR}
+      code = #{code,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

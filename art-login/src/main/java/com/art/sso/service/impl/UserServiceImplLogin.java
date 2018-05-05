@@ -106,8 +106,6 @@ public class UserServiceImplLogin implements UserServiceLogin {
 		//生成token
 		String token = UUID.randomUUID().toString();
 		System.out.println(token);
-		//保存用户之前，把用户对象中的密码清空。
-		user.setUpassword(null);
 		//把用户信息写入redis
 		jedisClient.set("REDIS_USER_SESSION:" + token, JsonUtils.objectToJson(user));
 		//设置session的过期时间

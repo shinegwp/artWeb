@@ -3,12 +3,7 @@ package com.art.pojo;
 import java.io.Serializable;
 
 public class ShippingAddress implements Serializable{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private Integer id;
+    private Integer id;
 
     private Integer uid;
 
@@ -16,19 +11,17 @@ public class ShippingAddress implements Serializable{
 
     private String stel;
 
-    private String address;
+    private String city;
 
     private String addressDetail;
 
     private String code;
 
-    @Override
-	public String toString() {
-		return "ShippingAddress [id=" + id + ", uid=" + uid + ", sname=" + sname + ", stel=" + stel + ", address="
-				+ address + ", addressDetail=" + addressDetail + ", code=" + code + "]";
-	}
+    private String province;
 
-	public Integer getId() {
+    private String area;
+
+    public Integer getId() {
         return id;
     }
 
@@ -60,12 +53,12 @@ public class ShippingAddress implements Serializable{
         this.stel = stel == null ? null : stel.trim();
     }
 
-    public String getAddress() {
-        return address;
+    public String getCity() {
+        return city;
     }
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
     }
 
     public String getAddressDetail() {
@@ -82,5 +75,21 @@ public class ShippingAddress implements Serializable{
 
     public void setCode(String code) {
         this.code = code == null ? null : code.trim();
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area == null ? null : area.trim();
     }
 }

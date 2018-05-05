@@ -53,6 +53,7 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public List<CartItem> getCartItemList(HttpServletRequest request, HttpServletResponse response) {
 		List<CartItem> itemList = getCartItemList(request);
+		System.out.println("查询出来的购物车中的商品"+itemList);
 		return itemList;
 	}
 	
@@ -78,7 +79,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public ArtResult addCartItem(Integer id, Integer num, HttpServletRequest request, HttpServletResponse response) {
-
+System.out.println("即将存入购物车中商品的id="+id);
 		//取商品信息
 		CartItem cartItem = null;
 		//取购物车商品列表
@@ -97,17 +98,20 @@ public class CartServiceImpl implements CartService {
 			cartItem = new CartItem();
 			//根据商品id查询商品基本信息。
 			String json = HttpClientUtil.doGet(REST_BASE_URL + ITME_INFO_URL + id); 
-			System.out.println(json);
+			System.out.println("redis里的item"+json);
 			//把json转换成java对象
 			ArtResult taotaoResult = ArtResult.formatToPojo(json, Item.class);
 			if (taotaoResult.getStatus() == 200) {
 				Item item = (Item) taotaoResult.getData();
-				cartItem.setId(item.getCid());
+				cartItem.setId(item.getId());
+				cartItem.setCid(item.getCid());
 				cartItem.setTitle(item.getTitle());
 				cartItem.setImage(item.getImgAddress());
 				cartItem.setNum(num);
 				cartItem.setPrice(item.getPrice());
+				System.out.println("价格======"+item.getPrice());
 			}
+			  System.out.println("添加购物车中的商品"+itemList);
 			//添加到购物车列表
 			itemList.add(cartItem);
 		}

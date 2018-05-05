@@ -23,10 +23,12 @@ jQuery(".scrollBox").slide({
 /*弹框盒子*/
 $(function() {
 	$(".alertbox").click(function() {
+		alert("jj");
 		$("#mask").stop().show();
 	})
 	$("#mask .close").click(function() {
 		$("#mask").stop().hide();
+		alert("kk");
 	})
 });
 $(".check-inline,.check-box").click(function() {

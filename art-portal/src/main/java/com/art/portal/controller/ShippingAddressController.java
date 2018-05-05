@@ -1,14 +1,18 @@
 package com.art.portal.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.art.pojo.ShippingAddress;
 import com.art.service.ShippingAddressService;
+import com.art.util.JsonUtils;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -27,31 +31,24 @@ public String getShippingAddress(Integer uid)
 	JSONArray jsonobject = JSONArray.fromObject(sas);
 	return jsonobject.toString();
 }
-@RequestMapping(value ="/save",produces = "text/html;charset=UTF-8" )
+@RequestMapping(value ="/saveshoppingaddress",produces = "text/html;charset=UTF-8" )
 @ResponseBody()
-public String updata(Integer id,Integer uid,String address,String sname,String stel,String addressDetail,String code )
-{   ShippingAddress sa = new ShippingAddress();
-System.out.println(id==null);
-if(!(id==null))
-{
-	sa.setId(id);
-	
-}
-else
-{
-	sa.setId(null);
-	sa.setUid(uid);
-}   
-    sa.setSname(sname);
-    sa.setAddress(address);
-    sa.setStel(stel);
-    sa.setAddressDetail(addressDetail);
-    sa.setCode(code);
-	System.out.println("����id="+sa);
+public String updata(Integer id,Integer uid,String sname,String stel,String addressDetail,String code,String city,String province,String area )
+{  
+	System.out.println("进入了saveshoppingaddress");
+	ShippingAddress sa = new ShippingAddress();
+       sa.setId(id);
+       sa.setUid(uid);
+       sa.setAddressDetail(addressDetail);
+       sa.setSname(sname);
+       sa.setStel(stel);
+       sa.setCode(code);
+       sa.setProvince(province);
+       sa.setCity(city);
+       sa.setArea(area);
 	Integer i = shippingAddressService.updata(sa);
 	System.out.println("controller"+i);
 	JSONObject json =JSONObject.fromObject(i);
-	
 	return json.toString();
 //	shippingaddressservice.update();
 }
@@ -83,4 +80,22 @@ public String deleteShippingAddressById(Integer id)
 		return jsonobject.toString();
 	
 	}
+	//把收货地址带到结算页面
+		@RequestMapping("gotojiesuan")
+		@ResponseBody
+		public ModelAndView trasShippingAddressByUid(String uid) 
+		{   
+			 List<ShippingAddress> slist = shippingAddressService.getShippingAddressByUid(Integer.parseInt(uid));
+			 Map<String,Object> map = new HashMap<String,Object>();
+			 map.put("slist",slist);
+			 ModelAndView mv =  new ModelAndView();
+			 mv.setViewName("jiesuan");
+			 mv.addAllObjects(map);
+			return mv;
+		
+		}
+		
+		
+		//创建订单
+				
 }

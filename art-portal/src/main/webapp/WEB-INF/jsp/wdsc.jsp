@@ -19,6 +19,7 @@
 		<link rel="stylesheet" type="text/css" href="css/common.css" />
 		<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.js"></script>
+		<script type="text/javascript" src="js/jquery.cookie.js"></script>
 	</head>
 
 	<body>
@@ -33,7 +34,6 @@
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
 								
-								<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/wdsc' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>
 								
 							</ul>
 						</div>
@@ -62,20 +62,12 @@ var uid;
 $(function()
 		{	
 	$.displayUserName();
-	uid=$.getuid();
-	$.getCollectionListByPage();
+	
 		});
-		alert(1);
 $.displayUserName = function()//如果登陆了展示退出和欢迎
 {
 	
 	var _ticket = $.cookie("TT_TOKEN");
-	alert(_ticket);
-	if (!_ticket) {
-		$("#displayName")
-				.html(
-						"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/wdsc' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
-	}
 	$
 			.ajax({
 				url : "http://sso.jiangyou-art.com/userLogin/token/"
@@ -86,68 +78,49 @@ $.displayUserName = function()//如果登陆了展示退出和欢迎
 				success : function(data) {
 					if (data.status == 200) {
 						var uname = data.data.uname;
+						uid = data.data.uid;
+						$.getCollectionListByPage();
 						var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
 								+ uname
-								+ "</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
+								+ "</a>进入商场</li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
 						$("#displayName").html(html);
+					}else {
+						alert("登陆已过期，请重新登录");
+						window.location.href = "http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/wdsc";
 					}
+					
 				}
 			});
 }
 
-$.outLogin = function() {
-	$
-			.ajax({
-				url : "http://sso.jiangyou-art.com/userLogin/outLogin",
-				type : "post",
-				success : function(data) {
-					if (data.msg == "OK") {
-						alert("成功退出！");
-						$("#displayName")
-								.html(
-										"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/wdsc' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
-					} else {
-						alert("操作有误");
-					}
-				},
-				error : function() {
-					alert("error");
-				}
-
-			});
-}
-$.grxx = function()//当点击个人中心时判断是否已登录
+$.outLogin=function()
 {
-	if ($.cookie("TT_TOKEN") == null) {
-		alert("请先登录！");
-	} else {
-		window.location.href = "grxx";
-	}
-}
-		
-		
-$.getuid=function()
-{
-		var dat;
-$.ajax({
-		  url: "getSessionUser",
-		  async:false,
+	 $.ajax({
+		  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
+		  dataType : "jsonp",
+		  type:"GET",
+		  
 		  success: function(data)
-		  { 
-		  //回显
-		  var jsondata = eval('('+data+')');//把Object对象转换城TaoTaoResult
-		  var uid=jsondata.data.uid; 
-		  dat=uid;
-	
+		  
+		  { if(data.msg=="OK")
+			  {
+			  alert("成功退出！");
+			  window.location.href = "http://www.jiangyou-art.com";
+			  }
+		  else
+			  {
+			  alert("操作有误");
+			  }
 		  },
 		  error:function()
 		  {
-			  alert("getSessionError");
+			  window.location.href = "http://www.jiangyou-art.com";	                  
 		  }
 		  
 		});
-	  return dat;
 }
+		
+
 $.getItemByIid=function(iid)
 { var item;
 	$.ajax(
@@ -221,7 +194,6 @@ $.getCollectionListByPage=function(e)
 $.gotoprodetail=function(e)
 {  
 	
-	alert(e.val());
 	 window.location.href ="getDetail?id="+e.val();
 	}
 
@@ -278,14 +250,12 @@ $.gotoprodetail=function(e)
 						<li>
 							<a href="zixun" class="db fs16">我的咨询</a>
 						</li>
-						<li>
-							<a href="znx" class="db fs16">站内信</a>
-						</li>
+						
 					</ul>
 				</div>
 				<div class="fr slide-show white-box">
 					<div class="dark-tit line-bot">
-						<h3 class="fs26">我的关注</h3></div>
+						<h3 class="fs26">我的收藏</h3></div>
 					<div class="fav-list mt10">
 						<ul class="clearfix">
 							<li id="gz0" onclick="$.gotoprodetail($(this))" value="" >
@@ -381,7 +351,7 @@ $.gotoprodetail=function(e)
 				</div>
 				
 			<div class="banquan clearfix ta-center">
-				Copyright © 2003-2015 酱油文化. All Rights Reserved. 
+				Copyright 酱油文化. All Rights Reserved. 
 			</div>
 		</div>
 		<!--footer end-->

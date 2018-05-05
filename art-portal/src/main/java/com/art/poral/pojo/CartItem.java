@@ -3,16 +3,24 @@ package com.art.poral.pojo;
 public class CartItem {
 
 	private long id;
+	private long cid;
 	private String title;
 	private Integer num;
 	private long price;
 	private String image;
 	
 	
+	public long getCid() {
+		return cid;
+	}
+	public void setCid(long cid) {
+		this.cid = cid;
+	}
+
 	@Override
 	public String toString() {
-		return "CartItem [id=" + id + ", title=" + title + ", num=" + num + ", price=" + price + ", image=" + image
-				+ "]";
+		return "CartItem [id=" + id + ", cid=" + cid + ", title=" + title + ", num=" + num + ", price=" + price
+				+ ", image=" + image + "]";
 	}
 	public long getId() {
 		return id;
