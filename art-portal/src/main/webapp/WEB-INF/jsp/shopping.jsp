@@ -32,22 +32,7 @@
 		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.js"></script>
 		<script type="text/javascript" src="js/jquery.cookie.js"></script>
 		</head>
-		
-   <script type="text/javascript">
-   var uid;
-	  $.gotojiesuan=function()
-	   {
-		    if(!$.cookie("TT_TOKEN"))
-		    	{
-		    	alert("请先登陆");
-		    	}
-		    else
-		    	{
-		    	var t = $("#totalPrice").attr("value");
-		    	window.location.href ="gotojiesuan?uid="+uid+"&totalprice="+t;
-		    	}
-	   }
-   </script>
+	
 <body>
 		<!--header star-->
 		
@@ -61,7 +46,6 @@
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
 								
-								<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>
 								
 							</ul>
 						</div>						
@@ -86,13 +70,7 @@
 			</div>
 		</div>
 		<!--header end-->
-        <script type="text/javascript">
-		$.search=function()
-		{
-			var querystr=$("#query").attr("value");
-			 window.location.href="search?q="+querystr;
-		}
-		</script>
+       
 		<!--navbar star-->
 		<div class="navbar clearfix">
 			<div class="content clearfix">
@@ -116,18 +94,35 @@
 	
 	 $(function()
 			 {
+		 var uid;
 		 $.displayUserName();
-		 $.getNewItem();
+		 
 			 });
-	</script>
-	<!-- 今日推荐 -->
-	<script type="text/javascript">
+	 $.search=function()
+		{
+			var querystr=$("#query").attr("value");
+			 window.location.href="search?q="+querystr;
+		}
+	 
+	  $.gotojiesuan=function()
+	   {
+		    if(!$.cookie("TT_TOKEN"))
+		    	{
+		    	alert("请先登陆");
+		    	}
+		    else
+		    	{
+		    	var t = $("#totalPrice").attr("value");
+		    	window.location.href ="gotojiesuan?uid="+uid+"&totalprice="+t;
+		    	}
+	   }
 	$.displayUserName=function()//如果登陆了展示退出和欢迎
 	{
 		var _ticket = $.cookie("TT_TOKEN");
 		if(!_ticket){
-			$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+			$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/cartShow' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
 		}
+		$.getNewItem();
 		$.ajax({
 			url : "http://sso.jiangyou-art.com/userLogin/token/" + _ticket,
 			dataType : "jsonp",
@@ -140,22 +135,27 @@
 					var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+uname+
 					"</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
 					$("#displayName").html(html);
+				} else {
+					alert("登陆已过期，请重新登录");
+					window.location.href = "http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/cartShow";
 				}
 			}
 		});
 	}
 
-	 $.outLogin=function()
+	$.outLogin=function()
 	 {
 		 $.ajax({
 			  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
 			  dataType : "jsonp",
 			  type:"GET",
+			  
 			  success: function(data)
+			  
 			  { if(data.msg=="OK")
 				  {
 				  alert("成功退出！");
-				  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+				  window.location.href = "http://www.jiangyou-art.com/cartShow";
 				  }
 			  else
 				  {
@@ -164,8 +164,7 @@
 			  },
 			  error:function()
 			  {
-				  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
-                  
+				  window.location.href = "http://www.jiangyou-art.com/cartShow";	                  
 			  }
 			  
 			});

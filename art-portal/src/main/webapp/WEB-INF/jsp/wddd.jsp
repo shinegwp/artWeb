@@ -28,7 +28,7 @@
 		<script type="text/javascript">
 		$(function(){
 			$.displayUserName();
-			$.getOrderFormListByPage();
+			
 		});
 		var user;
 		$.displayUserName = function()//如果登陆了展示退出和欢迎
@@ -45,6 +45,7 @@
 						success : function(data) {
 							if (data.status == 200) {
 								user = data.data;
+								$.getOrderFormListByPage();
 								var uname = data.data.uname;
 								var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
 										+ uname

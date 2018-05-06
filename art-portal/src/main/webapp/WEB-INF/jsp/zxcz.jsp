@@ -144,9 +144,6 @@
 						<li >
 							<a href="grxx" class="db fs16">个人信息</a>
 						</li>
-						<li>
-							<a href="wddd" class="db fs16">我的订单</a>
-						</li>
 						
 						<li>
 							<a href="shdz" class="db fs16">收货地址</a>
@@ -183,13 +180,13 @@
 							{
 								url:"restuserupdate",
 								data:{
-									"uid":$.cookie("uid"),
-									"money":parseInt($.cookie("money"))+parseInt(money)
+									"uid":user.uid,
+									"money":user.money,
 								},Type:"post",
 								dataType:"json",
 								success:function()
 								{
-									$.cookie("money",parseInt($.cookie("money"))+parseInt(money));
+									
 									$.creatTradeLog();
 								},
 								error:function()
@@ -207,14 +204,15 @@
 					  data:{
 						  "tradeMoney":"+"+money,
 						  "tradeType":"在线充值",
-						  "balance":$.cookie("money"),
-						  "uid":$.cookie("uid")
+						  "balance":user.money,
+						  "uid":user.uid,
 						  
 					  },Type:"post",
 					  dataType:"json",
 					  success:function(data)
 					  {
-						  alert("充值成功");
+						  alert("充值成功,请重新登录");
+							window.location.href = "http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/zxcz";
 					  },error:function()
 					  {
 						  alert("error");

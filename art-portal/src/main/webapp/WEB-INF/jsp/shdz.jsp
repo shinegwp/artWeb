@@ -176,13 +176,13 @@ if(list.length>=3)
 else{
 $.ajax({
 		
-		url:"save",
+		url:"saveshoppingaddress",
 		type:"post",
 		dataType:"json",
 		data:{
 			"id":id,
 			"uid":uid,
-			"address":$("#prov").val()+"/"+$("#cit").val()+"/"+$("#dist").val(),
+			
 			"sname":$("#sname").attr("value"),
 			"stel":$("#stel").attr("value"),
 			"addressDetail":$("#addressDetail").attr("value"),
@@ -319,9 +319,6 @@ $.reset=function()
 					<ul>
 						<li >
 							<a href="grxx" class="db fs16">个人信息</a>
-						</li>
-						<li>
-							<a href="wddd" class="db fs16">我的订单</a>
 						</li>
 						
 						<li class="on">

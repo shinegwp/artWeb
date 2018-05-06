@@ -39,7 +39,7 @@
 							</ul>
 					</div>
 					<div class="shopcar-btn clearfix fl">
-						<a href="shopping.html" class="box-s"> 购物车</a>
+						<a href="cartShow" class="box-s"> 购物车</a>
 					</div>
 					
 				</div>
@@ -176,7 +176,6 @@
 			<div class="fl slide-nav white-box">
 				<ul>
 					<li class="on"><a href="grxx" class="db fs16">个人信息</a></li>
-					<li><a href="wddd" class="db fs16">我的订单</a></li>
 					<li><a href="shdz" class="db fs16">收货地址</a></li>
 					<li><a href="wdsc" class="db fs16">我的收藏</a></li>
 

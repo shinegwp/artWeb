@@ -36,7 +36,6 @@
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
 								
-								<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>
 								
 							</ul>
 						</div>					
@@ -63,47 +62,11 @@ var id;
 var img;
 var title;
 var price;
-var a = $.cookie("user");
-var user=eval('('+a+')');
+var user;
 $(function()
 		{
 	 $.displayUserName();
-	  det=${detail};
-	  id = det.item.id;
-	  img = det.item.imgAddress;
-	  title = det.item.title;
-	  price = det.item.price;
-	for(var i=0;i<det.img1.length;i++)
-	{
-		
-	$("#img"+(i+1+0)).attr("src",det.img1[i].img1);
-	}
-	if(det.img1.length<7)
-		{
-		var k=0;
-		for(var j=det.img1.length;j<=7;j++)
-		{
-			
-		$("#img"+(j+1+0)).attr("src",det.img1[k++].img1);
-		}	
-		}
-   //展示姓名
-
-   $("#name").html(det.item.title);
-   $("#descript").html(det.item.description);
-   $("#price").html(det.item.price);
-   $("#sid").attr("iteid",det.item.id);//给购物车赋值商品ID
-   $("#bid").attr("iteid",det.item.id);//给购买赋值商品ID
- 
-
-   var xqappend="";
-   for(var k=0;k<det.img2.length;k++)
-	   {xqappend = xqappend+"<p><img src='"+det.img2[k].img2+" ' style='width:600px;height:400px'/></p>";//"<p><img src='upload/yd/hty/2/d1/1.jpg'/></p>";
-	   
-	   }
-   $("#xq").html(xqappend);
-   //大家都喜欢
-   $.alllike();
+	  
 });
 
 $.wdzx=function()
@@ -134,9 +97,14 @@ $.wdzx=function()
 
 $.displayUserName=function()//如果登陆了展示退出和欢迎
 {
+	det=${detail};
+	  id = det.item.id;
+	  img = det.item.imgAddress;
+	  title = det.item.title;
+	  price = det.item.price;
 	var _ticket = $.cookie("TT_TOKEN");
 	if(!_ticket){
-		$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+		$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/getDetail?id="+id+"' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
 	}
 	$.ajax({
 		url : "http://sso.jiangyou-art.com/userLogin/token/" + _ticket,
@@ -147,16 +115,53 @@ $.displayUserName=function()//如果登陆了展示退出和欢迎
 		
 			if(data.status == 200){
 				var uname = data.data.uname;
+				user = data.data;
+				
+				
 				var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+uname+
 				"</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
 				$("#displayName").html(html);
+			} else {
+				alert("登陆已过期，请重新登录");
+				window.location.href = "http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/getDetail"+"?id="+id;
 			}
 		}
 	});
-}
+	
+	for(var i=0;i<det.img1.length;i++)
+	{
+		
+	$("#img"+(i+1+0)).attr("src",det.img1[i].img1);
+	}
+	if(det.img1.length<7)
+		{
+		var k=0;
+		for(var j=det.img1.length;j<=7;j++)
+		{
+			
+		$("#img"+(j+1+0)).attr("src",det.img1[k++].img1);
+		}	
+		}
+ //展示姓名
 
- $.outLogin=function()
- {
+ $("#name").html(det.item.title);
+ $("#descript").html(det.item.description);
+ $("#price").html(det.item.price);
+ $("#sid").attr("iteid",det.item.id);//给购物车赋值商品ID
+ $("#bid").attr("iteid",det.item.id);//给购买赋值商品ID
+
+
+ var xqappend="";
+ for(var k=0;k<det.img2.length;k++)
+	   {xqappend = xqappend+"<p><img src='"+det.img2[k].img2+" ' style='width:600px;height:400px'/></p>";//"<p><img src='upload/yd/hty/2/d1/1.jpg'/></p>";
+	   
+	   }
+ $("#xq").html(xqappend);
+ //大家都喜欢
+ $.alllike();
+}
+$.outLogin=function()
+{
 	 $.ajax({
 		  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
 		  dataType : "jsonp",
@@ -167,7 +172,7 @@ $.displayUserName=function()//如果登陆了展示退出和欢迎
 		  { if(data.msg=="OK")
 			  {
 			  alert("成功退出！");
-			  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+			  window.location.href = "http://www.jiangyou-art.com/getDetail"+"?id="+id;	 
 			  }
 		  else
 			  {
@@ -176,12 +181,11 @@ $.displayUserName=function()//如果登陆了展示退出和欢迎
 		  },
 		  error:function()
 		  {
-			  $("#displayName").html("<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
-              
+			  window.location.href = "http://www.jiangyou-art.com/getDetail"+"?id="+id;	                  
 		  }
 		  
 		});
- }
+}
  $.grxx=function()//当点击个人中心时判断是否已登录
  {  
 	 if($.cookie("TT_TOKEN")==null)
@@ -227,7 +231,8 @@ $.alllike=function()
 			dataType:"json",
 			type:"post",
 			success:function(data)
-			{  a
+			{  
+				
 			for(var i=1;i<=12;i++)
 				{
 				$("#alllike"+i).attr("src",data[i-1].imgAddress);

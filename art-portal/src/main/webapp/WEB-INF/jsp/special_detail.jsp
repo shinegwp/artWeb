@@ -28,30 +28,12 @@
 			<div class="top clearfix">
 				<div class="topctent clearfix">
 					<div class="left clearfix fl">
-						公告：您好，欢迎登录北京椿龄文化发展有限公司
+						公告：您好，欢迎来到酱油文化艺术品商城
 					</div>
 					<div class="right clearfix fr">
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
 								
-								<li >
-									<a href="http://sso.jiangyou-art.com/page/register">
-										注册/登陆
-									</a>
-								</li>
-<<<<<<< HEAD
-
-=======
->>>>>>> 04dce5e5795b03ff5c7aadb388008ec38488a372
-								<li>
-									<a href="#" onclick="$.grxx()">
-										个人中心
-									</a>
-								</li>
-<<<<<<< HEAD
-
-=======
->>>>>>> 04dce5e5795b03ff5c7aadb388008ec38488a372
 							</ul>
 						</div>						
 						<div class="shopcar-btn clearfix fl">
@@ -96,7 +78,7 @@
 			<div class="sorts clearfix">
 				<div class="content clearfix">
 					<div class="top clearfix box-s">
-						您的位置：<a href="special">专场</a>&nbsp;&gt;&nbsp;文艺复兴专场
+						您的位置：<a href="special">专场</a>
 					</div>
 					<div class="spdetail clearfix mt25">
 						<div class="hd">
@@ -121,23 +103,22 @@
 <!-- 页面初始化 -->
 <script type="text/javascript">
 var pid;
-var a = $.cookie("user");
-var user=eval('('+a+')');
+var user;
 $(function()
 		{
 	$.displayUserName();
 	
 	 pid = ${pid};
    $.getspecialListByPage();
-	$.displayUserName();
 		});
 $.displayUserName = function()//如果登陆了展示退出和欢迎
 {
 	var _ticket = $.cookie("TT_TOKEN");
+	 pid = ${pid};
 	if (!_ticket) {
 		$("#displayName")
 				.html(
-						"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
+						"<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/gotoSpecialDet?pid="+pid+"' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>")
 	}
 	$
 			.ajax({
@@ -149,43 +130,50 @@ $.displayUserName = function()//如果登陆了展示退出和欢迎
 				success : function(data) {
 					if (data.status == 200) {
 						var uname = data.data.uname;
+						user = data.data;
 						var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
 								+ uname
 								+ "</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"
 						$("#displayName").html(html);
+					} else {
+						alert("登陆已过期，请重新登录");
+						window.location.href = "http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/gotoSpecialDet?pid="+pid;
 					}
 				}
 			});
 }
 
-$.outLogin = function() {
-	$
-			.ajax({
-				url : "http://sso.jiangyou-art.com/userLogin/outLogin",
-				type : "post",
-				success : function(data) {
-					if (data.msg == "OK") {
-						alert("成功退出！");
-						$("#displayName")
-								.html(
-										"<li ><a href='sso.jiangyou-art.com/page/register'>注册/登陆</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li>")
-					} else {
-						alert("操作有误");
-					}
-				},
-				error : function() {
-					alert("error");
-				}
-
-			});
+$.outLogin=function()
+{
+	 $.ajax({
+		  url: "http://sso.jiangyou-art.com/userLogin/outLogin",
+		  dataType : "jsonp",
+		  type:"GET",
+		  
+		  success: function(data)
+		  
+		  { if(data.msg=="OK")
+			  {
+			  alert("成功退出！");
+			  window.location.href = "http:///www.jiangyou-art.com/gotoSpecialDet?pid="+pid;
+			  }
+		  else
+			  {
+			  alert("操作有误");
+			  }
+		  },
+		  error:function()
+		  {
+			  window.location.href = "http:///www.jiangyou-art.com/gotoSpecialDet?pid="+pid;	                  
+		  }
+		  
+		});
 }
 $.grxx = function()//当点击个人中心时判断是否已登录
 {
-	if ($.cookie("TT_TOKEN") == null) {
-		alert("请先登录！");
-	} else {
+	
 		window.location.href = "grxx";
-	}
+	
 }
 $.getSale=function()
 {
@@ -201,21 +189,7 @@ $.getSale=function()
 		 window.location.href ="gotoSpecialDet?pid="+pid;
 }
 
-$.displayUserName=function()
-{
-if($.cookie("user")!=null)
 
- {
-	
-	$("#displayName").html("<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"+user.uname+
-			"</a>进入商场</li><li><a href='register' >免费注册</a></li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href=''#' onclick=''>退出</a></li>")
- 
-	}
-else
-	{
-	$("#displayName").html("<li ><span class='f1'>您好，请</span><a href='sign' class='f1'>登陆</a></li><li><a href='register' >免费注册</a></li>")
-	}
-}
 //分页查询商品
 $.getspecialListByPage=function(e)
 { 

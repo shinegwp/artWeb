@@ -38,11 +38,11 @@
         handler:function(){
         	var ids = getSelectionsIds();
         	if(ids.length == 0){
-        		$.messager.alert('提示','必须选择一个用户才能编辑!');
+        		$.messager.alert('提示','必须选择一个商品才能编辑!');
         		return ;
         	}
         	if(ids.indexOf(',') > 0){
-        		$.messager.alert('提示','只能选择一个用户!');
+        		$.messager.alert('提示','只能选择一个商品!');
         		return ;
         	}
         	
@@ -73,14 +73,19 @@
         handler:function(){
         	var ids = getSelectionsIds();
         	if(ids.length == 0){
-        		$.messager.alert('提示','未选中用户!');
+        		$.messager.alert('提示','未选中商品!');
         		return ;
         	}
-        	$.messager.confirm('确认','确定删除ID为 '+ids+' 的用户吗？',function(r){
+        	$.messager.confirm('确认','确定删除ID为 '+ids+' 的商品吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("restUserDelete",params);
-                	$("#userList").datagrid("reload");
+                	$.post("restUserDelete",params, function(data){
+            			if(data == 1){
+            				$.messager.alert('提示','删除商品成功!',undefined,function(){
+            					$("#userList").datagrid("reload");
+            				});
+            			}
+            		});
         	    }
         	});
         }

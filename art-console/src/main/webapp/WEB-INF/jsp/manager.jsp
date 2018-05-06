@@ -35,13 +35,6 @@
 	         		<li data-options="attributes:{'url':'user-list'}">查询用户</li>
 	         	</ul>
          	</li>
-         	<li>
-         		<span>网站内容管理</span>
-         		<ul>
-	         		<li data-options="attributes:{'url':'content-category'}">内容分类管理</li>
-	         		<li data-options="attributes:{'url':'content'}">内容管理</li>
-	         	</ul>
-         	</li>
          </ul>
     </div>
     <div data-options="region:'center',title:''">

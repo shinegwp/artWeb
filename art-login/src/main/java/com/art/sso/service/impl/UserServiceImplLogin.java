@@ -1,19 +1,14 @@
 package com.art.sso.service.impl;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -93,19 +88,16 @@ public class UserServiceImplLogin implements UserServiceLogin {
 		List<User> list = userMapper.selectByExample(example);
 		//如果没有此用户名
 		if (null == list || list.size() == 0) {
-			System.out.println("查无此人");
 			return ArtResult.build(400, "用户名或密码错误");
 		}
 		User user = list.get(0);
 		//比对密码
 		System.out.println(user.getBirthday());
 		if (!DigestUtils.md5DigestAsHex(upassword.getBytes()).equals(user.getUpassword())) {
-			System.out.println("密码错误");
 			return ArtResult.build(400, "用户名或密码错误");
 		}
 		//生成token
 		String token = UUID.randomUUID().toString();
-		System.out.println(token);
 		//把用户信息写入redis
 		jedisClient.set("REDIS_USER_SESSION:" + token, JsonUtils.objectToJson(user));
 		//设置session的过期时间

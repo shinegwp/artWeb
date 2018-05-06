@@ -36,7 +36,6 @@
 						<div class="zuo clearfix fl">
 							<ul class="clearfix fl" id="displayName">
 								
-								<li ><span class='f1'>您好，请</span><a href='http://sso.jiangyou-art.com/page/login?redirect=http://www.jiangyou-art.com/special' class='f1'>登陆</a></li><li><a href='http://sso.jiangyou-art.com/page/register' >免费注册</a></li>
 								
 							</ul>
 						</div>						
@@ -111,17 +110,15 @@
 <!-- script--------------------------------------------------------------------------------------------------- -->
 <!-- 页面开始加载--------------------------------------------------------------------------------------------------- -->
 <script type="text/javascript">
-var a = $.cookie("user");
-var user=eval('('+a+')');
+
+var user;
 $(function()
 		{
 	$.getParentListByPage();
 	$.displayUserName();
 		});
 		
-$(function() {
-	$.displayUserName();
-});
+
 
 $.displayUserName = function()//如果登陆了展示退出和欢迎
 {
@@ -141,6 +138,8 @@ $.displayUserName = function()//如果登陆了展示退出和欢迎
 				success : function(data) {
 					if (data.status == 200) {
 						var uname = data.data.uname;
+						user = data.data;
+						
 						var html = "<li ><span class='f1'>欢迎</span><a href='grxx' class='f1'>"
 								+ uname
 								+ "</a>进入商场</li><li><a href='#' onclick='$.grxx()'>个人中心</a></li><li><a href='#' onclick='$.outLogin()'>退出</a></li>"

@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,8 +35,7 @@ public class UserControllerBack {
 	public String showpage(@PathVariable String page) {
 		return page;
 	}
-	
-	@RequestMapping(value ="restUserDelete")
+	@RequestMapping(value ="restUserDelete")//��̨
 	@ResponseBody
 	public int deleteUsers(Integer[] ids)
 	{	
@@ -68,6 +68,7 @@ public class UserControllerBack {
 		u.setQq(qq);
 		u.setEmail(email);
 		u.setMoney(money);
+		System.out.println("updata"+u);
 		userServiceBack.update(u);
 		return u;
 	}
@@ -75,6 +76,8 @@ public class UserControllerBack {
 	@ResponseBody
 	public int insertUser(User user)
 	{
+		
+		user.setUpassword(DigestUtils.md5DigestAsHex(user.getUpassword().getBytes()));
 		int i = userServiceBack.insert(user);
 		return i ;
 	}

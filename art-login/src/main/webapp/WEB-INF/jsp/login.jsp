@@ -38,7 +38,7 @@
 				<a href="http://www.jiangyou-art.com" class="fl fanhui">返回首页</a>
 				<p class="fr">
 					还没有商城账号？
-					<a href="register.html" class="zhuce ra3">
+					<a href="register" class="zhuce ra3">
 						注册
 					</a>
 				</p>

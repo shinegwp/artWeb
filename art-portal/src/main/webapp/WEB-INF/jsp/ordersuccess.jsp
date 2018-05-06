@@ -19,6 +19,7 @@
 		<link rel="stylesheet" type="text/css" href="css/base.css" />
 		<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.js"></script>
+		<script type="text/javascript" src="js/jquery.cookie.js"></script>
 	</head>
 	<body>
 		<!--header star-->
@@ -26,38 +27,9 @@
 			<div class="top clearfix">
 				<div class="topctent clearfix">
 					<div class="left clearfix fl">
-						公告：您好，欢迎登录北京椿龄文化发展有限公司
+						公告：您好，欢迎来到酱油文化艺术品商城
 					</div>
-					<div class="right clearfix fr">
-						<div class="zuo clearfix fl">
-							<ul class="clearfix fl">
-								<li>
-									<span class="fl">欢迎</span>
-									<a href="grxx.html" class="fl">瑾晨0212</a>
-									<span class="fl">进入商城</span>
-								</li>
-								<li>
-									<a href="register.html">
-										免费注册
-									</a>
-								</li>
-								
-							</ul>
-						</div>						
-						<div class="shopcar-btn clearfix fl">
-							<a href="cartShow" class="box-s">
-								购物车
-							</a>
-						</div>
-						<div class="fenxiang clearfix fl">
-							<span class="fl">分享到：</span>
-							<ul class="clearfix fl">
-								<li><a href="#"><img src="img/sina.png"/></a></li>
-								<li><a href="#"><img src="img/qq.png"/></a></li>
-								<li><a href="#"><img src="img/wechat.png"/></a></li>
-							</ul>
-						</div>
-					</div>					
+									
 				</div>
 			</div>			
 			<div class="bottom clearfix">
@@ -72,12 +44,12 @@
 		</div>
 		<!--header end-->
 		<script type="text/javascript">
-		$(function(){
-			alert("ss");
+		$(function() {
 			var s = ${msg};
-			alert(s);
-		});
+			$.displayUserName();
 
+		});
+		
 		</script>
 		<!--navbar star-->
 		<div class="navbar clearfix">
@@ -139,86 +111,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="bottom clearfix">
-					<div class="left clearfix fl">
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>新手指南</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="scgmlc.html">商城购买流程</a></li>
-									<li><a href="cjwt.html">常见问题</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>账户管理</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="zhcz.html">账户充值</a></li>
-									<li><a href="zhtx.html">账户提现</a></li>
-									<li><a href="zffs.html">支付方式</a></li>
-								</ul>
-							</div>
-						</div>						
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>服务合作</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="friend-link.html">友情链接</a></li>
-									
-								</ul>
-							</div>
-						</div>
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>关于我们</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="gsjj.html">公司简介</a></li>
-									<li><a href="contact.html">联系我们</a></li>
-									<li><a href="jrwm.html">加入我们</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="list clearfix">
-							<div class="shang clearfix">
-								<p>售后服务</p>
-								<span></span>
-							</div>							
-							<div class="xia clearfix">
-								<ul>
-									<li><a href="wlsm.html">物流说明</a></li>
-									<li><a href="mzsm.html">免责声明</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="middle clearfix fl">
-						<ul>
-							<li><img src="upload/ewm.jpg"/></li>
-							<li><img src="upload/ewm.jpg"/></li>
-						</ul>
-					</div>
-					<div class="right clearfix fr">
-						<p class="bt">免费咨询热线：</p>
-						<p class="tel">400-000-0000</p>
-						<p class="fu-bt">(周一到周五8:00-22:00)</p>
-					</div>
-				</div>
-			</div>
+				
 			<div class="banquan clearfix ta-center">
-				Copyright © 2003-2015 椿龄文化(chunlingwenhua). All Rights Reserved. 
+				Copyright 酱油文化. All Rights Reserved. 
 			</div>
 		</div>
 		<!--footer end-->
